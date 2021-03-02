@@ -1,6 +1,7 @@
 # Mine
 ~
 venv
+models
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
