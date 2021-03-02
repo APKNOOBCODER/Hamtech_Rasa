@@ -124,3 +124,10 @@ stories:
     entities:
     - illness: میگرن
   - action: action_answer_drug_usage_5
+
+- story: interactive_story_1
+  steps:
+  - intent: drug_usage_4
+    entities:
+    - symptom: بدن درد
+  - action: action_answer_drug_usage_4
