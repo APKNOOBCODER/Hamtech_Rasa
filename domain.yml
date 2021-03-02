@@ -1,0 +1,52 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- drug_usage_4:
+    use_entities:
+    - symptom
+- drug_usage_1:
+    use_entities:
+    - drug_name
+- drug_usage_5:
+    use_entities:
+    - illness
+- drug_usage_2:
+    ignore_entities:
+    - illness
+- drug_usage_3:
+    ignore_entities:
+    - symptom
+- greet
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+entities:
+- drug_name
+- illness
+- symptom
+responses:
+  utter_greet:
+  - text: درود، چه کمکی ازم بر می آید؟
+  utter_cheer_up:
+  - text: 'اینم یه چیز خوشحال کننده:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: بهتری?
+  utter_happy:
+  - text: ایول، برو بریم
+  utter_goodbye:
+  - text: بدرود
+  utter_iamabot:
+  - text: من یه ربات ساخته شده با راسا هستم
+actions:
+- action_answer_drug_usage_1
+- action_answer_drug_usage_2
+- action_answer_drug_usage_3
+- action_answer_drug_usage_4
+- action_answer_drug_usage_5
+- utter_greet

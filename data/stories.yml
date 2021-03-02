@@ -1,0 +1,126 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: drug_usage_ask_1
+  steps:
+  - intent: drug_usage_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_usage_1
+
+- story: drug_usage_ask_2
+  steps:
+  - intent: drug_usage_2
+    entities:
+      - drug_name
+      - symptom
+  - action: action_answer_drug_usage_2
+
+- story: drug_usage_ask_3
+  steps:
+  - intent: drug_usage_3
+    entities:
+      - drug_name
+      - illness
+  - action: action_answer_drug_usage_3
+
+- story: drug_usage_ask_4
+  steps:
+  - intent: drug_usage_4
+    entities:
+      - sypmtom
+  - action: action_answer_drug_usage_4
+
+- story: drug_usage_ask_5
+  steps:
+  - intent: drug_usage_5
+    entities:
+      - illness
+  - action: action_answer_drug_usage_5
+
+# - story: sad path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: drug_usage_5
+  - intent: drug_usage_5
+    entities:
+    - illness: کمر درد
+  - action: action_answer_drug_usage_5
+  - intent: drug_usage_4
+    entities:
+    - symptom: سردرد
+  - action: action_answer_drug_usage_2
+  - intent: drug_usage_5
+    entities:
+    - illness: كارسينوماي پيشرفته پروستات
+  - action: action_answer_drug_usage_5
+  - intent: drug_usage_3
+    entities:
+    - drug_name: تکسوتر
+    - illness: سرطان تخمدان
+  - action: action_answer_drug_usage_3
+
+- story: interactive_story_1
+  steps:
+  - intent: drug_usage_5
+    entities:
+    - illness: کمردرد
+  - action: action_answer_drug_usage_5
+  - intent: drug_usage_4
+    entities:
+    - illness: درد
+  - action: action_answer_drug_usage_4
+  - intent: drug_usage_4
+    entities:
+    - symptom: سر درد
+  - action: action_answer_drug_usage_4
+  - intent: drug_usage_4
+    entities:
+    - symptom: لرزش دست
+  - action: action_answer_drug_usage_4
+  - intent: drug_usage_5
+    entities:
+    - illness: واریس
+  - action: action_answer_drug_usage_5
+  - intent: drug_usage_1
+    entities:
+    - drug_name: کولوتریمازول
+  - action: action_answer_drug_usage_1
+  - intent: drug_usage_2
+    entities:
+    - drug_name: تتراسایکلین
+    - symptom: گوش درد
+  - action: action_answer_drug_usage_2
+  - intent: drug_usage_5
+    entities:
+    - illness: میگرن
+  - action: action_answer_drug_usage_5
