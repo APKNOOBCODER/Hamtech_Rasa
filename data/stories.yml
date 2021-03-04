@@ -9,6 +9,7 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
+## mavared masraf
 - story: drug_usage_ask_1
   steps:
   - intent: drug_usage_1
@@ -45,6 +46,131 @@ stories:
     entities:
       - illness
   - action: action_answer_drug_usage_5
+
+## tadakhol
+- story: drug_caution_ask_1
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: تداخلات دارویی
+  - action: action_answer_drug_caution_1
+
+- story: drug_caution_ask_2
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: تداخل دارویی
+  - action: action_answer_drug_caution_1
+
+- story: drug_caution_ask_3
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: تداخلات دارویی
+  - action: action_answer_drug_caution_1
+
+## avarez
+- story: drug_caution_ask_4
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: عوارض جانبی
+  - action: action_answer_drug_caution_2
+
+- story: drug_caution_ask_5
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: عوارض
+  - action: action_answer_drug_caution_2
+
+- story: drug_caution_ask_6
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: آثار جانبی
+  - action: action_answer_drug_caution_2
+
+## khatar
+- story: drug_caution_ask_7
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: خطرات
+  - action: action_answer_drug_caution_3
+
+- story: drug_caution_ask_8
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: خطر
+  - action: action_answer_drug_caution_3
+
+- story: drug_caution_ask_9
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: خطر ها
+  - action: action_answer_drug_caution_3
+
+## hoshdar
+- story: drug_caution_ask_10
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: هشدار ها
+  - action: action_answer_drug_caution_4
+
+- story: drug_caution_ask_11
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: هشدار
+  - action: action_answer_drug_caution_4
+
+- story: drug_caution_ask_12
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: هشدار دارویی
+  - action: action_answer_drug_caution_4
+
+## nokat
+- story: drug_caution_ask_13
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: نکات مصرف
+  - action: action_answer_drug_caution_5
+
+- story: drug_caution_ask_14
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: نکته
+  - action: action_answer_drug_caution_5
+
+- story: drug_caution_ask_15
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+      - caution_type: نکات
+  - action: action_answer_drug_caution_5
 
 # - story: sad path 1
 #   steps:

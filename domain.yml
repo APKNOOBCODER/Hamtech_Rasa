@@ -3,21 +3,54 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- drug_usage_4:
-    use_entities:
-    - symptom
 - drug_usage_1:
-    use_entities:
+  use_entities:
     - drug_name
-- drug_usage_5:
-    use_entities:
+  ignore_entities:
     - illness
-- drug_usage_2:
-    ignore_entities:
-    - illness
-- drug_usage_3:
-    ignore_entities:
     - symptom
+    - caution_type
+- drug_usage_2:
+  use_entities:
+    - drug_name
+    - symptom
+  ignore_entities:
+    - illness
+    - caution_type
+
+- drug_usage_3:
+  use_entities:
+    - drug_name
+    - illness
+  ignore_entities:
+    - symptom
+    - caution_type
+
+- drug_usage_4:
+  use_entities:
+    - symptom
+  ignore_entities:
+    - illness
+    - drug_name
+    - caution_type
+
+- drug_usage_5:
+  use_entities:
+    - illness
+  ignore_entities:
+    - symptom
+    - drug_name
+    - caution_type
+- caution_type:
+  use_entities:
+    - drug_name
+    - caution_type
+  ignore_entities:
+    - symptom
+    - illness
+
+
+
 - greet
 - goodbye
 - affirm
@@ -29,6 +62,7 @@ entities:
 - drug_name
 - illness
 - symptom
+- caution_type
 responses:
   utter_greet:
   - text: درود، چه کمکی ازم بر می آید؟
@@ -49,4 +83,5 @@ actions:
 - action_answer_drug_usage_3
 - action_answer_drug_usage_4
 - action_answer_drug_usage_5
+- action_answer_drug_caution_1
 - utter_greet
