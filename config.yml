@@ -9,8 +9,10 @@ pipeline:
   - name: rasa_nlu_examples.tokenizers.StanzaTokenizer
     lang: "fa"
     cache_dir: "~/stanza_resources"
-  - name: RegexFeaturizer
-    "case_sensitive": True
+  - name: RegexEntityExtractor
+    case_sensitive: False
+    use_lookup_tables: True
+    use_regexes: True
     "use_word_boundaries": True
   # - name: LexicalSyntacticFeaturizer
   #   "features": [

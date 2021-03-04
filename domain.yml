@@ -4,53 +4,50 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - drug_usage_1:
-  use_entities:
+    use_entities:
     - drug_name
-  ignore_entities:
+    ignore_entities:
     - illness
     - symptom
     - caution_type
 - drug_usage_2:
-  use_entities:
+    use_entities:
     - drug_name
     - symptom
-  ignore_entities:
+    ignore_entities:
     - illness
     - caution_type
 
 - drug_usage_3:
-  use_entities:
+    use_entities:
     - drug_name
     - illness
-  ignore_entities:
+    ignore_entities:
     - symptom
     - caution_type
 
 - drug_usage_4:
-  use_entities:
+    use_entities:
     - symptom
-  ignore_entities:
+    ignore_entities:
     - illness
     - drug_name
     - caution_type
 
 - drug_usage_5:
-  use_entities:
+    use_entities:
     - illness
-  ignore_entities:
+    ignore_entities:
     - symptom
     - drug_name
     - caution_type
 - caution_type:
-  use_entities:
+    use_entities:
     - drug_name
     - caution_type
-  ignore_entities:
+    ignore_entities:
     - symptom
     - illness
-
-
-
 - greet
 - goodbye
 - affirm
@@ -84,4 +81,8 @@ actions:
 - action_answer_drug_usage_4
 - action_answer_drug_usage_5
 - action_answer_drug_caution_1
+- action_answer_drug_caution_2
+- action_answer_drug_caution_3
+- action_answer_drug_caution_4
+- action_answer_drug_caution_5
 - utter_greet
