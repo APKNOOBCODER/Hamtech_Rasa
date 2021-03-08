@@ -124,11 +124,9 @@ nlu:
     - برای [کمردرد](illness) چی مصرف کنم؟
     - چه دارویی برای واریس م[یتونی]{"entity": "illness", "value": "\u0648\u0627\u0631\u06cc\u0633"} بهم پیشنهاد بدی؟
     - [میگرن](illness) دارم، چیکار کنم؟
-<<<<<<< HEAD
 - synonym: واریس
   examples: |
     - یتونی
-=======
 - intent: drug_caution
   examples: |
     - [تداخل دارویی](caution_type) برای داروی [سوربیتول](drug_name) چیست؟
@@ -185,7 +183,6 @@ nlu:
     - نکات
     - نکته خاص
     - نکته
->>>>>>> a89eb17cae50cc4eae572c5e4c0503dcf94ed371
 - lookup: drug_name
   examples: |
     - دپوکورتین
