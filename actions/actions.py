@@ -147,3 +147,111 @@ class ActionAnswerDrugUsage5(Action):
         dispatcher.utter_message(text="%s"%ans)
 
         return []
+
+## tadakhol
+class ActionAnswerDrugCaution1(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_caution_1"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'تداخل دارویی برای داروی %s یافت نشد' % drug_name
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                ans = data[name]['Cautions']['Drug_Interferences']
+        dispatcher.utter_message(text=ans)
+
+## avarez
+class ActionAnswerDrugCaution2(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_caution_2"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'عوارض جانبی برای داروی %s یافت نشد' % drug_name
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                ans = data[name]['Cautions']['Side_Effects']
+        dispatcher.utter_message(text=ans)
+
+## khatar
+class ActionAnswerDrugCaution3(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_caution_3"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'خطری برای داروی %s یافت نشد' % drug_name
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                ans = "هشدار ها: \n " + \
+                      data[name]['Cautions']['Warnings'] + "\n" + \
+                      "عوارض جانبی: \n" + \
+                      data[name]['Cautions']['Side_Effects'] + "\n" + \
+                      "تداخلات دارویی: \n" + \
+                      data[name]['Cautions']['Drug_Interferences'] + "\n" + \
+                      "نکات پیشنهادی: \n" + \
+                      data[name]['Cautions']['Recommended_Tips'] + "\n"
+
+        dispatcher.utter_message(text=ans)
+
+## hoshdar
+class ActionAnswerDrugCaution4(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_caution_4"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'هیچ هشداری برای داروی %s یافت نشد' % drug_name
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                ans = data[name]['Cautions']['Warnings']
+        dispatcher.utter_message(text=ans)
+
+## nokte
+class ActionAnswerDrugCaution5(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_caution_5"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'عوارض جانبی برای داروی %s یافت نشد' % drug_name
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                ans = data[name]['Cautions']['Recommended_Tips']
+        dispatcher.utter_message(text=ans)
