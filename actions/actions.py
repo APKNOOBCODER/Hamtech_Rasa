@@ -22,7 +22,21 @@ class ActionAnswerDrugUsage1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # tracker.latest_massage.entity[]
         
+        ### another way:
+        # ent = tracker.latest_message['entities']
+        # I want to cook noodles.
+        # output: 
+        # ('entity', 
+        # [{u'extractor': u'ner_crf', 
+        # u'confidence': 0.787280111194543,
+        # u'end': 19, 
+        # u'value': u'noodles', 
+        # u'entity':
+        # u'Dish',
+        # u'start': 13
+        # }])
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:

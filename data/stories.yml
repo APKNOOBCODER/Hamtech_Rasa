@@ -69,7 +69,6 @@ stories:
   - intent: drug_caution
     entities:
       - drug_name
-      - caution_type: خطرات
   - action: action_answer_drug_caution_3
 
 ## hoshdar
@@ -78,7 +77,6 @@ stories:
   - intent: drug_caution
     entities:
       - drug_name
-      - caution_type: هشدار ها
   - action: action_answer_drug_caution_4
 
 ## nokat
@@ -87,9 +85,15 @@ stories:
   - intent: drug_caution
     entities:
       - drug_name
-      - caution_type: نکات مصرف
   - action: action_answer_drug_caution_5
 
+## tadakhol 2
+- story: drug_caution_ask_6
+  steps:
+  - intent: drug_caution
+    entities:
+      - drug_name
+  - action: action_answer_drug_caution_5
 
 # - story: sad path 1
 #   steps:
