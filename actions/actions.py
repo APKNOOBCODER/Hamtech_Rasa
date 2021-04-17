@@ -41,7 +41,7 @@ class ActionAnswerDrugUsage1(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
@@ -68,9 +68,10 @@ class ActionAnswerDrugUsage2(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_massage['intent']['confidence']
+        
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
@@ -103,7 +104,7 @@ class ActionAnswerDrugUsage3(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
@@ -136,7 +137,7 @@ class ActionAnswerDrugUsage4(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
@@ -169,7 +170,7 @@ class ActionAnswerDrugUsage5(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         illness = next(tracker.get_latest_entity_values('illness'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
@@ -203,7 +204,7 @@ class ActionDrugInterferences1(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -227,7 +228,7 @@ class ActionDrugInterferences2(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_names = []
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
@@ -260,7 +261,7 @@ class SideEffects1(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -285,7 +286,7 @@ class ActionAnswerDrugCaution1(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -318,7 +319,7 @@ class ActionAnswerWarning1(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -342,7 +343,7 @@ class ActionAnswerWarning2(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         illness = next(tracker.get_latest_entity_values('illness'), None)
@@ -370,7 +371,7 @@ class ActionAnswerHowToUse1(Action):
         confidence = tracker.latest_massage['intent']['confidence']
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
-            break
+            return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
