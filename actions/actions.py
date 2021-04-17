@@ -45,12 +45,16 @@ class ActionAnswerDrugUsage1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        usage = 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.'
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%usage)
+            return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         print(drug_name)
         # print(drug_name[0])
-        usage = 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.'
+        
         for name in data:
             if (name == drug_name) or (drug_name in name):
                 usage = data[name]['Mechanisms']['Usage']
@@ -74,9 +78,14 @@ class ActionAnswerDrugUsage2(Action):
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
-        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
+        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
+
+        if drug_name == None or symptom == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+        
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
@@ -108,9 +117,14 @@ class ActionAnswerDrugUsage3(Action):
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
-        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.'
+
         illness = next(tracker.get_latest_entity_values('illness'), None)
+        if drug_name == None or illness == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
@@ -143,11 +157,15 @@ class ActionAnswerDrugUsage4(Action):
             return []
         # end
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
+        ans = 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.'
+
+        if symptom == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
-        ans = 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.'
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if symptom in usage:
@@ -177,11 +195,15 @@ class ActionAnswerDrugUsage5(Action):
             return []
         # end
         illness = next(tracker.get_latest_entity_values('illness'), None)
+        ans = 'دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.'
+
+        if illness == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
-        ans = 'دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.'
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if illness in usage:
@@ -212,9 +234,13 @@ class ActionDrugInterferences1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'تداخل دارویی برای داروی %s یافت نشد' % drug_name
+
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'تداخل دارویی برای داروی %s یافت نشد' % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -239,9 +265,13 @@ class ActionDrugInterferences2(Action):
         drug_names = []
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         drug_names.append(drug_name)
+        ans = 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد'
+
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد'
         for drug_name_1 in drug_names:
             for drug_name_2 in drug_names:
                 for name in data:
@@ -271,9 +301,14 @@ class SideEffects1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'عوارض جانبی برای داروی %s یافت نشد' % drug_name
+
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'عوارض جانبی برای داروی %s یافت نشد' % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -297,9 +332,13 @@ class ActionAnswerDrugCaution1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'خطری برای داروی %s یافت نشد' % drug_name
+
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'خطری برای داروی %s یافت نشد' % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -331,9 +370,12 @@ class ActionAnswerWarning1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'هیچ هشداری برای داروی %s یافت نشد' % drug_name
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'هیچ هشداری برای داروی %s یافت نشد' % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -356,10 +398,13 @@ class ActionAnswerWarning2(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد'
         illness = next(tracker.get_latest_entity_values('illness'), None)
+        if drug_name == None or illness == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد'
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -385,9 +430,13 @@ class ActionAnswerHowToUse1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        ans = 'عوارض جانبی برای داروی %s یافت نشد' % drug_name
+
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
-        ans = 'عوارض جانبی برای داروی %s یافت نشد' % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
