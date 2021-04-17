@@ -41,37 +41,45 @@ intents:
     - symptom
     - drug_name
      
+- drug_interferences_1:
+    use_entities:
+    - drug_name
+    ignore_entities:
+    - symptom
+    - illness
+- drug_interferences_2:
+    use_entities:
+    - drug_name
+    - drug_name
+    ignore_entities:
+    - symptom
+    - illness
+
+- side_effects_1:
+    use_entities:
+    - drug_name
+    ignore_entities:
+    - symptom
+    - illness
 - drug_caution_1:
     use_entities:
     - drug_name
     ignore_entities:
     - symptom
     - illness
-- drug_caution_2:
+- drug_warning_1:
     use_entities:
     - drug_name
     ignore_entities:
     - symptom
     - illness
-- drug_caution_3:
+- drug_warning_2:
     use_entities:
     - drug_name
+    - illness
     ignore_entities:
     - symptom
-    - illness
-- drug_caution_4:
-    use_entities:
-    - drug_name
-    ignore_entities:
-    - symptom
-    - illness
-- drug_caution_5:
-    use_entities:
-    - drug_name
-    ignore_entities:
-    - symptom
-    - illness
-- drug_caution_6:
+- how_to_use_1:
     use_entities:
     - drug_name
     ignore_entities:
@@ -90,7 +98,7 @@ entities:
 - symptom
 responses:
   utter_greet:
-  - text: درود، چه کمکی ازم بر می آید؟
+  - text: درود، من یک ربات برای پاسخ به سوالات دارویی شما هستم. چه کمکی ازم بر می آید؟
   utter_cheer_up:
   - text: 'اینم یه چیز خوشحال کننده:'
     image: https://i.imgur.com/nGF1K8f.jpg
@@ -108,10 +116,11 @@ actions:
 - action_answer_drug_usage_3
 - action_answer_drug_usage_4
 - action_answer_drug_usage_5
+- action_answer_drug_interferences_1
+- action_answer_drug_interferences_2
+- action_answer_side_effects_1
 - action_answer_drug_caution_1
-- action_answer_drug_caution_2
-- action_answer_drug_caution_3
-- action_answer_drug_caution_4
-- action_answer_drug_caution_5
-- action_answer_drug_caution_6
+- action_answer_warning_1
+- action_answer_warning_2
+- action_answer_how_to_use_1
 - utter_greet

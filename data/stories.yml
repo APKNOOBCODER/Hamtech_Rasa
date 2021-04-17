@@ -47,53 +47,60 @@ stories:
       - illness
   - action: action_answer_drug_usage_5
 
-## tadakhol
+## drug_interferences
+- story: drug_interferences_ask_1
+  steps:
+  - intent: drug_interferences_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_interferences_1
+- story: drug_interferences_ask_2
+  steps:
+  - intent: drug_interferences_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_drug_interferences_2
+
+## avarez
+- story: side_effects_ask_1
+  steps:
+  - intent: side_effects_1
+    entities:
+      - drug_name
+  - action: action_answer_side_effects_1
+
+## khatar
 - story: drug_caution_ask_1
   steps:
-  - intent: drug_caution
+  - intent: drug_caution_1
     entities:
       - drug_name
   - action: action_answer_drug_caution_1
 
-## avarez
-- story: drug_caution_ask_2
-  steps:
-  - intent: drug_caution
-    entities:
-      - drug_name
-  - action: action_answer_drug_caution_2
-
-## khatar
-- story: drug_caution_ask_3
-  steps:
-  - intent: drug_caution
-    entities:
-      - drug_name
-  - action: action_answer_drug_caution_3
-
 ## hoshdar
-- story: drug_caution_ask_4
+- story: warning_ask_1
   steps:
-  - intent: drug_caution
+  - intent: drug_warning_1
     entities:
       - drug_name
-  - action: action_answer_drug_caution_4
+  - action: action_answer_warning_1
+
+- story: warning_ask_2
+  steps:
+  - intent: drug_warning_2
+    entities:
+      - drug_name
+      - illness
+  - action: action_answer_warning_2
 
 ## nokat
-- story: drug_caution_ask_5
+- story: how_to_use_ask_1
   steps:
-  - intent: drug_caution
+  - intent: how_to_use_1
     entities:
       - drug_name
-  - action: action_answer_drug_caution_5
-
-## tadakhol 2
-- story: drug_caution_ask_6
-  steps:
-  - intent: drug_caution
-    entities:
-      - drug_name
-  - action: action_answer_drug_caution_5
+  - action: action_answer_how_to_use_1
 
 # - story: sad path 1
 #   steps:

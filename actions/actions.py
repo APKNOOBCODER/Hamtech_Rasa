@@ -43,7 +43,7 @@ class ActionAnswerDrugUsage1(Action):
             data: dict = json.loads(f.read())
         print(drug_name)
         # print(drug_name[0])
-        usage = 'اطلاعاتی موجود نیست'
+        usage = 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.'
         for name in data:
             if (name == drug_name) or (drug_name in name):
                 usage = data[name]['Mechanisms']['Usage']
@@ -60,7 +60,7 @@ class ActionAnswerDrugUsage2(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        ans = 'اطلاعاتی یافت نشد'
+        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -87,7 +87,7 @@ class ActionAnswerDrugUsage3(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        ans = 'اطلاعاتی یافت نشد'
+        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         illness = next(tracker.get_latest_entity_values('illness'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -120,7 +120,7 @@ class ActionAnswerDrugUsage4(Action):
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
-        ans = 'دارویی برای چنین علائمی یافت نشد'
+        ans = 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.'
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if symptom in usage:
@@ -148,7 +148,7 @@ class ActionAnswerDrugUsage5(Action):
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
-        ans = 'دارویی برای چنین بیماری ای یافت نشد'
+        ans = 'دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.'
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if illness in usage:
@@ -163,10 +163,10 @@ class ActionAnswerDrugUsage5(Action):
         return []
 
 ## tadakhol
-class ActionAnswerDrugCaution1(Action):
+class ActionDrugInterferences1(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_caution_1"
+        return "action_answer_drug_interferences_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -182,11 +182,41 @@ class ActionAnswerDrugCaution1(Action):
                 ans = data[name]['Cautions']['Drug_Interferences']
         dispatcher.utter_message(text=ans)
 
-## avarez
-class ActionAnswerDrugCaution2(Action):
+class ActionDrugInterferences2(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_caution_2"
+        return "action_answer_drug_interferences_2"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        drug_names = []
+        while True:
+            try:
+                drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+                drug_names.append(drug_name)
+            except:
+                break
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد'
+        for drug_name_1 in drug_names:
+            for drug_name_2 in drug_names:
+                for name in data:
+                    if name == drug_name_1 or drug_name_1 in name:
+                        Drug_Interferences = data[name]['Cautions']['Drug_Interferences']
+                        if drug_name_2 in Drug_Interferences and ans == 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد':
+                            ans = 'بلی. دارو ها با هم تداخل دارند: \n %s' % Drug_Interferences
+                        elif drug_name_2 in Drug_Interferences:
+                            ans += '\n %s' % Drug_Interferences
+
+        dispatcher.utter_message(text=ans)
+
+## avarez
+class SideEffects1(Action):
+
+    def name(self) -> Text:
+        return "action_answer_side_effects_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -203,10 +233,10 @@ class ActionAnswerDrugCaution2(Action):
         dispatcher.utter_message(text=ans)
 
 ## khatar
-class ActionAnswerDrugCaution3(Action):
+class ActionAnswerDrugCaution1(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_caution_3"
+        return "action_answer_drug_caution_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -231,10 +261,10 @@ class ActionAnswerDrugCaution3(Action):
         dispatcher.utter_message(text=ans)
 
 ## hoshdar
-class ActionAnswerDrugCaution4(Action):
+class ActionAnswerWarning1(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_caution_4"
+        return "action_answer_warning_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -250,11 +280,33 @@ class ActionAnswerDrugCaution4(Action):
                 ans = data[name]['Cautions']['Warnings']
         dispatcher.utter_message(text=ans)
 
-## nokte
-class ActionAnswerDrugCaution5(Action):
+class ActionAnswerWarning2(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_caution_5"
+        return "action_answer_warning_2"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        illness = next(tracker.get_latest_entity_values('illness'), None)
+        with open(dir_path + '/' + 'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        ans = 'هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد'
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                warning  = data[name]['Cautions']['Warnings']
+                if illness in warning:
+                    ans = 'بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s' % warning
+        dispatcher.utter_message(text=ans)
+
+## nokte
+class ActionAnswerHowToUse1(Action):
+
+    def name(self) -> Text:
+        return "action_answer_how_to_use_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
