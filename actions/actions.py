@@ -40,7 +40,9 @@ class ActionAnswerDrugUsage1(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -74,7 +76,9 @@ class ActionAnswerDrugUsage2(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -113,7 +117,9 @@ class ActionAnswerDrugUsage3(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -152,7 +158,9 @@ class ActionAnswerDrugUsage4(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -190,7 +198,9 @@ class ActionAnswerDrugUsage5(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -229,7 +239,9 @@ class ActionDrugInterferences1(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -258,7 +270,9 @@ class ActionDrugInterferences2(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -296,7 +310,9 @@ class SideEffects1(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -327,7 +343,9 @@ class ActionAnswerDrugCaution1(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -365,7 +383,9 @@ class ActionAnswerWarning1(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -393,7 +413,9 @@ class ActionAnswerWarning2(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -425,7 +447,9 @@ class ActionAnswerHowToUse1(Action):
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
         print(confidence)
-        if confidence < 0.3:
+        intent = tracker.latest_message['intent']['name']
+        print(intent)
+        if confidence < 0.4:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
