@@ -28,17 +28,18 @@ class ActionAnswerDrugUsage1(Action):
         # ent = tracker.latest_message['entities']
         # I want to cook noodles.
         # output: 
-        ('entity', 
-        [{u'extractor': u'ner_crf', 
-        u'confidence': 0.787280111194543,
-        u'end': 19, 
-        u'value': u'noodles', 
-        u'entity':
-        u'Dish',
-        u'start': 13
-        }])
+        # ('entity', 
+        # [{u'extractor': u'ner_crf', 
+        # u'confidence': 0.787280111194543,
+        # u'end': 19, 
+        # u'value': u'noodles', 
+        # u'entity':
+        # u'Dish',
+        # u'start': 13
+        # }])
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -68,7 +69,7 @@ class ActionAnswerDrugUsage2(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
-        
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -102,6 +103,7 @@ class ActionAnswerDrugUsage3(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -135,6 +137,7 @@ class ActionAnswerDrugUsage4(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -168,6 +171,7 @@ class ActionAnswerDrugUsage5(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -202,6 +206,7 @@ class ActionDrugInterferences1(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -226,6 +231,7 @@ class ActionDrugInterferences2(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -259,6 +265,7 @@ class SideEffects1(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -284,6 +291,7 @@ class ActionAnswerDrugCaution1(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -317,6 +325,7 @@ class ActionAnswerWarning1(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -341,6 +350,7 @@ class ActionAnswerWarning2(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -369,6 +379,7 @@ class ActionAnswerHowToUse1(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
         confidence = tracker.latest_message['intent']['confidence']
+        print(confidence)
         if confidence < 0.3:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
