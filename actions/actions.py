@@ -28,15 +28,21 @@ class ActionAnswerDrugUsage1(Action):
         # ent = tracker.latest_message['entities']
         # I want to cook noodles.
         # output: 
-        # ('entity', 
-        # [{u'extractor': u'ner_crf', 
-        # u'confidence': 0.787280111194543,
-        # u'end': 19, 
-        # u'value': u'noodles', 
-        # u'entity':
-        # u'Dish',
-        # u'start': 13
-        # }])
+        ('entity', 
+        [{u'extractor': u'ner_crf', 
+        u'confidence': 0.787280111194543,
+        u'end': 19, 
+        u'value': u'noodles', 
+        u'entity':
+        u'Dish',
+        u'start': 13
+        }])
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -60,6 +66,12 @@ class ActionAnswerDrugUsage2(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
@@ -87,6 +99,12 @@ class ActionAnswerDrugUsage3(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.'
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         illness = next(tracker.get_latest_entity_values('illness'), None)
@@ -114,7 +132,12 @@ class ActionAnswerDrugUsage4(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -142,7 +165,12 @@ class ActionAnswerDrugUsage5(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         illness = next(tracker.get_latest_entity_values('illness'), None)
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -171,7 +199,12 @@ class ActionDrugInterferences1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -190,13 +223,15 @@ class ActionDrugInterferences2(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_names = []
-        while True:
-            try:
-                drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
-                drug_names.append(drug_name)
-            except:
-                break
+        drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
+        drug_names.append(drug_name)
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
         ans = 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد'
@@ -221,7 +256,12 @@ class SideEffects1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -241,7 +281,12 @@ class ActionAnswerDrugCaution1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -269,7 +314,12 @@ class ActionAnswerWarning1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -288,7 +338,12 @@ class ActionAnswerWarning2(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         illness = next(tracker.get_latest_entity_values('illness'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -311,7 +366,12 @@ class ActionAnswerHowToUse1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+        # findout that intent is correct
+        confidence = tracker.latest_massage['intent']['confidence']
+        if confidence < 0.3:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            break
+        # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         with open(dir_path + '/' + 'data.json','r') as f:
             data: dict = json.loads(f.read())
