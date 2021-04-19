@@ -60,7 +60,7 @@ class ActionAnswerDrugUsage1(Action):
         for name in data:
             if (name == drug_name) or (drug_name in name):
                 usage = data[name]['Mechanisms']['Usage']
-        
+        usage = usage[:4096]
         dispatcher.utter_message(text="%s"%usage)
 
         return []
@@ -101,7 +101,7 @@ class ActionAnswerDrugUsage2(Action):
                 else:
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
-        
+        ans = ans[:4096]
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -142,7 +142,7 @@ class ActionAnswerDrugUsage3(Action):
                 else:
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
-        
+        ans = ans[:4096]
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -182,7 +182,7 @@ class ActionAnswerDrugUsage4(Action):
                 else:
                     ans += " ,"
                 ans += name
-        
+        ans = ans[:4096]
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -222,7 +222,7 @@ class ActionAnswerDrugUsage5(Action):
                 else:
                     ans += " ,"
                 ans += name
-        
+        ans = ans[:4096]
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -257,6 +257,7 @@ class ActionDrugInterferences1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Drug_Interferences']
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
 
 class ActionDrugInterferences2(Action):
@@ -295,7 +296,7 @@ class ActionDrugInterferences2(Action):
                             ans = 'بلی. دارو ها با هم تداخل دارند: \n %s' % Drug_Interferences
                         elif drug_name_2 in Drug_Interferences:
                             ans += '\n %s' % Drug_Interferences
-
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
 
 ## avarez
@@ -329,6 +330,8 @@ class SideEffects1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Side_Effects']
+        
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
 
 ## khatar
@@ -369,6 +372,7 @@ class ActionAnswerDrugCaution1(Action):
                       "نکات پیشنهادی: \n" + \
                       data[name]['Cautions']['Recommended_Tips'] + "\n"
 
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
 
 ## hoshdar
@@ -400,6 +404,8 @@ class ActionAnswerWarning1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Warnings']
+
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
 
 class ActionAnswerWarning2(Action):
@@ -433,6 +439,8 @@ class ActionAnswerWarning2(Action):
                 warning  = data[name]['Cautions']['Warnings']
                 if illness in warning:
                     ans = 'بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s' % warning
+        
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
 
 ## nokte
@@ -465,4 +473,6 @@ class ActionAnswerHowToUse1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Recommended_Tips']
+            
+        ans = ans[:4096]
         dispatcher.utter_message(text=ans)
