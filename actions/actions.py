@@ -61,6 +61,8 @@ class ActionAnswerDrugUsage1(Action):
             if (name == drug_name) or (drug_name in name):
                 usage = data[name]['Mechanisms']['Usage']
         usage = usage[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%usage)
 
         return []
@@ -102,6 +104,8 @@ class ActionAnswerDrugUsage2(Action):
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -143,6 +147,8 @@ class ActionAnswerDrugUsage3(Action):
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -178,11 +184,13 @@ class ActionAnswerDrugUsage4(Action):
             usage = data[name]['Mechanisms']['Usage']
             if symptom in usage:
                 if ans == 'دارویی برای چنین علائمی یافت نشد':
-                    ans = ""
+                    ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
                 else:
                     ans += " ,"
                 ans += name
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -218,11 +226,13 @@ class ActionAnswerDrugUsage5(Action):
             usage = data[name]['Mechanisms']['Usage']
             if illness in usage:
                 if ans == 'دارویی برای چنین بیماری ای یافت نشد':
-                    ans = ""
+                    ans = "دارو های زیر برای رفع بیماری شما مصرف میشود: \n"
                 else:
                     ans += " ,"
                 ans += name
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -258,6 +268,8 @@ class ActionDrugInterferences1(Action):
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Drug_Interferences']
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 class ActionDrugInterferences2(Action):
@@ -297,6 +309,8 @@ class ActionDrugInterferences2(Action):
                         elif drug_name_2 in Drug_Interferences:
                             ans += '\n %s' % Drug_Interferences
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 ## avarez
@@ -332,6 +346,8 @@ class SideEffects1(Action):
                 ans = data[name]['Cautions']['Side_Effects']
         
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 ## khatar
@@ -373,6 +389,8 @@ class ActionAnswerDrugCaution1(Action):
                       data[name]['Cautions']['Recommended_Tips'] + "\n"
 
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 ## hoshdar
@@ -406,6 +424,8 @@ class ActionAnswerWarning1(Action):
                 ans = data[name]['Cautions']['Warnings']
 
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 class ActionAnswerWarning2(Action):
@@ -441,6 +461,8 @@ class ActionAnswerWarning2(Action):
                     ans = 'بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s' % warning
         
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 ## nokte
@@ -475,4 +497,6 @@ class ActionAnswerHowToUse1(Action):
                 ans = data[name]['Cautions']['Recommended_Tips']
             
         ans = ans[:4096]
+        if ans == '':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
