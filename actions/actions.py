@@ -174,8 +174,9 @@ class ActionAnswerDrugUsage4(Action):
         # end
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         ans = 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.'
-
+        print(symptom)
         if symptom == None:
+            print('None')
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
