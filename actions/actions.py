@@ -186,7 +186,7 @@ class ActionAnswerDrugUsage4(Action):
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if symptom in usage:
-                if ans == 'دارویی برای چنین علائمی یافت نشد':
+                if ans == 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.':
                     ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
                 else:
                     ans += " ,"
@@ -228,7 +228,7 @@ class ActionAnswerDrugUsage5(Action):
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if illness in usage:
-                if ans == 'دارویی برای چنین بیماری ای یافت نشد':
+                if ans == 'دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.':
                     ans = "دارو های زیر برای رفع بیماری شما مصرف میشود: \n"
                 else:
                     ans += " ,"
