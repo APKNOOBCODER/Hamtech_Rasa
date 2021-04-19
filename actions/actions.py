@@ -65,7 +65,9 @@ class ActionAnswerDrugUsage1(Action):
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         print(ans == '')
+        ans = '\r سلام استامینوفن'
         ans = ans.replace('\r','')
+        print(ans)
         dispatcher.utter_message(text="%s"%ans)
 
         return []
