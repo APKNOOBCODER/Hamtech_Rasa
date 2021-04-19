@@ -64,7 +64,7 @@ class ActionAnswerDrugUsage1(Action):
         print(ans)
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        print(ans)
+        print(ans == '')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
