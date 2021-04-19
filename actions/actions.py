@@ -52,7 +52,7 @@ class ActionAnswerDrugUsage1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         print(drug_name)
         # print(drug_name[0])
@@ -62,16 +62,13 @@ class ActionAnswerDrugUsage1(Action):
                 ans = data[name]['Mechanisms']['Usage']
         print(ans)
         ans = ans[:4096]
-        print(ans)
+        # print(ans)
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        print(ans.find('\r'))
-        print(ans.find('\n'))
-        print(ans.find('درد'))
+        ans = ans.replace('\r','')
         print(ans == "")
         # ans = '\r سلام استامینوفن'
-        ans = ans.replace('\r','')
-        print(ans)
+        # print(ans)
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -101,7 +98,7 @@ class ActionAnswerDrugUsage2(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
         for name in data:
@@ -113,9 +110,10 @@ class ActionAnswerDrugUsage2(Action):
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
         ans = ans[:4096]
+        ans = ans.replace('\r','')
+
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -145,7 +143,7 @@ class ActionAnswerDrugUsage3(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
 
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
         for name in data:
@@ -157,9 +155,9 @@ class ActionAnswerDrugUsage3(Action):
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -189,7 +187,7 @@ class ActionAnswerDrugUsage4(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
         for name in data:
@@ -201,9 +199,9 @@ class ActionAnswerDrugUsage4(Action):
                     ans += " ,"
                 ans += name
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -232,7 +230,7 @@ class ActionAnswerDrugUsage5(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
         for name in data:
@@ -244,9 +242,9 @@ class ActionAnswerDrugUsage5(Action):
                     ans += " ,"
                 ans += name
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -275,16 +273,16 @@ class ActionDrugInterferences1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Drug_Interferences']
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 class ActionDrugInterferences2(Action):
@@ -312,7 +310,7 @@ class ActionDrugInterferences2(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         for drug_name_1 in drug_names:
             for drug_name_2 in drug_names:
@@ -324,9 +322,10 @@ class ActionDrugInterferences2(Action):
                         elif drug_name_2 in Drug_Interferences:
                             ans += '\n %s' % Drug_Interferences
         ans = ans[:4096]
+        ans = ans.replace('\r','')
+
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 ## avarez
@@ -354,7 +353,7 @@ class SideEffects1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
 
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -362,9 +361,10 @@ class SideEffects1(Action):
                 ans = data[name]['Cautions']['Side_Effects']
         
         ans = ans[:4096]
+        ans = ans.replace('\r','')
+
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 ## khatar
@@ -391,7 +391,7 @@ class ActionAnswerDrugCaution1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -406,9 +406,10 @@ class ActionAnswerDrugCaution1(Action):
                       data[name]['Cautions']['Recommended_Tips'] + "\n"
 
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
+        
         dispatcher.utter_message(text=ans)
 
 ## hoshdar
@@ -434,7 +435,7 @@ class ActionAnswerWarning1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -442,9 +443,10 @@ class ActionAnswerWarning1(Action):
                 ans = data[name]['Cautions']['Warnings']
 
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
+        
         dispatcher.utter_message(text=ans)
 
 class ActionAnswerWarning2(Action):
@@ -470,7 +472,7 @@ class ActionAnswerWarning2(Action):
         if drug_name == None or illness == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -480,9 +482,10 @@ class ActionAnswerWarning2(Action):
                     ans = 'بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s' % warning
         
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
+        
         dispatcher.utter_message(text=ans)
 
 ## nokte
@@ -509,7 +512,7 @@ class ActionAnswerHowToUse1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data1000.json','r') as f:
+        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -517,7 +520,8 @@ class ActionAnswerHowToUse1(Action):
                 ans = data[name]['Cautions']['Recommended_Tips']
             
         ans = ans[:4096]
+        ans = ans.replace('\r','')
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        ans = ans.replace('\r','')
+        
         dispatcher.utter_message(text=ans)
