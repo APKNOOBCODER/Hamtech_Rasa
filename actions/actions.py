@@ -52,7 +52,7 @@ class ActionAnswerDrugUsage1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         print(drug_name)
         # print(drug_name[0])
@@ -101,7 +101,7 @@ class ActionAnswerDrugUsage2(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
         for name in data:
@@ -145,7 +145,7 @@ class ActionAnswerDrugUsage3(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
 
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
         for name in data:
@@ -189,7 +189,7 @@ class ActionAnswerDrugUsage4(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
         for name in data:
@@ -232,7 +232,7 @@ class ActionAnswerDrugUsage5(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
         for name in data:
@@ -275,7 +275,7 @@ class ActionDrugInterferences1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -312,7 +312,7 @@ class ActionDrugInterferences2(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
         for drug_name_1 in drug_names:
             for drug_name_2 in drug_names:
@@ -354,7 +354,7 @@ class SideEffects1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
 
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -391,7 +391,7 @@ class ActionAnswerDrugCaution1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -434,7 +434,7 @@ class ActionAnswerWarning1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -470,7 +470,7 @@ class ActionAnswerWarning2(Action):
         if drug_name == None or illness == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -509,7 +509,7 @@ class ActionAnswerHowToUse1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + 'data.json','r') as f:
+        with open(dir_path + '/' + 'data1000.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
