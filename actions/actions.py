@@ -60,12 +60,16 @@ class ActionAnswerDrugUsage1(Action):
         for name in data:
             if (name == drug_name) or (drug_name in name):
                 ans = data[name]['Mechanisms']['Usage']
+        print(ans)
         ans = ans[:4096]
         print(ans)
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        print(ans == '')
-        ans = '\r سلام استامینوفن'
+        print(ans.find('\r'))
+        print(ans.find('\n'))
+        print(ans.find('درد'))
+        print(ans == "")
+        # ans = '\r سلام استامینوفن'
         ans = ans.replace('\r','')
         print(ans)
         dispatcher.utter_message(text="%s"%ans)
