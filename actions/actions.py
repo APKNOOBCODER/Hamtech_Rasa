@@ -61,8 +61,10 @@ class ActionAnswerDrugUsage1(Action):
             if (name == drug_name) or (drug_name in name):
                 ans = data[name]['Mechanisms']['Usage']
         ans = ans[:4096]
+        print(ans)
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        print(ans)
         dispatcher.utter_message(text="%s"%ans)
 
         return []
