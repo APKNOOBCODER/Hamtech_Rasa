@@ -47,9 +47,9 @@ class ActionAnswerDrugUsage1(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
-        usage = 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.'
+        ans = 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.'
         if drug_name == None:
-            dispatcher.utter_message(text="%s"%usage)
+            dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' + 'data.json','r') as f:
@@ -59,11 +59,11 @@ class ActionAnswerDrugUsage1(Action):
         
         for name in data:
             if (name == drug_name) or (drug_name in name):
-                usage = data[name]['Mechanisms']['Usage']
-        usage = usage[:4096]
+                ans = data[name]['Mechanisms']['Usage']
+        ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        dispatcher.utter_message(text="%s"%usage)
+        dispatcher.utter_message(text="%s"%ans)
 
         return []
 
