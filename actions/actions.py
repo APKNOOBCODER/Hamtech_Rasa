@@ -65,6 +65,7 @@ class ActionAnswerDrugUsage1(Action):
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         print(ans == '')
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -108,6 +109,7 @@ class ActionAnswerDrugUsage2(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -151,6 +153,7 @@ class ActionAnswerDrugUsage3(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -194,6 +197,7 @@ class ActionAnswerDrugUsage4(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -236,6 +240,7 @@ class ActionAnswerDrugUsage5(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -273,6 +278,7 @@ class ActionDrugInterferences1(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 class ActionDrugInterferences2(Action):
@@ -314,6 +320,7 @@ class ActionDrugInterferences2(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 ## avarez
@@ -351,6 +358,7 @@ class SideEffects1(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 ## khatar
@@ -394,6 +402,7 @@ class ActionAnswerDrugCaution1(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 ## hoshdar
@@ -429,6 +438,7 @@ class ActionAnswerWarning1(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 class ActionAnswerWarning2(Action):
@@ -466,6 +476,7 @@ class ActionAnswerWarning2(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
 
 ## nokte
@@ -502,4 +513,5 @@ class ActionAnswerHowToUse1(Action):
         ans = ans[:4096]
         if ans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        ans = ans.replace('\r','')
         dispatcher.utter_message(text=ans)
