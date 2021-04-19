@@ -62,10 +62,11 @@ class ActionAnswerDrugUsage1(Action):
                 ans = data[name]['Mechanisms']['Usage']
         print(ans)
         ans = ans[:4096]
-        # print(ans)
-        if ans == '':
-            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         ans = ans.replace('\r','')
+        # print(ans)
+        if ans == '' or ' ':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        
         print(ans == "")
         # ans = '\r سلام استامینوفن'
         # print(ans)
