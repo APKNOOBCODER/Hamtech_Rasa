@@ -59,6 +59,7 @@ class ActionAnswerDrugUsage1(Action):
         
         for name in data:
             if (name == drug_name) or (drug_name in name):
+                print("found")
                 ans = data[name]['Mechanisms']['Usage']
         print(ans)
         ans = ans[:4096]
