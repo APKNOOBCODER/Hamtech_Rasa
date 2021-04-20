@@ -59,7 +59,7 @@ class ActionAnswerDrugUsage1(Action):
         
         for name in data:
             if (name == drug_name) or (drug_name in name):
-                print("found")
+                # print("found")
                 ans = data[name]['Mechanisms']['Usage']
                 checkans = ans.replace('\r','')
                 checkans = checkans.replace('\n','')
@@ -114,14 +114,20 @@ class ActionAnswerDrugUsage2(Action):
                 usage = data[name]['Mechanisms']['Usage']
                 if symptom in usage:
                     ans = 'بلی، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
+                    break
                 else:
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+# 
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -159,13 +165,19 @@ class ActionAnswerDrugUsage3(Action):
                 usage = data[name]['Mechanisms']['Usage']
                 if illness in usage:
                     ans = 'بلی، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
+                    break
                 else:
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -207,9 +219,14 @@ class ActionAnswerDrugUsage4(Action):
                     ans += " ,"
                 ans += name
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -250,9 +267,14 @@ class ActionAnswerDrugUsage5(Action):
                     ans += " ,"
                 ans += name
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text="%s"%ans)
 
         return []
@@ -287,10 +309,20 @@ class ActionDrugInterferences1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Drug_Interferences']
+                checkans = ans.replace('\r','')
+                checkans = checkans.replace('\n','')
+                checkans = checkans.replace(' ', '')
+                if checkans != '':
+                    break
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'تداخل دارویی برای داروی %s یافت نشد' % drug_name:
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 class ActionDrugInterferences2(Action):
@@ -330,10 +362,15 @@ class ActionDrugInterferences2(Action):
                         elif drug_name_2 in Drug_Interferences:
                             ans += '\n %s' % Drug_Interferences
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 ## avarez
@@ -367,12 +404,22 @@ class SideEffects1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Side_Effects']
+                checkans = ans.replace('\r','')
+                checkans = checkans.replace('\n','')
+                checkans = checkans.replace(' ', '')
+                if checkans != '':
+                    break
         
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'عوارض جانبی برای داروی %s یافت نشد' % drug_name:
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
 ## khatar
@@ -412,11 +459,21 @@ class ActionAnswerDrugCaution1(Action):
                       data[name]['Cautions']['Drug_Interferences'] + "\n" + \
                       "نکات پیشنهادی: \n" + \
                       data[name]['Cautions']['Recommended_Tips'] + "\n"
+                checkans = ans.replace('\r','')
+                checkans = checkans.replace('\n','')
+                checkans = checkans.replace(' ', '')
+                if checkans != '':
+                    break
 
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'خطری برای داروی %s یافت نشد' % drug_name:
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
 
@@ -449,11 +506,21 @@ class ActionAnswerWarning1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Warnings']
+                checkans = ans.replace('\r','')
+                checkans = checkans.replace('\n','')
+                checkans = checkans.replace(' ', '')
+                if checkans != '':
+                    break
 
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'هیچ هشداری برای داروی %s یافت نشد' % drug_name:
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
 
@@ -488,11 +555,21 @@ class ActionAnswerWarning2(Action):
                 warning  = data[name]['Cautions']['Warnings']
                 if illness in warning:
                     ans = 'بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s' % warning
+                    checkans = ans.replace('\r','')
+                    checkans = checkans.replace('\n','')
+                    checkans = checkans.replace(' ', '')
+                    if checkans != '':
+                        break
         
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
 
@@ -526,10 +603,20 @@ class ActionAnswerHowToUse1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]['Cautions']['Recommended_Tips']
+                checkans = ans.replace('\r','')
+                checkans = checkans.replace('\n','')
+                checkans = checkans.replace(' ', '')
+                if checkans != '':
+                    break
             
         ans = ans[:4096]
-        ans = ans.replace('\r','')
-        if ans == '':
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'عوارض جانبی برای داروی %s یافت نشد' % drug_name:
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        # ans = ans.replace('\r','')
+        # if ans == '':
+            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
