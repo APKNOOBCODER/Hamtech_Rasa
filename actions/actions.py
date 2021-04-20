@@ -71,7 +71,7 @@ class ActionAnswerDrugUsage1(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '':
+        if checkans == '' or ans == 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         # print(ans == "")
