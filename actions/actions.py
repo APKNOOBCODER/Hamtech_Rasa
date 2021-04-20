@@ -42,7 +42,7 @@ class ActionAnswerDrugUsage1(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -52,7 +52,7 @@ class ActionAnswerDrugUsage1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
         print(drug_name)
         # print(drug_name[0])
@@ -94,7 +94,7 @@ class ActionAnswerDrugUsage2(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -106,7 +106,7 @@ class ActionAnswerDrugUsage2(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
         for name in data:
@@ -145,7 +145,7 @@ class ActionAnswerDrugUsage3(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -157,7 +157,7 @@ class ActionAnswerDrugUsage3(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
 
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name)
         for name in data:
@@ -195,7 +195,7 @@ class ActionAnswerDrugUsage4(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -207,7 +207,7 @@ class ActionAnswerDrugUsage4(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
         for name in data:
@@ -244,7 +244,7 @@ class ActionAnswerDrugUsage5(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -255,7 +255,7 @@ class ActionAnswerDrugUsage5(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
         # print(drug_name[0])
         for name in data:
@@ -293,7 +293,7 @@ class ActionDrugInterferences1(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -303,7 +303,7 @@ class ActionDrugInterferences1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -338,7 +338,7 @@ class ActionDrugInterferences2(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -350,7 +350,7 @@ class ActionDrugInterferences2(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
         for drug_name_1 in drug_names:
             for drug_name_2 in drug_names:
@@ -387,7 +387,7 @@ class SideEffects1(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -398,7 +398,7 @@ class SideEffects1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
 
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -436,7 +436,7 @@ class ActionAnswerDrugCaution1(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -446,7 +446,7 @@ class ActionAnswerDrugCaution1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -491,7 +491,7 @@ class ActionAnswerWarning1(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -500,7 +500,7 @@ class ActionAnswerWarning1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -537,7 +537,7 @@ class ActionAnswerWarning2(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -547,7 +547,7 @@ class ActionAnswerWarning2(Action):
         if drug_name == None or illness == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
@@ -587,7 +587,7 @@ class ActionAnswerHowToUse1(Action):
         print(confidence)
         intent = tracker.latest_message['intent']['name']
         print(intent)
-        if confidence < 0.4:
+        if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
@@ -597,7 +597,7 @@ class ActionAnswerHowToUse1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        with open(dir_path + '/' + '../' + 'data1000.json','r') as f:
+        with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
 
         for name in data:
