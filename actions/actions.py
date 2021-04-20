@@ -22,7 +22,6 @@ class ActionAnswerDrugUsage1(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # tracker.latest_message.entity[]
         
         ### another way:
         # ent = tracker.latest_message['entities']
@@ -38,10 +37,12 @@ class ActionAnswerDrugUsage1(Action):
         # u'start': 13
         # }])
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -51,22 +52,19 @@ class ActionAnswerDrugUsage1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
-        # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
-        print(drug_name)
-        # print(drug_name[0])
+        print("drug_name: " + drug_name)
         
         for name in data:
             if (name == drug_name) or (drug_name in name):
-                # print("found")
                 ans = data[name]['Mechanisms']['Usage']
                 checkans = ans.replace('\r','')
                 checkans = checkans.replace('\n','')
                 checkans = checkans.replace(' ', '')
                 if checkans != '':
                     break
-        print(ans)
+        print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -74,10 +72,7 @@ class ActionAnswerDrugUsage1(Action):
         if checkans == '' or ans == 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
-        # print(ans == "")
-        # ans = '\r سلام استامینوفن'
-        # print(ans)
-        dispatcher.utter_message(text="%s"%ans)
+        dispatcher.utter_message(text=ans)
 
         return []
 
@@ -90,10 +85,12 @@ class ActionAnswerDrugUsage2(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -103,12 +100,13 @@ class ActionAnswerDrugUsage2(Action):
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
 
         if drug_name == None or symptom == None:
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=ans)
             return []
         
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
-        # print(drug_name)
+        print("drug_name: " + drug_name)
+        print("symptom: " + symptom)
         for name in data:
             if name == drug_name:
                 usage = data[name]['Mechanisms']['Usage']
@@ -117,18 +115,14 @@ class ActionAnswerDrugUsage2(Action):
                     break
                 else:
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
-
+        print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
         if checkans == '' or ans == 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        # ans = ans.replace('\r','')
-# 
-        # if ans == '':
-            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        dispatcher.utter_message(text="%s"%ans)
+        dispatcher.utter_message(text=ans)
 
         return []
 
@@ -141,10 +135,12 @@ class ActionAnswerDrugUsage3(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -154,12 +150,13 @@ class ActionAnswerDrugUsage3(Action):
 
         illness = next(tracker.get_latest_entity_values('illness'), None)
         if drug_name == None or illness == None:
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=""+ ans)
             return []
 
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
-        # print(drug_name)
+        print("drug_name: " + drug_name)
+        print("illness: " + illness)
         for name in data:
             if name == drug_name:
                 usage = data[name]['Mechanisms']['Usage']
@@ -169,16 +166,14 @@ class ActionAnswerDrugUsage3(Action):
                 else:
                     ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
 
+        print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
         if checkans == '' or ans == 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        # ans = ans.replace('\r','')
-        # if ans == '':
-            # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        dispatcher.utter_message(text="%s"%ans)
+        dispatcher.utter_message(text=ans)
 
         return []
 
@@ -191,25 +186,26 @@ class ActionAnswerDrugUsage4(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         ans = 'دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.'
-        print(symptom)
+        
         if symptom == None:
             print('None')
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=ans)
             return []
-        # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
+        print('symptom: ' + symptom)
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
-        # print(drug_name[0])
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if symptom in usage:
@@ -218,6 +214,8 @@ class ActionAnswerDrugUsage4(Action):
                 else:
                     ans += " ,"
                 ans += name
+        
+        print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -227,7 +225,7 @@ class ActionAnswerDrugUsage4(Action):
         # ans = ans.replace('\r','')
         # if ans == '':
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        dispatcher.utter_message(text="%s"%ans)
+        dispatcher.utter_message(text=ans)
 
         return []
 
@@ -240,24 +238,25 @@ class ActionAnswerDrugUsage5(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
         # end
         illness = next(tracker.get_latest_entity_values('illness'), None)
         ans = 'دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.'
-
         if illness == None:
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=ans)
             return []
         # drug_name = tracker.get_latest_entity_values(entity_type="drug_name")
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
-        # print(drug_name[0])
+        print("illness: " + illness)
         for name in data:
             usage = data[name]['Mechanisms']['Usage']
             if illness in usage:
@@ -266,6 +265,8 @@ class ActionAnswerDrugUsage5(Action):
                 else:
                     ans += " ,"
                 ans += name
+
+        print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -275,7 +276,7 @@ class ActionAnswerDrugUsage5(Action):
         # ans = ans.replace('\r','')
         # if ans == '':
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
-        dispatcher.utter_message(text="%s"%ans)
+        dispatcher.utter_message(text=ans)
 
         return []
 
@@ -289,10 +290,12 @@ class ActionDrugInterferences1(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -301,7 +304,7 @@ class ActionDrugInterferences1(Action):
         ans = 'تداخل دارویی برای داروی %s یافت نشد' % drug_name
 
         if drug_name == None:
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=ans)
             return []
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -314,6 +317,8 @@ class ActionDrugInterferences1(Action):
                 checkans = checkans.replace(' ', '')
                 if checkans != '':
                     break
+       
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -334,10 +339,12 @@ class ActionDrugInterferences2(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -361,6 +368,8 @@ class ActionDrugInterferences2(Action):
                             ans = 'بلی. دارو ها با هم تداخل دارند: \n %s' % Drug_Interferences
                         elif drug_name_2 in Drug_Interferences:
                             ans += '\n %s' % Drug_Interferences
+        
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -383,10 +392,12 @@ class SideEffects1(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -410,6 +421,7 @@ class SideEffects1(Action):
                 if checkans != '':
                     break
         
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -432,10 +444,12 @@ class ActionAnswerDrugCaution1(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -465,6 +479,7 @@ class ActionAnswerDrugCaution1(Action):
                 if checkans != '':
                     break
 
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -487,10 +502,12 @@ class ActionAnswerWarning1(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -512,6 +529,7 @@ class ActionAnswerWarning1(Action):
                 if checkans != '':
                     break
 
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -533,10 +551,12 @@ class ActionAnswerWarning2(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -561,6 +581,7 @@ class ActionAnswerWarning2(Action):
                     if checkans != '':
                         break
         
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
@@ -583,10 +604,12 @@ class ActionAnswerHowToUse1(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print(confidence)
+        print("confidence: " + confidence)
         intent = tracker.latest_message['intent']['name']
-        print(intent)
+        print("intent: " + intent)
         if confidence < 0.6:
             dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
             return []
@@ -609,6 +632,7 @@ class ActionAnswerHowToUse1(Action):
                 if checkans != '':
                     break
             
+        print('ans: ' + ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
