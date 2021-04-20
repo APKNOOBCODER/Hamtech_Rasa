@@ -61,6 +61,11 @@ class ActionAnswerDrugUsage1(Action):
             if (name == drug_name) or (drug_name in name):
                 print("found")
                 ans = data[name]['Mechanisms']['Usage']
+                checkans = ans.replace('\r','')
+                checkans = checkans.replace('\n','')
+                checkans = checkans.replace(' ', '')
+                if checkans != '':
+                    break
         print(ans)
         ans = ans[:4096]
         checkans = ans.replace('\r','')
