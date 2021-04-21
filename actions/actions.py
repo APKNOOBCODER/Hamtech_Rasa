@@ -104,10 +104,10 @@ class ActionAnswerDrugUsage1(Action):
 
         return [SlotSet("drug_name", drug_name)]
 
-class ActionAnswerDrugUsageComp1(Action):
+class ActionAnswerDrugUsage1Comp2(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_comp_1"
+        return "action_answer_drug_usage_1_comp_2"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -139,10 +139,10 @@ class ActionAnswerDrugUsageComp1(Action):
             if name == drug_name:
                 usage = data[name]["Mechanisms"]["Usage"]
                 if symptom in usage:
-                    ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
+                    ans = "بلی، " + drug_name + " برای موارد زیر استفاده می شود: " + "\n" + usage
                     break
                 else:
-                    ans = "خیر، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
+                    ans = "خیر، " + drug_name + " برای موارد زیر استفاده می شود: " + "\n" + usage
         print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace("\r","")
@@ -153,6 +153,57 @@ class ActionAnswerDrugUsageComp1(Action):
         dispatcher.utter_message(text=ans)
 
         return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
+
+class ActionAnswerDrugUsage1Comp3(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_usage_1_comp_3"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = tracker.slots["drug_name"]
+        ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید."
+
+        illness = next(tracker.get_latest_entity_values("illness"), None)
+        if drug_name == None or illness == None:
+            dispatcher.utter_message(text=""+ ans)
+            return []
+
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        print("drug_name: " + drug_name)
+        print("illness: " + illness)
+        for name in data:
+            if name == drug_name:
+                usage = data[name]["Mechanisms"]["Usage"]
+                if illness in usage:
+                    ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
+                    break
+                else:
+                    ans = "خیر، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
+
+        print("ans: " + ans)
+        ans = ans[:4096]
+        checkans = ans.replace("\r","")
+        checkans = checkans.replace("\n","")
+        checkans = checkans.replace(" ", "")
+        if checkans == "" or ans == "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.":
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        dispatcher.utter_message(text=ans)
+
+        return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]
 
 
 class ActionAnswerDrugUsage2(Action):
@@ -402,7 +453,7 @@ class ActionDrugInterferences1(Action):
         checkans = ans.replace("\r","")
         checkans = checkans.replace("\n","")
         checkans = checkans.replace(" ", "")
-        if checkans == "" or ans == "تداخل دارویی برای داروی %s یافت نشد" % drug_name:
+        if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         # ans = ans.replace("\r","")
         # if ans == "":

@@ -29,10 +29,22 @@ stories:
     entities:
       - drug_name 
   - action: action_answer_drug_usage_1
-  - intent: drug_usage_1_comp_1
+  - intent: drug_usage_2_comp_1
     entities: 
       - symptom
-  - action: action_answer_drug_usage_comp_1
+  - action: action_answer_drug_usage_1_comp_2
+- story: drug_usage_ask_1_comp_2
+  steps:
+  - intent: drug_usage_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_usage_1
+  - intent: drug_usage_3
+    entities: 
+      - illness
+  - action: action_answer_drug_usage_1_comp_3
+  ## end
+
 
 - story: drug_usage_ask_2
   steps:
@@ -55,6 +67,13 @@ stories:
       # - drug_name
   # - action: action_answer_drug_usage_comp_2
 
+- story: drug_usage_ask_3
+  steps:
+  - intent: drug_usage_3
+    entities:
+      - drug_name
+      - illness
+  - action: action_answer_drug_usage_3
 - story: drug_usage_ask_3
   steps:
   - intent: drug_usage_3
