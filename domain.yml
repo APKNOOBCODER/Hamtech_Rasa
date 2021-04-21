@@ -8,6 +8,14 @@ slots:
     type: text
     influence_conversation: true
     auto_fill: false
+  symptom:
+    type: text
+    influence_conversation: true
+    auto_fill: false
+  illness:
+    type: text
+    influence_conversation: true
+    auto_fill: false
 
 intents:
 - drug_usage_1:

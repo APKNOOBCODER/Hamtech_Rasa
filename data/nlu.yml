@@ -46,7 +46,6 @@ nlu:
     - من با ربات حرف میزنم؟
     - من با آدم حرف میزنم؟
 
-- intent: 
 
 ## intents
 - intent: drug_usage_1

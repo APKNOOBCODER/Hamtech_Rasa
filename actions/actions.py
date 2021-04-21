@@ -41,7 +41,7 @@ class ActionAnswerDrugUsage1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -89,7 +89,7 @@ class ActionAnswerDrugUsageComp1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -125,7 +125,7 @@ class ActionAnswerDrugUsageComp1(Action):
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
-        return []
+        return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
 
 
 class ActionAnswerDrugUsage2(Action):
@@ -140,7 +140,7 @@ class ActionAnswerDrugUsage2(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -175,7 +175,7 @@ class ActionAnswerDrugUsage2(Action):
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
-        return []
+        return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
 
 class ActionAnswerDrugUsage3(Action):
 
@@ -189,7 +189,7 @@ class ActionAnswerDrugUsage3(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -226,7 +226,8 @@ class ActionAnswerDrugUsage3(Action):
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
-        return []
+        return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]
+
 
 class ActionAnswerDrugUsage4(Action):
 
@@ -240,7 +241,7 @@ class ActionAnswerDrugUsage4(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -278,7 +279,7 @@ class ActionAnswerDrugUsage4(Action):
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
-        return []
+        return [SlotSet("symptom", symptom)]
 
 class ActionAnswerDrugUsage5(Action):
 
@@ -292,7 +293,7 @@ class ActionAnswerDrugUsage5(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -329,7 +330,7 @@ class ActionAnswerDrugUsage5(Action):
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
-        return []
+        return [SlotSet("illness", illness)]
 
 ## tadakhol
 class ActionDrugInterferences1(Action):
@@ -344,7 +345,7 @@ class ActionDrugInterferences1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -380,6 +381,8 @@ class ActionDrugInterferences1(Action):
         # if ans == '':
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
+        
+        return [SlotSet("drug_name", drug_name)]
 
 class ActionDrugInterferences2(Action):
 
@@ -393,7 +396,7 @@ class ActionDrugInterferences2(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -432,6 +435,7 @@ class ActionDrugInterferences2(Action):
         # if ans == '':
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
+        return []
 
 ## avarez
 class SideEffects1(Action):
@@ -446,7 +450,7 @@ class SideEffects1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -498,7 +502,7 @@ class ActionAnswerDrugCaution1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -556,7 +560,7 @@ class ActionAnswerWarning1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -605,7 +609,7 @@ class ActionAnswerWarning2(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
@@ -658,7 +662,7 @@ class ActionAnswerHowToUse1(Action):
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message['intent']['confidence']
-        print("confidence: " + confidence)
+        print("confidence: " + str(confidence))
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
