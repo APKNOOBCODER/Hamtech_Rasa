@@ -14,7 +14,34 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
- 
+class ActionAnswerDrugUsage1(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_usage_1"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message['intent']['confidence']
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message['intent']['name']
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            return []
+        dispatcher.utter_message(text="درود، من یک ربات برای پاسخ به سوالات دارویی شما هستم. چه کمکی ازم بر می آید؟  \
+                                       \nمیتوان این سوالات را در زمینه های زیر بپرسید: \
+                                       \n1- موارد مصرف دارو (به علاوه بیماری ها و علائم) \
+                                       \n2- تداخل دارویی \
+                                       \n3- طریقه مصرف دارو ها \
+                                       \n4- نکات و هشدار های مربوط به مصرف دارو ها \
+                                       \n5- ناسازگاری های دارویی با بیماری ها")
+        return []
+
+
+
 class ActionAnswerDrugUsage1(Action):
 
     def name(self) -> Text:
@@ -70,7 +97,7 @@ class ActionAnswerDrugUsage1(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.':
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)

@@ -9,6 +9,11 @@ stories:
 #   - intent: mood_great
 #   - action: utter_happy
 
+- story:
+  steps:
+  - intent: great
+  action: action_answer_great
+
 ## mavared masraf
 - story: drug_usage_ask_1
   steps:

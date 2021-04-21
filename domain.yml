@@ -119,15 +119,6 @@ entities:
 - illness
 - symptom
 responses:
-  utter_greet:
-  - text: >
-    درود، من یک ربات برای پاسخ به سوالات دارویی شما هستم. چه کمکی ازم بر می آید؟ 
-    میتوان این سوالات را در زمینه های زیر بپرسید: 
-    1- موارد مصرف دارو (به علاوه بیماری ها و علائم) 
-    2- تداخل دارویی 
-    3- طریقه مصرف دارو ها 
-    4- نکات و هشدار های مربوط به مصرف دارو ها 
-    5- ناسازگاری های دارویی با بیماری ها
   utter_cheer_up:
   - text: 'اینم یه چیز خوشحال کننده:'
     image: https://i.imgur.com/nGF1K8f.jpg
@@ -153,4 +144,4 @@ actions:
 - action_answer_warning_1
 - action_answer_warning_2
 - action_answer_how_to_use_1
-- utter_greet
+- action_answer_great
