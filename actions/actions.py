@@ -120,7 +120,7 @@ class ActionAnswerDrugUsageComp1(Action):
         intent = tracker.latest_message['intent']['name']
         print("intent: " + intent)
         if confidence < 0.6:
-            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
 
@@ -148,7 +148,7 @@ class ActionAnswerDrugUsageComp1(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.':
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
 
