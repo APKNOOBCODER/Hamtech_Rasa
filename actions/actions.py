@@ -428,7 +428,7 @@ class ActionDrugInterferences2(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'تداخل دارویی برای دارو های موجود در پرسش یافت نشد':
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         # ans = ans.replace('\r','')
 
@@ -481,7 +481,7 @@ class SideEffects1(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'عوارض جانبی برای داروی %s یافت نشد' % drug_name:
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         # ans = ans.replace('\r','')
 
@@ -531,6 +531,10 @@ class ActionAnswerDrugCaution1(Action):
                       data[name]['Cautions']['Recommended_Tips'] + "\n"
                 checkans = ans.replace('\r','')
                 checkans = checkans.replace('\n','')
+                checkans = checkans.replace("هشدار ها: ", "")
+                checkans = checkans.replace("عوارض جانبی: ", "")
+                checkans = checkans.replace("تداخلات دارویی: ", "")
+                checkans = checkans.replace("نکات پیشنهادی: ", "")
                 checkans = checkans.replace(' ', '')
                 if checkans != '':
                     break
@@ -540,7 +544,7 @@ class ActionAnswerDrugCaution1(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'خطری برای داروی %s یافت نشد' % drug_name:
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         # ans = ans.replace('\r','')
         # if ans == '':
@@ -591,7 +595,7 @@ class ActionAnswerWarning1(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'هیچ هشداری برای داروی %s یافت نشد' % drug_name:
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         # ans = ans.replace('\r','')
         # if ans == '':
@@ -623,7 +627,7 @@ class ActionAnswerWarning2(Action):
         ans = 'هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد'
         illness = next(tracker.get_latest_entity_values('illness'), None)
         if drug_name == None or illness == None:
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=ans)
             return []
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -644,7 +648,7 @@ class ActionAnswerWarning2(Action):
         checkans = ans.replace('\r','')
         checkans = checkans.replace('\n','')
         checkans = checkans.replace(' ', '')
-        if checkans == '' or ans == 'هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد':
+        if checkans == '':
             ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         # ans = ans.replace('\r','')
         # if ans == '':
