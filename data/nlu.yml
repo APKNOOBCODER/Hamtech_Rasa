@@ -284,7 +284,7 @@ nlu:
     - [گلورآ](drug_name) رو چطوری مصرف کنم؟
     - [تایروژن](drug_name) رو چطوری مصرف کنم؟
 
-intent: not_recognized
+- intent: not_recognized
   example: |
     - ممدقلی خان ممسنی با بستنی بی بستنی
     - هوا خوبه؟
@@ -297,7 +297,7 @@ intent: not_recognized
     - موبایلت چه رنگیه؟
     - آیفون 12 چند؟
     - ممدی نبودی ببینی، شهر آزاد گشته؟
-    
+
 ## lookup
 - lookup: drug_name
   examples: |
