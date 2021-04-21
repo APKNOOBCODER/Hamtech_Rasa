@@ -134,6 +134,7 @@ actions:
 - action_answer_drug_interferences_2
 - action_answer_side_effects_1
 - action_answer_drug_caution_1
+- action_answer_drug_usage_comp_1
 - action_answer_warning_1
 - action_answer_warning_2
 - action_answer_how_to_use_1
