@@ -107,6 +107,7 @@ intents:
     ignore_entities:
     - symptom
     - illness
+- not_recognized
 - greet
 - goodbye
 - affirm
@@ -119,6 +120,8 @@ entities:
 - illness
 - symptom
 responses:
+  utter_not_recognized:
+  - text: "متوجه نشدم، لطفا دوباره تلاش کنید"
   utter_cheer_up:
   - text: 'اینم یه چیز خوشحال کننده:'
     image: https://i.imgur.com/nGF1K8f.jpg

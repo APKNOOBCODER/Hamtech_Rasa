@@ -152,6 +152,11 @@ stories:
 #   - intent: deny
 #   - action: utter_goodbye
 
+- story:
+  steps:
+  - intent: not_recognized
+  - action: utter_not_recognized
+
 - story: interactive_story_1
   steps:
   - intent: greet
