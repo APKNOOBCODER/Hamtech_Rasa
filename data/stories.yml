@@ -17,6 +17,18 @@ stories:
       - drug_name
   - action: action_answer_drug_usage_1
 
+  ## have drug_usage_1 and then incomplete drug_usage_2 that need more info
+- story: drug_usage_ask_1_comp_1
+  steps:
+  - intent: drug_usage_1
+    entities:
+      - drug_name 
+  - action: action_answer_drug_usage_1
+  - intent: drug_usage_1_comp_1
+    entities: 
+      - symptom
+  - action: action_answer_drug_usage_comp_1
+
 - story: drug_usage_ask_2
   steps:
   - intent: drug_usage_2
@@ -24,6 +36,19 @@ stories:
       - drug_name
       - symptom
   - action: action_answer_drug_usage_2
+
+
+
+# - story: drug_usage_ask_2_comp_2
+  # steps:
+  # - intent: drug_usage_2
+    # entities:
+      # - symptom
+  # - action: action_ask_drug_usage_comp_2
+  # - intent: drug_usage_2_comp_2
+    # entities: 
+      # - drug_name
+  # - action: action_answer_drug_usage_comp_2
 
 - story: drug_usage_ask_3
   steps:

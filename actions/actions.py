@@ -12,6 +12,7 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 
  
 class ActionAnswerDrugUsage1(Action):
@@ -50,7 +51,7 @@ class ActionAnswerDrugUsage1(Action):
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         ans = 'اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید.'
         if drug_name == None:
-            dispatcher.utter_message(text="%s"%ans)
+            dispatcher.utter_message(text=ans)
             return []
         with open(dir_path + '/' +'data.json','r') as f:
             data: dict = json.loads(f.read())
@@ -74,7 +75,58 @@ class ActionAnswerDrugUsage1(Action):
         
         dispatcher.utter_message(text=ans)
 
+        return [SlotSet("drug_name", drug_name)]
+
+class ActionAnswerDrugUsageComp1(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_usage_comp_1"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message['intent']['confidence']
+        print("confidence: " + confidence)
+        intent = tracker.latest_message['intent']['name']
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text='متوجه نشدم، لطفا دوباره تلاش کنید')
+            return []
+        # end
+
+        drug_name = tracker["slots"]["drug_name"]
+        symptom = next(tracker.get_latest_entity_values('symptom'), None)
+        ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
+        if drug_name == None or symptom == None:
+            dispatcher.utter_message(text=ans)
+            return []
+        
+        with open(dir_path + '/' +'data.json','r') as f:
+            data: dict = json.loads(f.read())
+        print("drug_name: " + drug_name)
+        print("symptom: " + symptom)
+        for name in data:
+            if name == drug_name:
+                usage = data[name]['Mechanisms']['Usage']
+                if symptom in usage:
+                    ans = 'بلی، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
+                    break
+                else:
+                    ans = 'خیر، ' + drug_name + 'برای موارد زیر استفاده می شود: ' + "\n" + usage
+        print("ans: " + ans)
+        ans = ans[:4096]
+        checkans = ans.replace('\r','')
+        checkans = checkans.replace('\n','')
+        checkans = checkans.replace(' ', '')
+        if checkans == '' or ans == 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.':
+            ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
+        dispatcher.utter_message(text=ans)
+
         return []
+
 
 class ActionAnswerDrugUsage2(Action):
 
@@ -98,7 +150,6 @@ class ActionAnswerDrugUsage2(Action):
         drug_name = next(tracker.get_latest_entity_values('drug_name'), None)
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
-
         if drug_name == None or symptom == None:
             dispatcher.utter_message(text=ans)
             return []

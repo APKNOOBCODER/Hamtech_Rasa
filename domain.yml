@@ -2,6 +2,13 @@ version: '2.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+slots:
+  drug_name:
+    type: text
+    influence_conversation: true
+    auto_fill: false
+
 intents:
 - drug_usage_1:
     use_entities:
@@ -9,7 +16,14 @@ intents:
     ignore_entities:
     - illness
     - symptom
-     
+
+- drug_usage_1_comp_1:
+    use_entities:
+    - symptom
+    ignore_entities:
+    - illness
+    - drug_name
+
 - drug_usage_2:
     use_entities:
     - drug_name
@@ -98,7 +112,7 @@ entities:
 - symptom
 responses:
   utter_greet:
-  - text: درود، من یک ربات برای پاسخ به سوالات دارویی شما هستم. چه کمکی ازم بر می آید؟
+  - text: 'درود، من یک ربات برای پاسخ به سوالات دارویی شما هستم. چه کمکی ازم بر می آید؟ \n میتوان این سوالات را در زمینه های زیر بپرسید: \n 1- موارد مصرف دارو (به علاوه بیماری ها و علائم) \n 2- تداخل دارویی \n 3- طریقه مصرف دارو ها \n 4- نکات و هشدار های مربوط به مصرف دارو ها \n 5- ناسازگاری های دارویی با بیماری ها'
   utter_cheer_up:
   - text: 'اینم یه چیز خوشحال کننده:'
     image: https://i.imgur.com/nGF1K8f.jpg
