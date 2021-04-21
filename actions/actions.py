@@ -488,6 +488,7 @@ class SideEffects1(Action):
         # if ans == '':
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]
 
 ## khatar
 class ActionAnswerDrugCaution1(Action):
@@ -546,6 +547,7 @@ class ActionAnswerDrugCaution1(Action):
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]
 
 ## hoshdar
 class ActionAnswerWarning1(Action):
@@ -596,6 +598,7 @@ class ActionAnswerWarning1(Action):
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]
 
 class ActionAnswerWarning2(Action):
 
@@ -648,6 +651,7 @@ class ActionAnswerWarning2(Action):
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]
 
 ## nokte
 class ActionAnswerHowToUse1(Action):
@@ -699,3 +703,4 @@ class ActionAnswerHowToUse1(Action):
             # ans = 'با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست'
         
         dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]
