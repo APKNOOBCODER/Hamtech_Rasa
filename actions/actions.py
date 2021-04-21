@@ -14,10 +14,10 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
-class ActionAnswerDrugUsage1(Action):
+class ActionAnswerGreat(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_1"
+        return "action_answer_great"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
