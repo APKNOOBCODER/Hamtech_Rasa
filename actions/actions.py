@@ -97,7 +97,7 @@ class ActionAnswerDrugUsageComp1(Action):
             return []
         # end
 
-        drug_name = tracker["slots"]["drug_name"]
+        drug_name = tracker.slots["drug_name"]
         symptom = next(tracker.get_latest_entity_values('symptom'), None)
         ans = 'اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.'
         if drug_name == None or symptom == None:
