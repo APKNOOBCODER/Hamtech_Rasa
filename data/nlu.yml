@@ -285,7 +285,7 @@ nlu:
     - [تایروژن](drug_name) رو چطوری مصرف کنم؟
 
 - intent: not_recognized
-  example: |
+  examples: |
     - ممدقلی خان ممسنی با بستنی بی بستنی
     - هوا خوبه؟
     - ساعت چنده؟
