@@ -285,8 +285,10 @@ class ActionAnswerDrugUsage3(Action):
         if drug_name == None:
             print("slot")
             drug_name = tracker.slots["drug_name"]
+            print(drug_name)
         if drug_name == None or illness == None:
             print("None")
+            print(illness)
             dispatcher.utter_message(text=""+ ans)
             return []
 
