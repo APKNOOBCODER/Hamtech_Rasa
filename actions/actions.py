@@ -229,7 +229,7 @@ class ActionAnswerDrugUsage2(Action):
         symptom = next(tracker.get_latest_entity_values("symptom"), None)
         ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید."
         if drug_name == None:
-            drug_name = next([tracker.slots["drug_name"], None])
+            drug_name = tracker.slots["drug_name"]
         if symptom == None or drug_name == None:
             dispatcher.utter_message(text=ans)
             return []
@@ -281,7 +281,7 @@ class ActionAnswerDrugUsage3(Action):
 
         illness = next(tracker.get_latest_entity_values("illness"), None)
         if drug_name == None:
-            drug_name = next([tracker.slots["drug_name"], None])
+            drug_name = tracker.slots["drug_name"]
         if drug_name == None or illness == None:
             dispatcher.utter_message(text=""+ ans)
             return []
