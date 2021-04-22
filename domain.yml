@@ -25,12 +25,6 @@ intents:
     - illness
     - symptom
 
-- drug_usage_2_comp_1:
-    use_entities:
-    - symptom
-    ignore_entities:
-    - illness
-    - drug_name
 
 - drug_usage_2:
     use_entities:
