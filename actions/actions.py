@@ -101,9 +101,11 @@ class ActionAnswerDrugUsage1(Action):
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         
         dispatcher.utter_message(text=ans)
+        # dispatcher.utter_message(text=ans2)
 
         return [SlotSet("drug_name", drug_name)]
 
+"""
 class ActionAnswerDrugUsage1Comp2(Action):
 
     def name(self) -> Text:
@@ -203,7 +205,7 @@ class ActionAnswerDrugUsage1Comp3(Action):
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
 
-        return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]
+        return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]"""
 
 
 class ActionAnswerDrugUsage2(Action):
@@ -492,13 +494,36 @@ class ActionDrugInterferences2(Action):
             return []
         # end
         drug_names = []
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        drug_names.append(drug_name)
+        try:
+            for dn in tracker.latest_message["entities"]:
+                drug_names.append(dn["value"])
+        except:
+            dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
+            return []
+        if len(drug_names)==1:
+            try:
+                drug_name_2 = drug_name_1
+                drug_name_1 = tracker.slots["drug_name"]
+            except:
+                dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
+                return []
+        # try:
+            # drug_name_1 = tracker.latest_message["entities"][0]["value"]
+        # except:
+            # dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
+            # return []
+        # try:
+            # drug_name_2 = tracker.latest_message["entities"][1]["value"]
+        # except:
+            # drug_name_2 = drug_name_1
+            # drug_name_1 = tracker.slots["drug_name"]
+        # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        # drug_names.append(drug_name)
         ans = "تداخل دارویی برای دارو های موجود در پرسش یافت نشد"
 
-        if drug_name == None:
-            dispatcher.utter_message(text="%s"%ans)
-            return []
+        # if drug_name_1 == None:
+            # dispatcher.utter_message(text="%s"%ans)
+            # return []
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
         for drug_name_1 in drug_names:
