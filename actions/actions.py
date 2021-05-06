@@ -495,9 +495,12 @@ class ActionDrugInterferences2(Action):
         # end
         drug_names = []
         try:
+            print("try")
             for dn in tracker.latest_message["entities"]:
+                print(dn["value"])
                 drug_names.append(dn["value"])
         except:
+            print("except")
             dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
             return []
         if len(drug_names)==1:
@@ -531,10 +534,14 @@ class ActionDrugInterferences2(Action):
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
                         Drug_Interferences = data[name]["Cautions"]["Drug_Interferences"]
-                        if drug_name_2 in Drug_Interferences and ans == "تداخل دارویی برای دارو های موجود در پرسش یافت نشد":
+                        if drug_name_2 in Drug_Interferences:
                             ans = "بلی. دارو ها با هم تداخل دارند: \n %s" % Drug_Interferences
-                        elif drug_name_2 in Drug_Interferences:
-                            ans += "\n %s" % Drug_Interferences
+                            print("found")
+                            break
+                
+                        # elif drug_name_2 in Drug_Interferences:
+                            # ans += "\n %s" % Drug_Interferences
+                            # print("found again!")
         
         print("ans: " + ans)
         ans = ans[:4096]
