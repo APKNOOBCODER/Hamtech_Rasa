@@ -534,6 +534,7 @@ class ActionDrugInterferences2(Action):
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
                         Drug_Interferences = data[name]["Cautions"]["Drug_Interferences"]
+                        print(Drug_Interferences.find(drug_name_2))
                         print(Drug_Interferences)
                         print(drug_name_2)
                         print(drug_name_2 in Drug_Interferences)
