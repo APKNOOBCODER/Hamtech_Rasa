@@ -534,8 +534,9 @@ class ActionDrugInterferences2(Action):
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
                         Drug_Interferences = data[name]["Cautions"]["Drug_Interferences"]
-                        # print(Drug_Interferences)
-                        print("سایمتیدین" in Drug_Interferences)
+                        print(Drug_Interferences)
+                        print(drug_name_2)
+                        print(drug_name_2 in Drug_Interferences)
                         if drug_name_2 in Drug_Interferences:
                             ans = "بلی. دارو ها با هم تداخل دارند: \n %s" % Drug_Interferences
                             print("found")
