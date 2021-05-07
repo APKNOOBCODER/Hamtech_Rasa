@@ -536,7 +536,7 @@ class ActionDrugInterferences2(Action):
                         Drug_Interferences = data[name]["Cautions"]["Drug_Interferences"]
                         print("find: " + str(Drug_Interferences.find(drug_name_2)))
                         print("Drug_Interferences: " + Drug_Interferences)
-                        print("drug_name_2: " + drug_name_2)
+                        print("drug_name_2: " + drug_name_2[0])
                         print("exist: " + str(drug_name_2 in Drug_Interferences))
                         if drug_name_2 in Drug_Interferences:
                             ans = "بلی. دارو ها با هم تداخل دارند: \n %s" % Drug_Interferences
