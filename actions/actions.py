@@ -527,7 +527,7 @@ class ActionDrugInterferences2(Action):
         # if drug_name_1 == None:
             # dispatcher.utter_message(text="%s"%ans)
             # return []
-        with open(dir_path + "/" +"data.json","r") as f:
+        with open(dir_path + "/" +"data.json","r", encoding="utf-8") as f:
             data: dict = json.loads(f.read())
         for drug_name_1 in drug_names:
             for drug_name_2 in drug_names:
