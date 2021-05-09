@@ -2,9 +2,9 @@ digraph  {
 0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
 "-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
 1 [class=active, fontsize=12, label=action_session_start];
-2 [class=active, fontsize=12, label=action_answer_drug_usage_4];
+2 [class=active, fontsize=12, label=action_answer_drug_interferences_2];
 3 [class="intent dashed active", label="  ?  ", shape=rect];
-4 [class="intent active", fillcolor=lightblue, label="بدن درد دارم، چیکار کنم؟", shape=rect, style=filled];
+4 [class="intent active", fillcolor=lightblue, label="پرامی پکسول و سایمتیدین تداخل دارن؟", shape=rect, style=filled];
 0 -> "-1"  [class="", key=NONE, label=""];
 0 -> 1  [class=active, key=NONE, label=""];
 1 -> 4  [class=active, key=0];

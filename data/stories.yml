@@ -241,3 +241,11 @@ stories:
     entities:
     - symptom: بدن درد
   - action: action_answer_drug_usage_4
+
+- story: interactive_story_1
+  steps:
+  - intent: drug_interferences_2
+    entities:
+    - drug_name: پرامی پکسول
+    - drug_name: سایمتیدین
+  - action: action_answer_drug_interferences_2
