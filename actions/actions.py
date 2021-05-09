@@ -7,6 +7,8 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 import json
+import hazm
+Norm = hazm.Normalizer()
 from typing import Any, Text, Dict, List
 import os 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -87,6 +89,7 @@ class ActionAnswerDrugUsage1(Action):
         for name in data:
             if (name == drug_name) or (drug_name in name):
                 ans = data[name]["Mechanisms"]["Usage"]
+                ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
@@ -245,6 +248,7 @@ class ActionAnswerDrugUsage2(Action):
         for name in data:
             if name == drug_name:
                 usage = data[name]["Mechanisms"]["Usage"]
+                usage = Norm.normalize(usage)
                 if symptom in usage:
                     ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
                     break
@@ -301,6 +305,7 @@ class ActionAnswerDrugUsage3(Action):
         for name in data:
             if name == drug_name:
                 usage = data[name]["Mechanisms"]["Usage"]
+                usage = Norm.normalize(usage)
                 if illness in usage:
                     ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
                     break
@@ -350,6 +355,7 @@ class ActionAnswerDrugUsage4(Action):
             data: dict = json.loads(f.read())
         for name in data:
             usage = data[name]["Mechanisms"]["Usage"]
+            usage = Norm.normalize(usage)
             if symptom in usage:
                 if ans == "دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.":
                     ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
@@ -401,6 +407,7 @@ class ActionAnswerDrugUsage5(Action):
         print("illness: " + illness)
         for name in data:
             usage = data[name]["Mechanisms"]["Usage"]
+            usage = Norm.normalize(usage)
             if illness in usage:
                 if ans == "دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.":
                     ans = "دارو های زیر برای رفع بیماری شما مصرف میشود: \n"
@@ -454,6 +461,7 @@ class ActionDrugInterferences1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]["Cautions"]["Drug_Interferences"]
+                ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
@@ -534,16 +542,17 @@ class ActionDrugInterferences2(Action):
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
                         Drug_Interferences = data[name]["Cautions"]["Drug_Interferences"]
-                        charsI = []
-                        for char in Drug_Interferences: charsI.append(char)
-                        print(charsI)
-                        charsD = []
-                        for char in drug_name_2: charsD.append(char)
-                        print(charsD)
-                        print("find: " + str(Drug_Interferences.find(drug_name_2)))
-                        print("Drug_Interferences: " + Drug_Interferences)
-                        print("drug_name_2: " + drug_name_2[0])
-                        print("exist: " + str(drug_name_2 in Drug_Interferences))
+                        Drug_Interferences = Norm.normalize(Drug_Interferences)
+                        # charsI = []
+                        # for char in Drug_Interferences: charsI.append(char)
+                        # print(charsI)
+                        # charsD = []
+                        # for char in drug_name_2: charsD.append(char)
+                        # print(charsD)
+                        # print("find: " + str(Drug_Interferences.find(drug_name_2)))
+                        # print("Drug_Interferences: " + Drug_Interferences)
+                        # print("drug_name_2: " + drug_name_2[0])
+                        # print("exist: " + str(drug_name_2 in Drug_Interferences))
                         if drug_name_2 in Drug_Interferences:
                             ans = "بلی. دارو ها با هم تداخل دارند: \n %s" % Drug_Interferences
                             print("found")
@@ -600,6 +609,7 @@ class SideEffects1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]["Cautions"]["Side_Effects"]
+                ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
@@ -659,6 +669,7 @@ class ActionAnswerDrugCaution1(Action):
                       data[name]["Cautions"]["Drug_Interferences"] + "\n" + \
                       "نکات پیشنهادی: \n" + \
                       data[name]["Cautions"]["Recommended_Tips"] + "\n"
+                ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace("هشدار ها: ", "")
@@ -714,6 +725,7 @@ class ActionAnswerWarning1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]["Cautions"]["Warnings"]
+                ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
@@ -765,6 +777,7 @@ class ActionAnswerWarning2(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 warning  = data[name]["Cautions"]["Warnings"]
+                ans = Norm.normalize(ans)
                 if illness in warning:
                     ans = "بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s" % warning
                     checkans = ans.replace("\r","")
@@ -819,6 +832,7 @@ class ActionAnswerHowToUse1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 ans = data[name]["Cautions"]["Recommended_Tips"]
+                ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
