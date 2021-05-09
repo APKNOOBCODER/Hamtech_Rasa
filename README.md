@@ -9,7 +9,9 @@
         Use "pip install "rasa_nlu_examples[stanza] @ git+https://github.com/RasaHQ/rasa-nlu-examples.git"" command to install the package
 
     4- run stanza_loader.py to download pretrained model
+## hazm
+    5- use "pip install hazm" command for installing hazm and it's normalizer
 ## rasa_train
-    5- after all with "rasa train" command, in terminal, make a training model!
+    6- after all with "rasa train" command, in terminal, make a training model!
 ## Run
 Done! with "rasa shell" you can use chatbot :)
