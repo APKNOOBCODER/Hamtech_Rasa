@@ -151,6 +151,22 @@ stories:
       - drug_name
   - action: action_answer_how_to_use_1
 
+## Price
+- story: price
+  steps:
+  - intent: price
+    entities:
+      - drug_name
+  - action: action_answer_price
+
+## Sames
+- story: Sames_1
+  steps:
+  - intent: same_drug_1
+    entities:
+      - drug_name
+  - action: action_answer_sames_1
+
 # - story: sad path 1
 #   steps:
 #   - intent: greet

@@ -854,3 +854,73 @@ class ActionAnswerHowToUse1(Action):
         
         dispatcher.utter_message(text=ans)
         return [SlotSet("drug_name", drug_name)]
+
+## gheimat
+class ActionAnswerPrice(Action):
+    def name(self) -> Text:
+        return "action_answer_price"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
+            data: dict = json.loads(f.read())
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                try:
+                    ans = min(data[name]["Price"])
+                    break
+                except:
+                    ans = "قیمت یافت نشد"
+        print("ans: " + ans)
+        dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]
+
+## Shebahat
+class ActionAnswerSames1(Action):
+    def name(self) -> Text:
+        return "action_answer_sames_1"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
+            data: dict = json.loads(f.read())
+
+        for name in data:
+            if name == drug_name or drug_name in name:
+                try:
+                    ans = data[name]["Sames"][0]
+                    for x in data[name]["Sames"]:
+                        ans += ", " + x
+                    break
+                except:
+                    ans = "مشابه دارو یافت نشد"
+        print("ans: " + ans)
+        dispatcher.utter_message(text=ans)
+        return [SlotSet("drug_name", drug_name)]

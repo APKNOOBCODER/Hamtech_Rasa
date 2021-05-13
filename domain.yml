@@ -39,6 +39,13 @@ intents:
 - how_to_use_1:
     use_entities:
     - drug_name
+- price:
+    use_entities:
+    - drug_name
+- same_drug_1:
+    use_entities:
+    - drug_name
+
 - not_recognized
 - greet
 - goodbye
