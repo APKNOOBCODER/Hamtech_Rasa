@@ -88,7 +88,7 @@ class ActionAnswerDrugUsage1(Action):
         
         for name in data:
             if (name == drug_name) or (drug_name in name):
-                ans = data[name]["Mechanisms"]["Usage"]
+                ans = data[name]["Mechanisms"][0]["Usage"]
                 ans = Norm.normalize(ans)
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
@@ -142,7 +142,7 @@ class ActionAnswerDrugUsage1Comp2(Action):
         print("symptom: " + symptom)
         for name in data:
             if name == drug_name:
-                usage = data[name]["Mechanisms"]["Usage"]
+                usage = data[name]["Mechanisms"][0]["Usage"]
                 if symptom in usage:
                     ans = "بلی، " + drug_name + " برای موارد زیر استفاده می شود: " + "\n" + usage
                     break
@@ -192,7 +192,7 @@ class ActionAnswerDrugUsage1Comp3(Action):
         print("illness: " + illness)
         for name in data:
             if name == drug_name:
-                usage = data[name]["Mechanisms"]["Usage"]
+                usage = data[name]["Mechanisms"][0]["Usage"]
                 if illness in usage:
                     ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
                     break
@@ -247,7 +247,7 @@ class ActionAnswerDrugUsage2(Action):
         print("symptom: " + symptom)
         for name in data:
             if name == drug_name:
-                usage = data[name]["Mechanisms"]["Usage"]
+                usage = data[name]["Mechanisms"][0]["Usage"]
                 usage = Norm.normalize(usage)
                 if symptom in usage:
                     ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
@@ -259,7 +259,7 @@ class ActionAnswerDrugUsage2(Action):
         checkans = ans.replace("\r","")
         checkans = checkans.replace("\n","")
         checkans = checkans.replace(" ", "")
-        if checkans == "" or ans == "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید.":
+        if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
 
@@ -304,7 +304,7 @@ class ActionAnswerDrugUsage3(Action):
         print("illness: " + illness)
         for name in data:
             if name == drug_name:
-                usage = data[name]["Mechanisms"]["Usage"]
+                usage = data[name]["Mechanisms"][0]["Usage"]
                 usage = Norm.normalize(usage)
                 if illness in usage:
                     ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
@@ -317,7 +317,7 @@ class ActionAnswerDrugUsage3(Action):
         checkans = ans.replace("\r","")
         checkans = checkans.replace("\n","")
         checkans = checkans.replace(" ", "")
-        if checkans == "" or ans == "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.":
+        if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
 
@@ -354,7 +354,7 @@ class ActionAnswerDrugUsage4(Action):
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
         for name in data:
-            usage = data[name]["Mechanisms"]["Usage"]
+            usage = data[name]["Mechanisms"][0]["Usage"]
             usage = Norm.normalize(usage)
             if symptom in usage:
                 if ans == "دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.":
@@ -406,7 +406,7 @@ class ActionAnswerDrugUsage5(Action):
             data: dict = json.loads(f.read())
         print("illness: " + illness)
         for name in data:
-            usage = data[name]["Mechanisms"]["Usage"]
+            usage = data[name]["Mechanisms"][0]["Usage"]
             usage = Norm.normalize(usage)
             if illness in usage:
                 if ans == "دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.":

@@ -58,7 +58,7 @@ from bs4 import BeautifulSoup as BS
 
 Drugs_Data = {}
 
-start = 1001
+start = 25001
 data_count = 35011
 m = 0
 
@@ -193,10 +193,10 @@ for t in range(start, data_count + 1):
         m += 1
         t -= 1
 # data = {}
-# f = open("new_data_copy.json", "r", encoding='utf-8')
-# data = json.loads(f.read())
-# data.update(Drugs_Data)
-# f.close()
-# f = open("new_data_copy.json", "w", encoding='utf-8')
-# json.dump(data, f, indent=4, ensure_ascii=False)
-# f.close()
+f = open("new_data_copy.json", "r", encoding='utf-8')
+data = json.loads(f.read())
+data.update(Drugs_Data)
+f.close()
+f = open("new_data_copy.json", "w", encoding='utf-8')
+json.dump(data, f, indent=4, ensure_ascii=False)
+f.close()
