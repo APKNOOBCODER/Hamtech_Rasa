@@ -556,7 +556,7 @@ class ActionDrugInterferences2(Action):
                         # print("drug_name_2: " + drug_name_2[0])
                         # print("exist: " + str(drug_name_2 in Drug_Interferences))
                         if drug_name_2 in Drug_Interferences:
-                            ans = "بلی. دارو ها با هم تداخل دارند: \n %s" % Drug_Interferences
+                            ans = "دارو ها با هم تداخل دارند: \n %s" % Drug_Interferences
                             print("found")
                             break
                 
@@ -781,7 +781,7 @@ class ActionAnswerWarning2(Action):
                 warning  = data[name]["Cautions"][0]["Warnings"]
                 ans = Norm.normalize(ans)
                 if illness in warning:
-                    ans = "بلی، داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s" % warning
+                    ans = "داروی مورد نظر با بیماری موجود در پرسش در تداخل است: \n %s" % warning
                     checkans = ans.replace("\r","")
                     checkans = checkans.replace("\n","")
                     checkans = checkans.replace(" ", "")
