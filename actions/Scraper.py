@@ -58,7 +58,7 @@ from bs4 import BeautifulSoup as BS
 
 Drugs_Data = {}
 
-start = 1
+start = 1001
 data_count = 35011
 m = 0
 
