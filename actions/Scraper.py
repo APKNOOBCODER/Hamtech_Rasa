@@ -67,6 +67,13 @@ for t in range(start, data_count + 1):
         t += 1
     print(t)
     if(t % 1000 == 0):
+        f = open("new_data_copy.json", "r", encoding='utf-8')
+        data = json.loads(f.read())
+        data.update(Drugs_Data)
+        f.close()
+        f = open("new_data_copy.json", "w", encoding='utf-8')
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        f.close()
         time.sleep(20)
     # site url
     URL = "http://irc.fda.gov.ir/nfi/Detail/%s" % t
@@ -172,6 +179,10 @@ for t in range(start, data_count + 1):
             # print(Recommended_Tips)
             # print(Drugs_Data)
             m = 0
+    except KeyboardInterrupt:
+        break
+    except:
+        if(m==0):
             f = open("new_data_copy.json", "r", encoding='utf-8')
             data = json.loads(f.read())
             data.update(Drugs_Data)
@@ -179,8 +190,13 @@ for t in range(start, data_count + 1):
             f = open("new_data_copy.json", "w", encoding='utf-8')
             json.dump(data, f, indent=4, ensure_ascii=False)
             f.close()
-    except:
         m += 1
         t -= 1
 # data = {}
-
+# f = open("new_data_copy.json", "r", encoding='utf-8')
+# data = json.loads(f.read())
+# data.update(Drugs_Data)
+# f.close()
+# f = open("new_data_copy.json", "w", encoding='utf-8')
+# json.dump(data, f, indent=4, ensure_ascii=False)
+# f.close()
