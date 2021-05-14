@@ -95,6 +95,7 @@ class ActionAnswerDrugUsage1(Action):
                 checkans = ans.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace("موارد مصرف داروی ","")
+                checkans = checkans.replace(drug_name,"")
                 checkans = checkans.replace(" ", "")
                 if checkans != "":
                     break
