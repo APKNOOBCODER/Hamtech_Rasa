@@ -875,8 +875,8 @@ class ActionAnswerPrice(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 try:
-                    if 0 in data[name]["Price"]:
-                        data[name]["Price"].pop(0)
+                    if "0" in data[name]["Price"]:
+                        data[name]["Price"].pop("0")
                     ans = min(data[name]["Price"])
                     break
                 except:
