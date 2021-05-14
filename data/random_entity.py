@@ -13,6 +13,8 @@ for name in data:
 
 n = int(input("how many drugs needed?!"))
 for x in range(n):
-    index = random.randrange(0,len(drug_names))
-    print("    - چقدره قیمت [" + drug_names[index] + "](drug_name)؟")
+    index1 = random.randrange(0,len(drug_names))
+    index2 = random.randrange(0,len(drug_names))
+    # "    - ["+ drug_names[index1] +"](drug_name) و ["+ drug_names[index2] +"](drug_name) مثل همن؟"
+    print("    - ["+ drug_names[index1] +"](drug_name) و ["+ drug_names[index2] +"](drug_name) مثل همن؟")
 

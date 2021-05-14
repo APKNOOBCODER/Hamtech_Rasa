@@ -167,6 +167,14 @@ stories:
       - drug_name
   - action: action_answer_sames_1
 
+- story: Sames_2
+  steps:
+  - intent: same_drug_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_sames_2
+
 # - story: sad path 1
 #   steps:
 #   - intent: greet
