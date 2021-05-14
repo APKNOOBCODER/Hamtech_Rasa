@@ -519,7 +519,7 @@ class ActionDrugInterferences2(Action):
             return []
         if len(drug_names)==1:
             try:
-                drug_name_2 = drug_name_1
+                drug_name_2 = drug_names[0]
                 drug_name_1 = tracker.slots["drug_name"]
             except:
                 dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
@@ -909,7 +909,7 @@ class ActionAnswerSames1(Action):
         for name in data:
             if name == drug_name or drug_name in name:
                 try:
-                    ans = "دارو های مشابه داروی " + drug_name + "این ها است: \n" + data[name]["Sames"][0]
+                    ans = "دارو های مشابه داروی " + drug_name + " این ها است: \n" + data[name]["Sames"][0]
                     for x in data[name]["Sames"][0:]:
                         ans += ", " + x
                     break
@@ -937,6 +937,7 @@ class ActionAnswerSames2(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
+        drug_names = []
         try:
             # print("try")
             for dn in tracker.latest_message["entities"]:
@@ -948,7 +949,7 @@ class ActionAnswerSames2(Action):
             return []
         if len(drug_names)==1:
             try:
-                drug_name_2 = drug_name_1
+                drug_name_2 = drug_names[0]
                 drug_name_1 = tracker.slots["drug_name"]
             except:
                 dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
@@ -975,4 +976,4 @@ class ActionAnswerSames2(Action):
                             ans = "مشابه دارو یافت نشد"
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
-        return [SlotSet("drug_name", drug_name)]
+        return [SlotSet("drug_name", drug_name_1)]
