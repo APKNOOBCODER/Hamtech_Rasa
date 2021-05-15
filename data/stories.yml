@@ -273,3 +273,21 @@ stories:
     - drug_name: پرامی پکسول
     - drug_name: سایمتیدین
   - action: action_answer_drug_interferences_2
+
+- story: interactive_story_1
+  steps:
+  - intent: same_drug_2
+    entities:
+    - drug_name: استامینوفن
+    - drug_name: استامینوفن کودئین
+  - action: action_answer_sames_2
+  - slot_was_set:
+    - drug_name: استامینوفن کودئین
+  - intent: same_drug_2
+    entities:
+    - drug_name: ژلوفن
+    - drug_name: ژلوفن
+    - drug_name: ایبوبروفن
+  - action: action_answer_sames_2
+  - slot_was_set:
+    - drug_name: ایبوبروفن
