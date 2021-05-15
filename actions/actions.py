@@ -78,6 +78,8 @@ class ActionAnswerDrugUsage1(Action):
         if confidence < 0.6:
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
+        intentsList = tracker.latest_message["intent_ranking"]["name"]
+        print(intentsList)
         # end
         drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         ans = "اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید."
