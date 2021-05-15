@@ -875,6 +875,12 @@ class ActionAnswerPrice(Action):
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
 
+        if drug_name == None:
+            print("slot")
+            drug_name = tracker.slots["drug_name"]
+        if drug_name == None:
+            dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
+
         for name in data:
             if name == drug_name or drug_name in name:
                 try:
@@ -910,6 +916,12 @@ class ActionAnswerSames1(Action):
         drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
+
+        if drug_name == None:
+            print("slot")
+            drug_name = tracker.slots["drug_name"]
+        if drug_name == None:
+            dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
 
         for name in data:
             if name == drug_name or drug_name in name:
