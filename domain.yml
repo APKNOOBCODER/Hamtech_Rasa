@@ -3,6 +3,9 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- same_drug_2:
+    use_entities:
+    - drug_name
 - drug_interferences_2:
     use_entities:
     - drug_name
@@ -45,10 +48,6 @@ intents:
 - same_drug_1:
     use_entities:
     - drug_name
-- same_drug_2:
-    use_entities:
-    - drug_name
-
 - not_recognized
 - greet
 - goodbye
@@ -101,9 +100,9 @@ actions:
 - action_answer_drug_usage_5
 - action_answer_great
 - action_answer_how_to_use_1
-- action_answer_side_effects_1
-- action_answer_warning_1
-- action_answer_warning_2
 - action_answer_price
 - action_answer_sames_1
 - action_answer_sames_2
+- action_answer_side_effects_1
+- action_answer_warning_1
+- action_answer_warning_2
