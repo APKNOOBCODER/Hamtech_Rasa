@@ -78,7 +78,7 @@ class ActionAnswerDrugUsage1(Action):
         if confidence < 0.6:
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
-        intentsList = tracker.latest_message["intent_ranking"]["name"]
+        intentsList = tracker.latest_message["intent_ranking"]
         print(intentsList)
         # end
         drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
