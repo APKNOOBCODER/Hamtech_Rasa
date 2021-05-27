@@ -111,7 +111,20 @@ class ActionAnswerDrugUsage1(Action):
         
         dispatcher.utter_message(text=ans)
         # dispatcher.utter_message(text=ans2)
-
+        entities: list = [drug_name]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
         return [SlotSet("drug_name", drug_name)]
 
 """
@@ -268,6 +281,21 @@ class ActionAnswerDrugUsage2(Action):
         if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name, symptom]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
 
         return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
 
@@ -326,6 +354,21 @@ class ActionAnswerDrugUsage3(Action):
         if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name, illness]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
 
         return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]
 
@@ -380,6 +423,21 @@ class ActionAnswerDrugUsage4(Action):
         # if ans == "":
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [symptom]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
 
         return [SlotSet("symptom", symptom)]
 
@@ -432,6 +490,21 @@ class ActionAnswerDrugUsage5(Action):
         # if ans == "":
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [illness]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
 
         return [SlotSet("illness", illness)]
 
@@ -488,6 +561,21 @@ class ActionDrugInterferences1(Action):
         # if ans == "":
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
         
         return [SlotSet("drug_name", drug_name)]
 
@@ -561,6 +649,23 @@ class ActionDrugInterferences2(Action):
         # if ans == "":
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_names]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+
         return []
 
 ## avarez
@@ -618,6 +723,22 @@ class SideEffects1(Action):
         # if ans == "":
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 ## khatar
@@ -682,6 +803,22 @@ class ActionAnswerDrugCaution1(Action):
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 ## hoshdar
@@ -737,6 +874,22 @@ class ActionAnswerWarning1(Action):
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 class ActionAnswerWarning2(Action):
@@ -794,6 +947,22 @@ class ActionAnswerWarning2(Action):
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name, illness]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 ## nokte
@@ -850,6 +1019,22 @@ class ActionAnswerHowToUse1(Action):
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 ## gheimat
@@ -892,6 +1077,22 @@ class ActionAnswerPrice(Action):
                     ans = "قیمت یافت نشد"
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 ## Shebahat
@@ -934,6 +1135,22 @@ class ActionAnswerSames1(Action):
                     ans = "مشابه دارو یافت نشد"
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name)]
 
 class ActionAnswerSames2(Action):
@@ -993,4 +1210,20 @@ class ActionAnswerSames2(Action):
                             ans = "مشابه دارو یافت نشد"
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
+        entities: list = [drug_names]
+        intentsList = tracker.latest_message["intent_ranking"]
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path + "/Log/" +"Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path + "/Log/" +"Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
         return [SlotSet("drug_name", drug_name_1)]
