@@ -116,13 +116,13 @@ class ActionAnswerDrugUsage1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
         return [SlotSet("drug_name", drug_name)]
@@ -287,13 +287,13 @@ class ActionAnswerDrugUsage2(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -360,13 +360,13 @@ class ActionAnswerDrugUsage3(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -429,13 +429,13 @@ class ActionAnswerDrugUsage4(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -496,13 +496,13 @@ class ActionAnswerDrugUsage5(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -567,13 +567,13 @@ class ActionDrugInterferences1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
         
@@ -655,13 +655,13 @@ class ActionDrugInterferences2(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -729,13 +729,13 @@ class SideEffects1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -809,13 +809,13 @@ class ActionAnswerDrugCaution1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -880,13 +880,13 @@ class ActionAnswerWarning1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -953,13 +953,13 @@ class ActionAnswerWarning2(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -1025,13 +1025,13 @@ class ActionAnswerHowToUse1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -1083,13 +1083,13 @@ class ActionAnswerPrice(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -1141,13 +1141,13 @@ class ActionAnswerSames1(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
@@ -1216,13 +1216,13 @@ class ActionAnswerSames2(Action):
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
         try:
-            with open(dir_path + "/Log/" +"Log.json","r") as f:
+            with open(dir_path +  "/Log.json","r") as f:
                 logdic: dict = json.loads(f.read())
                 logdic.update(newlogdic)
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(logdic, f, indent=4, ensure_ascii=False)
         except:
-            with open(dir_path + "/Log/" +"Log.json","w") as f:
+            with open(dir_path +  "/Log.json","w") as f:
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
 
