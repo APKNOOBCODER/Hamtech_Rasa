@@ -79,7 +79,7 @@ class ActionAnswerDrugUsage1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         intentsList = tracker.latest_message["intent_ranking"]
-        print(intentsList)
+        # print(intentsList)
         # end
         drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         ans = "اطلاعاتی موجود نیست. این اتفاق احتمالا به خاطر اشتباه تایپی در نوشتار دارو به زبان فارسی رخ داده. لطفا نحوه نوشتار آن را به دقت از روی جعبه دارو به دست آورید."
@@ -341,10 +341,10 @@ class ActionAnswerDrugUsage3(Action):
                 usage = data[name]["Mechanisms"][0]["Usage"]
                 usage = Norm.normalize(usage)
                 if illness in usage:
-                    ans = drug_name + "برای رفع" + illness + "مناسب است، به علاوه برای موارد زیر استفاده می شود: " + "\n" + usage
+                    ans = drug_name + "برای رفع" + illness + " مناسب است، به علاوه برای موارد زیر استفاده می شود: " + "\n" + usage
                     break
                 else:
-                    ans = drug_name + "، " + illness + "را از بین نمیبرد! اما برای موارد زیر استفاده می شود: " + "\n" + usage
+                    ans = drug_name + "، " + illness + " را از بین نمیبرد! اما برای موارد زیر استفاده می شود: " + "\n" + usage
 
         print("ans: " + ans)
         ans = ans[:4096]
