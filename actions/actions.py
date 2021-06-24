@@ -1175,9 +1175,10 @@ class ActionAnswerSames2(Action):
         try:
             # print("try")
             for dn in tracker.latest_message["entities"]:
-                if dn["value"] not in drug_names:
-                    print("dn: " + dn["value"])
-                    drug_names.append(dn["value"])
+                DN = Norm.normalize(dn["value"])
+                if (DN not in drug_names) and (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_names.append(DN)
         except:
             # print("except")
             dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
