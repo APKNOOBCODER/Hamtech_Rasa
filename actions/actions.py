@@ -1175,7 +1175,7 @@ class ActionAnswerSames2(Action):
         try:
             # print("try")
             for dn in tracker.latest_message["entities"]:
-                if dn not in drug_names:
+                if dn["value"] not in drug_names:
                     print("dn: " + dn["value"])
                     drug_names.append(dn["value"])
         except:
