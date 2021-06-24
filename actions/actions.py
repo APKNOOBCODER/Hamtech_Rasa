@@ -404,12 +404,16 @@ class ActionAnswerDrugUsage4(Action):
         for name in data:
             usage = data[name]["Mechanisms"][0]["Usage"]
             usage = Norm.normalize(usage)
+            count = 0 
             if symptom in usage:
-                if ans == "دارویی برای چنین علائمی یافت نشد. لطفا به نحوه نوشتار علائم گفته شده در سوالتان دقت کنید.":
+                if count == 0:
                     ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
                 else:
                     ans += " ,"
-                    ans += name
+                    ans += (name + "\n")
+                count += 1
+                if count > 10:
+                    break
         
         print("ans: " + ans)
         ans = ans[:4096]
