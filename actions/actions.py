@@ -761,14 +761,19 @@ class ActionAnswerDrugCaution1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        ans = "خطری برای داروی %s یافت نشد" % drug_name
-
+        drug_name = None
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_name = DN
+        ans = "لطفا به نحوه نوشتار نام دارو توجه فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
+        ans = "خطری برای داروی %s یافت نشد" % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -911,15 +916,20 @@ class ActionAnswerWarning2(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        ans = "هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد"
+        drug_name = None
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_name = DN
+        ans = "لطفا به نحوه نوشتار نام دارو و بیماری توجه فرمایید"
         illness = next(tracker.get_latest_entity_values("illness"), None)
         if drug_name == None or illness == None:
             dispatcher.utter_message(text=ans)
             return []
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
-
+        ans = "هیچ هشداری برای داروی مورد نظر در تداخل با بیماری یافت نشد"
         for name in data:
             if name == drug_name or drug_name in name:
                 warning  = data[name]["Cautions"][0]["Warnings"]
@@ -966,6 +976,7 @@ class ActionAnswerWarning2(Action):
         return [SlotSet("drug_name", drug_name)]
 
 ## nokte
+# checked
 class ActionAnswerHowToUse1(Action):
 
     def name(self) -> Text:
