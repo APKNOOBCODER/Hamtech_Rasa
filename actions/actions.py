@@ -7,6 +7,8 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 import json
+
+from yaml.events import NodeEvent
 import hazm
 Norm = hazm.Normalizer()
 from typing import Any, Text, Dict, List
@@ -766,7 +768,8 @@ class ActionAnswerDrugCaution1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    drug_name = DN
+                    if len(drug_name) < len(DN) or drug_name == None:
+                        drug_name = DN
         ans = "لطفا به نحوه نوشتار نام دارو توجه فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
@@ -853,7 +856,8 @@ class ActionAnswerWarning1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
                     print("dn: " + DN)
-                    drug_name = DN
+                    if len(drug_name) < len(DN) or drug_name == None:
+                        drug_name = DN
         ans = "در نحوه نوشتار دارو دقت فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
@@ -930,7 +934,8 @@ class ActionAnswerWarning2(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
                     print("dn: " + DN)
-                    drug_name = DN
+                    if len(drug_name) < len(DN) or drug_name == None:
+                        drug_name = DN
         ans = "لطفا به نحوه نوشتار نام دارو و بیماری توجه فرمایید"
         
         if drug_name == None or illness == None:
@@ -1010,7 +1015,8 @@ class ActionAnswerHowToUse1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    drug_name = DN
+                    if len(drug_name) < len(DN) or drug_name == None:
+                        drug_name = DN
         ans = "لطفا به نوشتار دارو توجه فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
@@ -1087,7 +1093,8 @@ class ActionAnswerPrice(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    drug_name = DN
+                    if len(drug_name) < len(DN) or drug_name == None:
+                        drug_name = DN
         # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
@@ -1152,11 +1159,13 @@ class ActionAnswerSames1(Action):
         # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
+        drug_name = None
         for dn in tracker.latest_message["entities"]:
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    drug_name = DN
+                    if len(drug_name) < len(DN) or drug_name == None:
+                        drug_name = DN
         if drug_name == None:
             print("slot")
             drug_name = tracker.slots["drug_name"]
