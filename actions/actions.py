@@ -11,7 +11,7 @@ import json
 # from yaml.events import NodeEvent
 import hazm
 Norm = hazm.Normalizer()
-from typing import Any, Text, Dict, List
+from typing import Any, Counter, Text, Dict, List
 import os 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 from rasa_sdk import Action, Tracker
@@ -405,7 +405,7 @@ class ActionAnswerDrugUsage4(Action):
         for name in data:
             usage = data[name]["Mechanisms"][0]["Usage"]
             usage = Norm.normalize(usage)
-            if count > 9:
+            if count > 10:
                     break
             if symptom in usage:
                 if count == 0:
@@ -473,15 +473,19 @@ class ActionAnswerDrugUsage5(Action):
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
         print("illness: " + illness)
+        count = 0
         for name in data:
             usage = data[name]["Mechanisms"][0]["Usage"]
             usage = Norm.normalize(usage)
+            if count > 10:
+                break
             if illness in usage:
-                if ans == "دارویی برای چنین بیماری ای یافت نشد. لطفا به نحوه نوشتار بیماری گفته شده در سوالتان دقت کنید.":
-                    ans = "دارو های زیر برای رفع بیماری شما مصرف میشود: \n"
+                if count == 0:
+                    ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
                 else:
-                    ans += " ,"
-                    ans += name
+                    ans += (str(count) + "- ")
+                    ans += (name + "\n")
+                count += 1
 
         print("ans: " + ans)
         ans = ans[:4096]
