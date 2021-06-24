@@ -1123,7 +1123,7 @@ class ActionAnswerSames1(Action):
             drug_name = tracker.slots["drug_name"]
         if drug_name == None:
             dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
-
+        print(drug_name)
         for name in data:
             if name == drug_name or drug_name in name:
                 try:
@@ -1152,7 +1152,7 @@ class ActionAnswerSames1(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name)]
-
+# checked
 class ActionAnswerSames2(Action):
     def name(self) -> Text:
         return "action_answer_sames_2"
