@@ -768,7 +768,9 @@ class ActionAnswerDrugCaution1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    if len(drug_name) < len(DN) or drug_name == None:
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
                         drug_name = DN
         ans = "لطفا به نحوه نوشتار نام دارو توجه فرمایید"
         if drug_name == None:
@@ -856,7 +858,9 @@ class ActionAnswerWarning1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
                     print("dn: " + DN)
-                    if len(drug_name) < len(DN) or drug_name == None:
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
                         drug_name = DN
         ans = "در نحوه نوشتار دارو دقت فرمایید"
         if drug_name == None:
@@ -934,7 +938,9 @@ class ActionAnswerWarning2(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
                     print("dn: " + DN)
-                    if len(drug_name) < len(DN) or drug_name == None:
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
                         drug_name = DN
         ans = "لطفا به نحوه نوشتار نام دارو و بیماری توجه فرمایید"
         
@@ -1015,7 +1021,9 @@ class ActionAnswerHowToUse1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    if len(drug_name) < len(DN) or drug_name == None:
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
                         drug_name = DN
         ans = "لطفا به نوشتار دارو توجه فرمایید"
         if drug_name == None:
@@ -1093,7 +1101,9 @@ class ActionAnswerPrice(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    if len(drug_name) < len(DN) or drug_name == None:
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
                         drug_name = DN
         # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
@@ -1164,7 +1174,9 @@ class ActionAnswerSames1(Action):
                 DN = Norm.normalize(dn["value"])
                 if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
-                    if len(drug_name) < len(DN) or drug_name == None:
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
                         drug_name = DN
         if drug_name == None:
             print("slot")
