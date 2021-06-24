@@ -1056,7 +1056,12 @@ class ActionAnswerPrice(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_name = DN
+        # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
 
@@ -1096,6 +1101,7 @@ class ActionAnswerPrice(Action):
         return [SlotSet("drug_name", drug_name)]
 
 ## Shebahat
+# checked
 class ActionAnswerSames1(Action):
     def name(self) -> Text:
         return "action_answer_sames_1"
