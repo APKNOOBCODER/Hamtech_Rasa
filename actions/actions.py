@@ -411,7 +411,7 @@ class ActionAnswerDrugUsage4(Action):
                 if count == 0:
                     ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
                 else:
-                    ans += " ,"
+                    ans += (str(count) + "- ")
                     ans += (name + "\n")
                 count += 1
                 
