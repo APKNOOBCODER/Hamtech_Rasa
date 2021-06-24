@@ -1202,7 +1202,7 @@ class ActionAnswerSames2(Action):
                         NormedSames = []
                         for same in Sames:
                             NormedSames.append(Norm.normalize(same))
-                        print(Sames)
+                        # print(Sames)
                         for x in Sames:
                             if drug_name_2 == x or drug_name_2 in x:
                                 ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان اند"
