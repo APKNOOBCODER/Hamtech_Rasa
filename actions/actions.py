@@ -1209,7 +1209,7 @@ class ActionAnswerSames2(Action):
                         # print(Sames)
                         for x in Sames:
                             if drug_name_2 == x or drug_name_2 in x:
-                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان اند"
+                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + " یکسان اند"
                                 print("ans: " + ans)
                                 dispatcher.utter_message(text=ans)
                                 entities: list = drug_names
@@ -1230,7 +1230,7 @@ class ActionAnswerSames2(Action):
 
                                 return [SlotSet("drug_name", drug_name_1)]
                             else:
-                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان نیستند!"
+                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + " یکسان نیستند!"
                         
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
