@@ -8,7 +8,7 @@
 # This is a simple example for a custom action which utters "Hello World!"
 import json
 
-from yaml.events import NodeEvent
+# from yaml.events import NodeEvent
 import hazm
 Norm = hazm.Normalizer()
 from typing import Any, Text, Dict, List
