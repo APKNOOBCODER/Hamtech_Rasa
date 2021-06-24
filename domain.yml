@@ -53,8 +53,6 @@ intents:
 - goodbye
 - affirm
 - deny
-- mood_great
-- mood_unhappy
 - bot_challenge
 entities:
 - drug_name
@@ -98,7 +96,7 @@ actions:
 - action_answer_drug_usage_3
 - action_answer_drug_usage_4
 - action_answer_drug_usage_5
-- action_answer_great
+- action_answer_greet
 - action_answer_how_to_use_1
 - action_answer_price
 - action_answer_sames_1

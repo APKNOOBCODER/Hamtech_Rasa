@@ -11,8 +11,8 @@ stories:
 
 - story:
   steps:
-  - intent: great
-  - action: action_answer_great
+  - intent: greet
+  - action: action_answer_greet
 
 ## mavared masraf
 - story: drug_usage_ask_1
@@ -203,7 +203,7 @@ stories:
 - story: interactive_story_1
   steps:
   - intent: greet
-  - action: action_answer_great
+  - action: action_answer_greet
   - intent: drug_usage_5
   - intent: drug_usage_5
     entities:
