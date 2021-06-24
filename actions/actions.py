@@ -1199,7 +1199,9 @@ class ActionAnswerSames2(Action):
                     if name == drug_name_1 or drug_name_1 in name:
                         
                         Sames = data[name]["Sames"]
-                        Sames = Norm.normalize(Sames)
+                        NormedSames = []
+                        for same in Sames:
+                            NormedSames.append(Norm.normalize(same))
                         print(Sames)
                         for x in Sames:
                             if drug_name_2 == x or drug_name_2 in x:
