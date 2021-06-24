@@ -291,3 +291,12 @@ stories:
   - action: action_answer_sames_2
   - slot_was_set:
     - drug_name: ایبوبروفن
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: action_answer_greet
+  - intent: greet
+  - action: action_answer_greet
+  - intent: greet
+  - action: action_answer_greet
