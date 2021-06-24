@@ -1175,8 +1175,9 @@ class ActionAnswerSames2(Action):
         try:
             # print("try")
             for dn in tracker.latest_message["entities"]:
-                print(dn["value"])
-                drug_names.append(dn["value"])
+                if dn not in drug_names:
+                    print(dn["value"])
+                    drug_names.append(dn["value"])
         except:
             # print("except")
             dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
