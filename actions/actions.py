@@ -827,6 +827,7 @@ class ActionAnswerDrugCaution1(Action):
         return [SlotSet("drug_name", drug_name)]
 
 ## hoshdar
+# checked
 class ActionAnswerWarning1(Action):
 
     def name(self) -> Text:
@@ -846,13 +847,20 @@ class ActionAnswerWarning1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        ans = "هیچ هشداری برای داروی %s یافت نشد" % drug_name
+        drug_name = None
+        illness = next(tracker.get_latest_entity_values("illness"), None)
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
+                    print("dn: " + DN)
+                    drug_name = DN
+        ans = "در نحوه نوشتار دارو دقت فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
+        ans = "هیچ هشداری برای داروی %s یافت نشد" % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -896,7 +904,7 @@ class ActionAnswerWarning1(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name)]
-
+# checked
 class ActionAnswerWarning2(Action):
 
     def name(self) -> Text:
