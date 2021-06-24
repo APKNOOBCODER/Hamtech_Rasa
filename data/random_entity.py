@@ -19,7 +19,8 @@ with open(dir_path + "/nlu.yml", "r", encoding='utf-8') as f:
 for name in data:
     drug_names.append(name)
 """
-n = int(input("how many drugs needed?!"))
+n = 5
+# n = int(input("how many drugs needed?!"))
 for x in range(n):
     dindex1 = random.randrange(0,len(drugList))
     dindex2 = random.randrange(0,len(drugList))
@@ -28,4 +29,19 @@ for x in range(n):
     # "    - ["+ drug_names[index1] +"](drug_name) و ["+ drug_names[index2] +"](drug_name) مثل همن؟"
     # [" + drugList[dindex1] + "](drug_name)
     # print(symptomList[sindex])
-    print("    - چه دارو هایی رو نباید با [" + drugList[dindex1] + "](drug_name) بخورم؟")
+    # " + drugList[dindex1] + " # " + drugList[dindex2] + "
+    print("    - [" + drugList[dindex1] + "](drug_name) شبیه [" + drugList[dindex2] + "](drug_name) هست؟")
+
+"""with open(dir_path + '/../actions/data.json', mode='r' , encoding='utf-8') as f:
+    data = json.load(f)
+# print(data)
+count = 0
+for drug in data:
+    if count % 1000 == 0:
+        input()
+        print("    - " + drug)
+        count += 1
+    if drug not in drugList:
+        print("    - " + drug)
+        count += 1
+print(count)"""
