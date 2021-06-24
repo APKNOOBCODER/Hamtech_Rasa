@@ -1184,15 +1184,20 @@ class ActionAnswerSames1(Action):
         if drug_name == None:
             dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
         print(drug_name)
+        ans = "مشابه دارو در دیتابیس من یافت نشد"
         for name in data:
             if name == drug_name or drug_name in name:
                 try:
-                    ans = "دارو های مشابه داروی " + drug_name + " این ها است: \n" + data[name]["Sames"][0]
+                    Sames = data[name]["Sames"]
+                    NormedSames = []
+                    for same in Sames:
+                        NormedSames.append(Norm.normalize(same))
+                    ans = "دارو های مشابه داروی " + drug_name + " این ها است: \n" + NormedSames[0]
                     for x in data[name]["Sames"][0:]:
                         ans += ", " + x
                     break
                 except:
-                    ans = "مشابه دارو یافت نشد"
+                    ans = "مشابه دارو در دیتابیس من یافت نشد"
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
@@ -1261,36 +1266,38 @@ class ActionAnswerSames2(Action):
                     continue
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
-                        
-                        Sames = data[name]["Sames"]
-                        NormedSames = []
-                        for same in Sames:
-                            NormedSames.append(Norm.normalize(same))
-                        # print(Sames)
-                        for x in Sames:
-                            if drug_name_2 == x or drug_name_2 in x:
-                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + " یکسان اند"
-                                print("ans: " + ans)
-                                dispatcher.utter_message(text=ans)
-                                entities: list = drug_names
-                                intentsList = tracker.latest_message["intent_ranking"]
-                                ## log
-                                newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
-                                            "entities": entities, "ans": ans}}
-                                try:
-                                    with open(dir_path +  "/Log.json","r") as f:
-                                        logdic: dict = json.loads(f.read())
-                                        logdic.update(newlogdic)
-                                    with open(dir_path +  "/Log.json","w") as f:
-                                        json.dump(logdic, f, indent=4, ensure_ascii=False)
-                                except:
-                                    with open(dir_path +  "/Log.json","w") as f:
-                                        json.dump(newlogdic, f, indent=4, ensure_ascii=False)
-                                ## end log
+                        try:
+                            Sames = data[name]["Sames"]
+                            NormedSames = []
+                            for same in Sames:
+                                NormedSames.append(Norm.normalize(same))
+                            # print(Sames)
+                            for x in NormedSames:
+                                if drug_name_2 == x or drug_name_2 in x:
+                                    ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + " یکسان اند"
+                                    print("ans: " + ans)
+                                    dispatcher.utter_message(text=ans)
+                                    entities: list = drug_names
+                                    intentsList = tracker.latest_message["intent_ranking"]
+                                    ## log
+                                    newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                                                "entities": entities, "ans": ans}}
+                                    try:
+                                        with open(dir_path +  "/Log.json","r") as f:
+                                            logdic: dict = json.loads(f.read())
+                                            logdic.update(newlogdic)
+                                        with open(dir_path +  "/Log.json","w") as f:
+                                            json.dump(logdic, f, indent=4, ensure_ascii=False)
+                                    except:
+                                        with open(dir_path +  "/Log.json","w") as f:
+                                            json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+                                    ## end log
 
-                                return [SlotSet("drug_name", drug_name_1)]
-                            else:
-                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + " یکسان نیستند!"
+                                    return [SlotSet("drug_name", drug_name_1)]
+                                else:
+                                    ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + " یکسان نیستند!"
+                        except:
+                            ans = "اطلاعاتی برای داروی شما در دیتابیس من یافت نشد"
                         
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
