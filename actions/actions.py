@@ -511,6 +511,7 @@ class ActionAnswerDrugUsage5(Action):
         return [SlotSet("illness", illness)]
 
 ## tadakhol
+# checked
 class ActionDrugInterferences1(Action):
 
     def name(self) -> Text:
@@ -530,12 +531,21 @@ class ActionDrugInterferences1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        ans = "تداخل دارویی برای داروی %s یافت نشد" % drug_name
-
+        drug_name = None
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
+                        drug_name = DN
+        ans = "لطفا به نحوه نوشتار خود دقت کنید"
         if drug_name == None:
             dispatcher.utter_message(text=ans)
             return []
+        ans = "تداخل دارویی برای داروی %s یافت نشد" % drug_name
+        
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
 
@@ -580,7 +590,7 @@ class ActionDrugInterferences1(Action):
         ## end log
         
         return [SlotSet("drug_name", drug_name)]
-
+# checked
 class ActionDrugInterferences2(Action):
 
     def name(self) -> Text:
@@ -604,13 +614,18 @@ class ActionDrugInterferences2(Action):
         try:
             # print("try")
             for dn in tracker.latest_message["entities"]:
-                print(dn["value"])
-                drug_names.append(dn["value"])
+                DN = Norm.normalize(dn["value"])
+                if (DN not in drug_names) and (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_names.append(DN)
         except:
             # print("except")
             dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
             return []
-        if len(drug_names)==1:
+        if len(drug_names) == 0:
+            dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
+            return []
+        elif len(drug_names)==1:
             try:
                 drug_name_2 = drug_names[0]
                 drug_name_1 = tracker.slots["drug_name"]
@@ -671,6 +686,7 @@ class ActionDrugInterferences2(Action):
         return []
 
 ## avarez
+# checked
 class SideEffects1(Action):
 
     def name(self) -> Text:
@@ -690,12 +706,20 @@ class SideEffects1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        ans = "عوارض جانبی برای داروی %s یافت نشد" % drug_name
-
+        drug_name = None
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
+                        drug_name = DN
+        ans = "لطفا به نحوه نوشتار داور دقت فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
+        ans = "عوارض جانبی برای داروی %s یافت نشد" % drug_name
 
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
@@ -744,6 +768,7 @@ class SideEffects1(Action):
         return [SlotSet("drug_name", drug_name)]
 
 ## khatar
+# checked
 class ActionAnswerDrugCaution1(Action):
 
     def name(self) -> Text:
@@ -1248,7 +1273,10 @@ class ActionAnswerSames2(Action):
             # print("except")
             dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
             return []
-        if len(drug_names)==1:
+        if len(drug_names) == 0:
+            dispatcher.utter_message(text="لطفا در نوشتار دارو توجه فرمایید.")
+            return []
+        elif len(drug_names)==1:
             try:
                 drug_name_2 = drug_names[0]
                 drug_name_1 = tracker.slots["drug_name"]
