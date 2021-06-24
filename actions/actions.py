@@ -1206,7 +1206,25 @@ class ActionAnswerSames2(Action):
                         for x in Sames:
                             if drug_name_2 == x or drug_name_2 in x:
                                 ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان اند"
-                                break
+                                print("ans: " + ans)
+                                dispatcher.utter_message(text=ans)
+                                entities: list = [drug_names]
+                                intentsList = tracker.latest_message["intent_ranking"]
+                                ## log
+                                newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                                            "entities": entities, "ans": ans}}
+                                try:
+                                    with open(dir_path +  "/Log.json","r") as f:
+                                        logdic: dict = json.loads(f.read())
+                                        logdic.update(newlogdic)
+                                    with open(dir_path +  "/Log.json","w") as f:
+                                        json.dump(logdic, f, indent=4, ensure_ascii=False)
+                                except:
+                                    with open(dir_path +  "/Log.json","w") as f:
+                                        json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+                                ## end log
+
+                                return [SlotSet("drug_name", drug_name_1)]
                             else:
                                 ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان نیستند!"
                         
