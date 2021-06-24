@@ -1077,7 +1077,7 @@ class ActionAnswerPrice(Action):
             drug_name = tracker.slots["drug_name"]
         if drug_name == None:
             dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
-
+        ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
         for name in data:
             if name == drug_name or drug_name in name:
                 try:
@@ -1087,8 +1087,8 @@ class ActionAnswerPrice(Action):
                     break
                 except:
                     ans = "قیمت یافت نشد"
-        if ans == None:
-            ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
+        """if ans == None:
+            ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"""
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
