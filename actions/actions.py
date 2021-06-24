@@ -1176,7 +1176,7 @@ class ActionAnswerSames2(Action):
             # print("try")
             for dn in tracker.latest_message["entities"]:
                 if dn not in drug_names:
-                    print(dn["value"])
+                    print("dn: " + dn["value"])
                     drug_names.append(dn["value"])
         except:
             # print("except")
@@ -1209,7 +1209,7 @@ class ActionAnswerSames2(Action):
                                 ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان اند"
                                 print("ans: " + ans)
                                 dispatcher.utter_message(text=ans)
-                                entities: list = [drug_names]
+                                entities: list = drug_names
                                 intentsList = tracker.latest_message["intent_ranking"]
                                 ## log
                                 newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
