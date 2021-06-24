@@ -1197,17 +1197,17 @@ class ActionAnswerSames2(Action):
             for drug_name_2 in drug_names:
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
-                        try:
-                            Sames = data[name]["Sames"]
-                            Sames = Norm.normalize(Sames)
-                            for x in Sames:
-                                if drug_name_2 == x or drug_name_2 in x:
-                                    ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان اند"
-                                    break
-                                else:
-                                    ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان نیستند!"
-                        except:
-                            ans = "مشابه دارو یافت نشد"
+                        
+                        Sames = data[name]["Sames"]
+                        Sames = Norm.normalize(Sames)
+                        print(Sames)
+                        for x in Sames:
+                            if drug_name_2 == x or drug_name_2 in x:
+                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان اند"
+                                break
+                            else:
+                                ans = "دارو های " + drug_name_1 + " و " + drug_name_2 + "یکسان نیستند!"
+                        
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
         entities: list = [drug_names]
