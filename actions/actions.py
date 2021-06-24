@@ -1114,10 +1114,14 @@ class ActionAnswerSames1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
-
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_name = DN
         if drug_name == None:
             print("slot")
             drug_name = tracker.slots["drug_name"]
