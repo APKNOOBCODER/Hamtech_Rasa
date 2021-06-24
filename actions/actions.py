@@ -985,14 +985,19 @@ class ActionAnswerHowToUse1(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
-        ans = "عوارض جانبی برای داروی %s یافت نشد" % drug_name
-
+        drug_name = None
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    drug_name = DN
+        ans = "لطفا به نوشتار دارو توجه فرمایید"
         if drug_name == None:
             dispatcher.utter_message(text="%s"%ans)
             return []
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
+        ans = "عوارض جانبی برای داروی %s یافت نشد" % drug_name
 
         for name in data:
             if name == drug_name or drug_name in name:
@@ -1038,6 +1043,7 @@ class ActionAnswerHowToUse1(Action):
         return [SlotSet("drug_name", drug_name)]
 
 ## gheimat
+# checked
 class ActionAnswerPrice(Action):
     def name(self) -> Text:
         return "action_answer_price"
