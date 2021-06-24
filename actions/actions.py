@@ -917,13 +917,14 @@ class ActionAnswerWarning2(Action):
             return []
         # end
         drug_name = None
+        illness = next(tracker.get_latest_entity_values("illness"), None)
         for dn in tracker.latest_message["entities"]:
                 DN = Norm.normalize(dn["value"])
-                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
                     print("dn: " + DN)
                     drug_name = DN
         ans = "لطفا به نحوه نوشتار نام دارو و بیماری توجه فرمایید"
-        illness = next(tracker.get_latest_entity_values("illness"), None)
+        
         if drug_name == None or illness == None:
             dispatcher.utter_message(text=ans)
             return []
