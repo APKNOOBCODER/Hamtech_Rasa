@@ -1087,6 +1087,8 @@ class ActionAnswerPrice(Action):
                     break
                 except:
                     ans = "قیمت یافت نشد"
+        if ans == None:
+            ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
