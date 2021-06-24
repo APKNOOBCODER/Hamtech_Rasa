@@ -46,8 +46,6 @@ class ActionAnswerGreet(Action):
                                        \n7- نام دارو ها و مشابه آن ها در بازار")
         return []
 
-
-
 class ActionAnswerDrugUsage1(Action):
 
     def name(self) -> Text:
@@ -230,7 +228,6 @@ class ActionAnswerDrugUsage1Comp3(Action):
         dispatcher.utter_message(text=ans)
 
         return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]"""
-
 
 class ActionAnswerDrugUsage2(Action):
 
