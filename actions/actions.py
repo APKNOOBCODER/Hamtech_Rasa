@@ -401,10 +401,12 @@ class ActionAnswerDrugUsage4(Action):
         print("symptom: " + symptom)
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
+        count = 0 
         for name in data:
             usage = data[name]["Mechanisms"][0]["Usage"]
             usage = Norm.normalize(usage)
-            count = 0 
+            if count > 9:
+                    break
             if symptom in usage:
                 if count == 0:
                     ans = "دارو های زیر برای رفع علامت شما مصرف میشود: \n"
@@ -412,8 +414,7 @@ class ActionAnswerDrugUsage4(Action):
                     ans += " ,"
                     ans += (name + "\n")
                 count += 1
-                if count > 10:
-                    break
+                
         
         print("ans: " + ans)
         ans = ans[:4096]
