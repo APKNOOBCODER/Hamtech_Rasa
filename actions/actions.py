@@ -1196,6 +1196,8 @@ class ActionAnswerSames2(Action):
 
         for drug_name_1 in drug_names:
             for drug_name_2 in drug_names:
+                if drug_name_1 == drug_name_2:
+                    continue
                 for name in data:
                     if name == drug_name_1 or drug_name_1 in name:
                         
