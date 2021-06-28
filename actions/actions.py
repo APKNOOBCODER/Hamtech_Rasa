@@ -50,7 +50,7 @@ class ActionAnswerGreet(Action):
 class ActionAnswerDrugUsage1(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_1"
+        return "action_answer_ask_drug_usage"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -106,6 +106,8 @@ class ActionAnswerDrugUsage1(Action):
         ans = ans[:4096]
         checkans = ans.replace("\r","")
         checkans = checkans.replace("\n","")
+        checkans = checkans.replace("موارد مصرف داروی ","")
+        checkans = checkans.replace(drug_name,"")
         checkans = checkans.replace(" ", "")
         if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
@@ -128,11 +130,11 @@ class ActionAnswerDrugUsage1(Action):
         ## end log
         return [SlotSet("drug_name", drug_name)]
 
-"""
-class ActionAnswerDrugUsage1Comp2(Action):
+
+class ActionAnswerAskDrugUsageComp(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_1_comp_2"
+        return "action_answer_ask_drug_usage_comp"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -144,45 +146,92 @@ class ActionAnswerDrugUsage1Comp2(Action):
         print("confidence: " + str(confidence))
         intent = tracker.latest_message["intent"]["name"]
         print("intent: " + intent)
+        # dispatcher.utter_message(text=ans2)
+        intentsList = tracker.latest_message["intent_ranking"]
+        ans = "متوجه نشدم، لطفا دوباره تلاش کنید"
+        entities = None
         if confidence < 0.6:
+            ## log
+            newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                        "entities": entities, "ans": ans}}
+            try:
+                with open(dir_path +  "/Log.json","r") as f:
+                    logdic: dict = json.loads(f.read())
+                    logdic.update(newlogdic)
+                with open(dir_path +  "/Log.json","w") as f:
+                    json.dump(logdic, f, indent=4, ensure_ascii=False)
+            except:
+                with open(dir_path +  "/Log.json","w") as f:
+                    json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+            ## end log
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
+        # print(intentsList)
         # end
-
-        drug_name = tracker.slots["drug_name"]
-        symptom = next(tracker.get_latest_entity_values("symptom"), None)
-        ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید."
-        if drug_name == None or symptom == None:
-            dispatcher.utter_message(text=ans)
-            return []
-        
+        drug_name = next(tracker.slots["drug_name"],None)
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
+        if drug_name == None:
+            ## log
+            newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                        "entities": entities, "ans": ans}}
+            try:
+                with open(dir_path +  "/Log.json","r") as f:
+                    logdic: dict = json.loads(f.read())
+                    logdic.update(newlogdic)
+                with open(dir_path +  "/Log.json","w") as f:
+                    json.dump(logdic, f, indent=4, ensure_ascii=False)
+            except:
+                with open(dir_path +  "/Log.json","w") as f:
+                    json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+            ## end log
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
         print("drug_name: " + drug_name)
-        print("symptom: " + symptom)
+        
         for name in data:
-            if name == drug_name:
-                usage = data[name]["Mechanisms"][0]["Usage"]
-                if symptom in usage:
-                    ans = "بلی، " + drug_name + " برای موارد زیر استفاده می شود: " + "\n" + usage
+            if (name == drug_name) or (drug_name in name):
+                ans = "موارد مصرف داروی " + drug_name + data[name]["Mechanisms"][0]["Usage"]
+                ans = Norm.normalize(ans)
+                checkans = ans.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace("موارد مصرف داروی ","")
+                checkans = checkans.replace(drug_name,"")
+                checkans = checkans.replace(" ", "")
+                if checkans != "":
                     break
-                else:
-                    ans = "خیر، " + drug_name + " برای موارد زیر استفاده می شود: " + "\n" + usage
         print("ans: " + ans)
         ans = ans[:4096]
         checkans = ans.replace("\r","")
         checkans = checkans.replace("\n","")
+        checkans = checkans.replace("موارد مصرف داروی ","")
+        checkans = checkans.replace(drug_name,"")
         checkans = checkans.replace(" ", "")
         if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        
+
         dispatcher.utter_message(text=ans)
-
-        return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
-
+        
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+        return [SlotSet("drug_name", drug_name)]
+"""
 class ActionAnswerDrugUsage1Comp3(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_1_comp_3"
+        return "action_answer_ask_drug_usage_comp_3"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -230,10 +279,10 @@ class ActionAnswerDrugUsage1Comp3(Action):
 
         return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]"""
 
-class ActionAnswerDrugUsage2(Action):
+class ActionAnswerDrugUsageForSymptom(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_2"
+        return "action_answer_drug_usage_for_symptom"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -249,12 +298,10 @@ class ActionAnswerDrugUsage2(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
-        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
         symptom = next(tracker.get_latest_entity_values("symptom"), None)
         ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید."
-        if drug_name == None:
-            print("slot")
-            drug_name = tracker.slots["drug_name"]
+        print("slot")
+        drug_name = tracker.slots["drug_name"]
         if symptom == None or drug_name == None:
             print("None")
             dispatcher.utter_message(text=ans)
@@ -746,7 +793,9 @@ class SideEffects1(Action):
         
         print("ans: " + ans)
         ans = ans[:4096]
-        checkans = ans.replace("\r","")
+        checkans = ans.replace("عوارض جانبی زیر برای داروی ","")
+        checkans = checkans.replace(" یافت شد: \n","")
+        checkans = checkans.replace("\r","")
         checkans = checkans.replace("\n","")
         checkans = checkans.replace(" ", "")
         if checkans == "":
