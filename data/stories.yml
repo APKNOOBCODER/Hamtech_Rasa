@@ -15,30 +15,32 @@ stories:
   - action: action_answer_greet
 
 ## mavared masraf
-- story: drug_usage_ask_1
+- story: ask_drug_usage
   steps:
-  - intent: drug_usage_1
+  - intent: ask_drug_usage
     entities:
       - drug_name
-  - action: action_answer_drug_usage_1
+  - action: action_answer_ask_drug_usage
 
-  ## have drug_usage_1 and then incomplete drug_usage_2 that need more info
-- story: drug_usage_ask_1_comp_2
+  ## have ask_drug_usage and then incomplete drug_usage_for_symptom that need more info
+- story: ask_drug_usage_comp_1
   steps:
-  - intent: drug_usage_1
-    entities:
-      - drug_name 
-  - action: action_answer_drug_usage_1
-  - intent: drug_usage_2
+  - intent: drug_usage_for_symptom
     entities: 
+      - drug_name
       - symptom
-  - action: action_answer_drug_usage_2
+  - action: action_answer_drug_usage_for_symptom
+  - intent: ask_drug_usage
+  - action: action_answer_ask_drug_usage_comp
+  
+
+
 - story: drug_usage_ask_1_comp_3
   steps:
-  - intent: drug_usage_1
+  - intent: ask_drug_usage
     entities:
       - drug_name
-  - action: action_answer_drug_usage_1
+  - action: action_answer_ask_drug_usage
   - intent: drug_usage_3
     entities: 
       - illness
@@ -48,21 +50,21 @@ stories:
 
 - story: drug_usage_ask_2
   steps:
-  - intent: drug_usage_2
+  - intent: drug_usage_for_symptom
     entities:
       - drug_name
       - symptom
-  - action: action_answer_drug_usage_2
+  - action: action_answer_drug_usage_for_symptom
 
 
 
 # - story: drug_usage_ask_2_comp_2
   # steps:
-  # - intent: drug_usage_2
+  # - intent: drug_usage_for_symptom
     # entities:
       # - symptom
   # - action: action_ask_drug_usage_comp_2
-  # - intent: drug_usage_2_comp_2
+  # - intent: drug_usage_for_symptom_comp_2
     # entities: 
       # - drug_name
   # - action: action_answer_drug_usage_comp_2
@@ -212,7 +214,7 @@ stories:
   - intent: drug_usage_4
     entities:
     - symptom: سردرد
-  - action: action_answer_drug_usage_2
+  - action: action_answer_drug_usage_for_symptom
   - intent: drug_usage_5
     entities:
     - illness: كارسينوماي پيشرفته پروستات
@@ -245,15 +247,15 @@ stories:
     entities:
     - illness: واریس
   - action: action_answer_drug_usage_5
-  - intent: drug_usage_1
+  - intent: ask_drug_usage
     entities:
     - drug_name: کولوتریمازول
-  - action: action_answer_drug_usage_1
-  - intent: drug_usage_2
+  - action: action_answer_ask_drug_usage
+  - intent: drug_usage_for_symptom
     entities:
     - drug_name: تتراسایکلین
     - symptom: گوش درد
-  - action: action_answer_drug_usage_2
+  - action: action_answer_drug_usage_for_symptom
   - intent: drug_usage_5
     entities:
     - illness: میگرن

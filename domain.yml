@@ -9,12 +9,20 @@ intents:
 - drug_interferences_2:
     use_entities:
     - drug_name
-- drug_usage_1:
+- ask_drug_usage:
     use_entities:
     - drug_name
-- drug_usage_2:
+- ask_drug_usage_comp:
+    ignore_entities:
+    - drug_name
+    - illness
+    - symptom
+- drug_usage_for_symptom:
     ignore_entities:
     - illness
+- drug_usage_for_symptom_comp:
+    use_entities:
+    - symptom
 - drug_usage_3:
     ignore_entities:
     - symptom
@@ -93,10 +101,9 @@ actions:
 - action_answer_drug_caution_1
 - action_answer_drug_interferences_1
 - action_answer_drug_interferences_2
-- action_answer_drug_usage_1
-- action_answer_drug_usage_1_comp_2
-- action_answer_drug_usage_1_comp_3
-- action_answer_drug_usage_2
+- action_answer_ask_drug_usage
+- action_answer_ask_drug_usage_comp
+- action_answer_drug_usage_for_symptom
 - action_answer_drug_usage_3
 - action_answer_drug_usage_4
 - action_answer_drug_usage_5
