@@ -653,3 +653,26 @@ stories:
   - action: action_answer_drug_usage_comp
   - slot_was_set:
     - drug_name: کوآموکسی کلاو
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: action_answer_greet
+  - intent: greet
+  - action: action_answer_greet
+  - intent: drug_usage
+    entities:
+    - drug_name: بتامتازون
+  - action: action_answer_drug_usage
+  - slot_was_set:
+    - drug_name: بتامتازون
+  - intent: drug_usage_for_symptom_comp
+    entities:
+    - symptom: زخم معده
+    - illness: زخم معده
+    - symptom: زخم
+  - action: action_answer_drug_usage_for_symptom_comp
+  - slot_was_set:
+    - drug_name: بتامتازون
+  - slot_was_set:
+    - symptom: زخم معده
