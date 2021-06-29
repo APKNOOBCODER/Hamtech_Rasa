@@ -302,3 +302,17 @@ stories:
   - action: action_answer_greet
   - intent: greet
   - action: action_answer_greet
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: action_answer_greet
+  - intent: side_effects_1
+    entities:
+    - drug_name: متفورمین
+    - drug_name: متفورمین
+  - action: action_answer_side_effects_1
+  - slot_was_set:
+    - drug_name: متفورمین
+  - intent: ask_drug_usage_comp
+  - intent: ask_drug_usage_comp

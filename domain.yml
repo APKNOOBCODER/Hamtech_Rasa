@@ -3,6 +3,14 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- side_effects_1:
+    use_entities:
+    - drug_name
+- greet:
+    use_entities:
+    - symptom
+- ask_drug_usage_comp:
+    use_entities: []
 - same_drug_2:
     use_entities:
     - drug_name
@@ -12,11 +20,6 @@ intents:
 - ask_drug_usage:
     use_entities:
     - drug_name
-- ask_drug_usage_comp:
-    ignore_entities:
-    - drug_name
-    - illness
-    - symptom
 - drug_usage_for_symptom:
     ignore_entities:
     - illness
@@ -33,9 +36,6 @@ intents:
     use_entities:
     - illness
 - drug_interferences_1:
-    use_entities:
-    - drug_name
-- side_effects_1:
     use_entities:
     - drug_name
 - drug_caution_1:
@@ -57,11 +57,6 @@ intents:
     use_entities:
     - drug_name
 - not_recognized
-- greet:
-    ignore_entities:
-    - drug_name
-    - syptom
-    - illness
 - goodbye
 - affirm
 - deny
@@ -98,15 +93,15 @@ responses:
   utter_iamabot:
   - text: من یه ربات ساخته شده با راسا هستم
 actions:
+- action_answer_ask_drug_usage
+- action_answer_ask_drug_usage_comp
 - action_answer_drug_caution_1
 - action_answer_drug_interferences_1
 - action_answer_drug_interferences_2
-- action_answer_ask_drug_usage
-- action_answer_ask_drug_usage_comp
-- action_answer_drug_usage_for_symptom
 - action_answer_drug_usage_3
 - action_answer_drug_usage_4
 - action_answer_drug_usage_5
+- action_answer_drug_usage_for_symptom
 - action_answer_greet
 - action_answer_how_to_use_1
 - action_answer_price

@@ -3,14 +3,17 @@ digraph  {
 "-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
 1 [class=active, fontsize=12, label=action_session_start];
 2 [class=active, fontsize=12, label=action_answer_greet];
-5 [class="intent dashed active", label="  ?  ", shape=rect];
-6 [class="intent active", fillcolor=lightblue, label="درود", shape=rect, style=filled];
-7 [class="intent active", fillcolor=lightblue, label="هی!!", shape=rect, style=filled];
+3 [class=active, fontsize=12, label=action_answer_side_effects_1];
+4 [class="intent dashed active", label=ask_drug_usage_comp, shape=rect];
+5 [class="intent active", fillcolor=lightblue, label="سلام", shape=rect, style=filled];
+6 [class="intent active", fillcolor=lightblue, label="چه عوارضی برای متفورمین وجود داره؟", shape=rect, style=filled];
+7 [class="intent active", fillcolor=lightblue, label="برای چی مصرف میشه؟", shape=rect, style=filled];
 0 -> "-1"  [class="", key=NONE, label=""];
 0 -> 1  [class=active, key=NONE, label=""];
-1 -> 6  [class=active, key=0];
-2 -> 5  [class=active, key=NONE, label=""];
-2 -> 7  [class=active, key=0];
-6 -> 2  [class=active, key=0];
-7 -> 2  [class=active, key=0];
+1 -> 5  [class=active, key=0];
+2 -> 6  [class=active, key=0];
+3 -> 7  [class=active, key=0];
+5 -> 2  [class=active, key=0];
+6 -> 3  [class=active, key=0];
+7 -> 4  [class=active, key=0];
 }
