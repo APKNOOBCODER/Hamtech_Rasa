@@ -804,6 +804,7 @@ class SideEffects1(Action):
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
+        print(tracker.latest_message)
         intentsList = tracker.latest_message["intent_ranking"]
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
