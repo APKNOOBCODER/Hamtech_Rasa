@@ -46,7 +46,7 @@ nlu:
     - تو آدمی؟
     - من با ربات حرف میزنم؟
     - من با آدم حرف میزنم؟
-- intent: ask_drug_usage
+- intent: drug_usage
   examples: |
     - برای چه مشکلی از [متیل تستوسترون](drug_name) استفاده میشود؟
     - برای چه مشکلی از [متوکلوپرامید](drug_name) استفاده میشود؟
@@ -88,7 +88,7 @@ nlu:
     - [رزکسل](drug_name) به چه دردی میخوره؟
     - [كلاويسيلين](drug_name) به چه دردی میخوره؟
     - [توگورو](drug_name) به چه دردی میخوره؟
-- intent: ask_drug_usage_comp
+- intent: drug_usage_comp
   examples: |
     - برای چی استفاده میشه؟
     - برای چی مصرف میشه؟

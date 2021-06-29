@@ -48,29 +48,15 @@ class ActionAnswerGreet(Action):
         return []
 ## mavared masraf
 # checked II
-class ActionAnswerDrugUsage1(Action):
+class ActionAnswerDrugUsage(Action):
 
     def name(self) -> Text:
-        return "action_answer_ask_drug_usage"
+        return "action_answer_drug_usage"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        ### another way:
-        # ent = tracker.latest_message["entities"]
-        # I want to cook noodles.
-        # output: 
-        # ("entity", 
-        # [{u"extractor": u"ner_crf", 
-        # u"confidence": 0.787280111194543,
-        # u"end": 19, 
-        # u"value": u"noodles", 
-        # u"entity":
-        # u"Dish",
-        # u"start": 13
-        # }])
-        # findout that intent is correct
         Q = tracker.latest_message["text"]
         print("Q: " + Q)
         confidence = tracker.latest_message["intent"]["confidence"]
@@ -80,7 +66,10 @@ class ActionAnswerDrugUsage1(Action):
         if confidence < 0.6:
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         # print(intentsList)
         # end
         drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
@@ -90,6 +79,7 @@ class ActionAnswerDrugUsage1(Action):
             return []
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
+        drug_name = Norm.normalize(drug_name)
         print("drug_name: " + drug_name)
         
         find_drug_name = False
@@ -136,7 +126,7 @@ class ActionAnswerDrugUsage1(Action):
 class ActionAnswerAskDrugUsageComp(Action):
 
     def name(self) -> Text:
-        return "action_answer_ask_drug_usage_comp"
+        return "action_answer_drug_usage_comp"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -149,7 +139,10 @@ class ActionAnswerAskDrugUsageComp(Action):
         intent = tracker.latest_message["intent"]["name"]
         print("intent: " + intent)
         # dispatcher.utter_message(text=ans2)
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ans = "متوجه نشدم، لطفا دوباره تلاش کنید"
         entities = None
         if confidence < 0.6:
@@ -233,59 +226,9 @@ class ActionAnswerAskDrugUsageComp(Action):
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
         return [SlotSet("drug_name", drug_name)]
-"""
-class ActionAnswerDrugUsage1Comp3(Action):
+## end
 
-    def name(self) -> Text:
-        return "action_answer_ask_drug_usage_comp_3"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        # findout that intent is correct
-        Q = tracker.latest_message["text"]
-        print("Q: " + Q)
-        confidence = tracker.latest_message["intent"]["confidence"]
-        print("confidence: " + str(confidence))
-        intent = tracker.latest_message["intent"]["name"]
-        print("intent: " + intent)
-        if confidence < 0.6:
-            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
-            return []
-        # end
-        drug_name = tracker.slots["drug_name"]
-        ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید."
-
-        illness = next(tracker.get_latest_entity_values("illness"), None)
-        if drug_name == None or illness == None:
-            dispatcher.utter_message(text=""+ ans)
-            return []
-
-        with open(dir_path + "/" +"data.json","r") as f:
-            data: dict = json.loads(f.read())
-        print("drug_name: " + drug_name)
-        print("illness: " + illness)
-        find_drug_name = False
-        for name in data:
-            if name == drug_name:
-                usage = data[name]["Mechanisms"][0]["Usage"]
-                if illness in usage:
-                    ans = "بلی، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
-                    break
-                else:
-                    ans = "خیر، " + drug_name + "برای موارد زیر استفاده می شود: " + "\n" + usage
-
-        print("ans: " + ans)
-        ans = ans[:4096]
-        checkans = ans.replace("\r","")
-        checkans = checkans.replace("\n","")
-        checkans = checkans.replace(" ", "")
-        if checkans == "" or ans == "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید.":
-            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
-        dispatcher.utter_message(text=ans)
-
-        return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]"""
-
+# mavared masraf ba alaem
 # checked II
 class ActionAnswerDrugUsageForSymptom(Action):
 
@@ -308,7 +251,79 @@ class ActionAnswerDrugUsageForSymptom(Action):
         # end
         symptom = next(tracker.get_latest_entity_values("symptom"), None)
         ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید."
-        print("slot")
+        drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        
+        if symptom == None or drug_name == None:
+            dispatcher.utter_message(text=ans)
+            return []
+        
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        print("drug_name: " + drug_name)
+        print("symptom: " + symptom)
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                usage = data[name]["Mechanisms"][0]["Usage"]
+                usage = Norm.normalize(usage)
+                checkans = usage.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace(" ", "")
+                if symptom in usage:
+                    ans = drug_name + " برای رفع " + symptom + " مناسب است، به علاوه برای موارد زیر استفاده می شود: " + "\n" + usage
+                    break
+                else:
+                    ans = drug_name + "، " + symptom + " را از بین نمیبرد! اما برای موارد زیر استفاده می شود: " + "\n" + usage
+        print("ans: " + ans)
+        ans = ans[:4096]
+        
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name, symptom]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
+
+# chacked II
+class ActionAnswerDrugUsageForSymptomComp(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_usage_for_symptom_comp"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        symptom = next(tracker.get_latest_entity_values("symptom"), None)
+        ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و علائم گفته شده در سوال خود دقت فرمایید."
         drug_name = tracker.slots["drug_name"]
         if symptom == None or drug_name == None:
             print("None")
@@ -340,7 +355,10 @@ class ActionAnswerDrugUsageForSymptom(Action):
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name, symptom]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -356,7 +374,6 @@ class ActionAnswerDrugUsageForSymptom(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
-
 # checked II
 class ActionAnswerDrugUsage3(Action):
 
@@ -378,6 +395,7 @@ class ActionAnswerDrugUsage3(Action):
             return []
         # end
         drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        
         ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید."
 
         illness = next(tracker.get_latest_entity_values("illness"), None)
@@ -390,7 +408,7 @@ class ActionAnswerDrugUsage3(Action):
             print(illness)
             dispatcher.utter_message(text=""+ ans)
             return []
-
+        drug_name = Norm.normalize(drug_name)
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
         print("drug_name: " + drug_name)
@@ -417,7 +435,10 @@ class ActionAnswerDrugUsage3(Action):
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name, illness]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -495,7 +516,10 @@ class ActionAnswerDrugUsage4(Action):
             # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         dispatcher.utter_message(text=ans)
         entities: list = [symptom]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -568,7 +592,10 @@ class ActionAnswerDrugUsage5(Action):
             ans = "دارویی برای رفع بیماری شما یافت نشد"
         dispatcher.utter_message(text=ans)
         entities: list = [illness]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -736,7 +763,10 @@ class ActionDrugInterferences2(Action):
         ans = ans[:4096]
         dispatcher.utter_message(text=ans)
         entities: list = [drug_names]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -925,7 +955,10 @@ class ActionAnswerDrugCaution1(Action):
             ans = "خطری برای داروی %s یافت نشد" % drug_name
         dispatcher.utter_message(text=ans)
         entities = [drug_name]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -1008,7 +1041,10 @@ class ActionAnswerWarning1(Action):
         
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -1086,7 +1122,10 @@ class ActionAnswerWarning2(Action):
         
         dispatcher.utter_message(text=ans)
         entities = [drug_name, illness]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -1165,7 +1204,10 @@ class ActionAnswerHowToUse1(Action):
         
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
@@ -1403,7 +1445,10 @@ class ActionAnswerSames2(Action):
                                     print("ans: " + ans)
                                     dispatcher.utter_message(text=ans)
                                     entities: list = drug_names
-                                    intentsList = tracker.latest_message["intent_ranking"]
+                                    try:
+                                        intentsList = tracker.latest_message["intent_ranking"]
+                                    except KeyError:
+                                        intentsList = None
                                     ## log
                                     newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                                                 "entities": entities, "ans": ans}}
@@ -1427,7 +1472,10 @@ class ActionAnswerSames2(Action):
         print("ans: " + ans)
         dispatcher.utter_message(text=ans)
         entities: list = [drug_names]
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
