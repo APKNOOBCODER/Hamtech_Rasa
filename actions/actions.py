@@ -168,7 +168,10 @@ class ActionAnswerAskDrugUsageComp(Action):
             return []
         # print(intentsList)
         # end
-        drug_name = next(tracker.slots["drug_name"],None)
+        try:
+            drug_name = tracker.slots["drug_name"]
+        except:
+            drug_name = None
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
         if drug_name == None:
