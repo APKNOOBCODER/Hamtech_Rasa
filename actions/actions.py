@@ -789,10 +789,10 @@ class SideEffects1(Action):
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
                 if checkans != "":
-                    print("ans: " + ans)
+                    print("ans1: " + ans)
                     break
         
-        print("ans: " + ans)
+        print("ans2: " + ans)
         ans = ans[:4096]
         checkans = ans.replace("عوارض جانبی زیر برای داروی ","")
         checkans = checkans.replace(" یافت شد: \n","")
