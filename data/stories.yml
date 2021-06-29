@@ -78,10 +78,10 @@ stories:
   - action: action_answer_drug_usage_comp
 - story: drug_usage_comp_7
   steps:
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
       - drug_name
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
 - story: drug_usage_comp_8
@@ -212,10 +212,10 @@ stories:
   - action: action_answer_drug_usage_for_symptom_comp
 - story: drug_usage_for_symptom_comp_7
   steps:
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
       - drug_name
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
 - story: drug_usage_for_symptom_comp_8
@@ -344,10 +344,10 @@ stories:
   - action: action_answer_drug_usage_for_illness_comp
 - story: drug_usage_for_illness_comp_7
   steps:
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
       - drug_name
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - intent: drug_usage_for_illness_comp
   - action: action_answer_drug_usage_for_illness_comp
 - story: drug_usage_for_illness_comp_8
@@ -493,10 +493,10 @@ stories:
   - action: action_answer_drug_interferences_1_comp
 - story: drug_interferences_1_comp_7
   steps:
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
       - drug_name
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - intent: drug_interferences_1_comp
   - action: action_answer_drug_interferences_1_comp
 - story: drug_interferences_1_comp_8
@@ -632,10 +632,10 @@ stories:
   - action: action_answer_side_effect_comp
 - story: side_effect_comp_7
   steps:
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
       - drug_name
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - intent: side_effect_comp
   - action: action_answer_side_effect_comp
 - story: side_effect_comp_8
@@ -1476,11 +1476,11 @@ stories:
   steps:
   - intent: greet
   - action: action_answer_greet
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
     - drug_name: متفورمین
     - drug_name: متفورمین
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - slot_was_set:
     - drug_name: متفورمین
   - intent: drug_usage_comp
@@ -1490,27 +1490,27 @@ stories:
   steps:
   - intent: greet
   - action: action_answer_greet
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
     - drug_name: کوآموکسی کلاو
-  - action: action_answer_side_effect_1
-  - intent: side_effect_1
+  - action: action_answer_side_effect
+  - intent: side_effect
     entities:
     - drug_name: متفورمین
     - drug_name: متفورمین
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - slot_was_set:
     - drug_name: متفورمین
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-  - intent: side_effect_1
+  - intent: side_effect
     entities:
     - drug_name: کوآموکسی کلاو
-  - action: action_answer_side_effect_1
-  - intent: side_effect_1
+  - action: action_answer_side_effect
+  - intent: side_effect
     entities:
     - drug_name: کوآموکسی کلاو
-  - action: action_answer_side_effect_1
+  - action: action_answer_side_effect
   - slot_was_set:
     - drug_name: کوآموکسی کلاو
   - intent: drug_usage_comp
