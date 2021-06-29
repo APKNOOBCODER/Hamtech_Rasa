@@ -777,9 +777,11 @@ class SideEffects1(Action):
         print(drug_name)
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
-
+        
+        find_drug_name = False
         for name in data:
             if name == drug_name or drug_name in name:
+                find_drug_name = True
                 Caution = data[name]["Cautions"][0]["Side_Effects"]
                 checkans = Caution.replace("\r","")
                 checkans = checkans.replace("\n","")
@@ -792,8 +794,10 @@ class SideEffects1(Action):
         
         print("ans2: " + ans)
         ans = ans[:4096]
-        if checkans == "":
+        if not find_drug_name:
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        elif checkans == "":
+            ans = "هیچ عارضه جانبی برای " + drug_name + " وجود ندارد."
         # ans = ans.replace("\r","")
 
         # if ans == "":
