@@ -164,12 +164,7 @@ nlu:
     - میتونه [سوزش ادرار](symptom)  رو از بین ببره؟!
     - میتونه [خیز](symptom)  رو از بین ببره؟!
     - میتونه [آسیت](symptom)  رو از بین ببره؟!
-<<<<<<< Updated upstream
 - intent: drug_usage_for_illness
-=======
-    - آیای برای [زخم معده](symptom)[زخم معده](illness)[زخم](symptom) معده خوبه؟
-- intent: drug_usage_3
->>>>>>> Stashed changes
   examples: |
     - آیا داروی [جمنیل](drug_name) برای درمان [تومور مثانه](illness) کاربرد دارد؟
     - آیا داروی [سوفیجکت](drug_name) برای درمان [سرطان پوست](illness) کاربرد دارد؟

@@ -669,8 +669,6 @@ stories:
   - intent: drug_usage_for_symptom_comp
     entities:
     - symptom: زخم معده
-    - illness: زخم معده
-    - symptom: زخم
   - action: action_answer_drug_usage_for_symptom_comp
   - slot_was_set:
     - drug_name: بتامتازون
