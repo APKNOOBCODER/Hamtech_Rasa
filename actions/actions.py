@@ -805,6 +805,7 @@ class ActionDrugInterferences1Comp(Action):
             dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
             return []
         # end
+        drug_name = None
         drug_name = tracker.slots["drug_name"]
 
         ans = "لطفا به نحوه نوشتار داروی خود دقت کنید"
@@ -957,10 +958,10 @@ class ActionDrugInterferences2(Action):
 
 # avarez
 ## checked II
-class SideEffects1(Action):
+class SideEffect(Action):
 
     def name(self) -> Text:
-        return "action_answer_side_effects_1"
+        return "action_answer_side_effect"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1038,14 +1039,88 @@ class SideEffects1(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## end
-# end
-
-## khatar
-# checked II
-class ActionAnswerDrugCaution1(Action):
+class SideEffectComp(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_caution_1"
+        return "action_answer_side_effect_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = None
+        drug_name = tracker.slots["drug_name"]
+        ans = "لطفا به نحوه نوشتار داور دقت فرمایید"
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+        ans = "عوارض جانبی برای داروی %s یافت نشد" % drug_name
+        print("drug_name: " + drug_name)
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                Caution = data[name]["Cautions"][0]["Side_Effects"]
+                checkans = Caution.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace(" ", "")
+                ans = "عوارض جانبی زیر برای داروی " + drug_name + " یافت شد: \n" + Caution
+                ans = Norm.normalize(ans)
+                if checkans != "":
+                    # print("ans1: " + ans)
+                    break
+        
+        print("ans: " + ans)
+        ans = ans[:4096]
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        elif checkans == "":
+            ans = "هیچ عارضه جانبی برای " + drug_name + " وجود ندارد."
+
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        print(tracker.latest_message)
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name)]
+## end
+# end
+
+# khatar
+## checked II
+class ActionAnswerDrugCaution(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_caution"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1146,9 +1221,110 @@ class ActionAnswerDrugCaution1(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## end
+## checked II
+class ActionAnswerDrugCautionComp(Action):
 
-## hoshdar
-# checked II
+    def name(self) -> Text:
+        return "action_answer_drug_caution_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = None
+        drug_name = tracker.slots["drug_name"]
+        ans = "لطفا به نحوه نوشتار نام دارو توجه فرمایید"
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        ans = "خطری برای داروی %s یافت نشد" % drug_name
+
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                ### Warnigns
+                Warnings = data[name]["Cautions"][0]["Warnings"]
+                Warnings = Norm.normalize(Warnings)
+                Wcheckans = Warnings.replace("\r","")
+                Wcheckans = Wcheckans.replace("\n","")
+                ### end
+                ### Side_Effects
+                Side = data[name]["Cautions"][0]["Side_Effects"]
+                Side = Norm.normalize(Side)
+                Scheckans = Side.replace("\r","")
+                Scheckans = Scheckans.replace("\n","")
+                ### end
+                ### Drug_Interferences
+                Drug_Interferences = data[name]["Cautions"][0]["Drug_Interferences"]
+                Drug_Interferences = Norm.normalize(Drug_Interferences)
+                Dcheckans = Drug_Interferences.replace("\r","")
+                Dcheckans = Dcheckans.replace("\n","")
+                ### end
+                ### Recommended_Tips
+                Recom = data[name]["Cautions"][0]["Recommended_Tips"]
+                Recom = Norm.normalize(Recom)
+                Rcheckans = Recom.replace("\r","")
+                Rcheckans = Rcheckans.replace("\n","")
+                ### end
+                ans = "هشدار ها: \n " + \
+                      Warnings + "\n" + \
+                      "عوارض جانبی: \n" + \
+                      Side + "\n" + \
+                      "تداخلات دارویی: \n" + \
+                      Drug_Interferences + "\n" + \
+                      "نکات پیشنهادی: \n" + \
+                      Recom + "\n"
+
+                if Wcheckans != "" or Scheckans != "" or Dcheckans != "" or \
+                    Rcheckans != "":
+                    break
+
+        print("ans: " + ans)
+        ans = ans[:4096]
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من \
+                 اطلاعات مربوط به سوال شما موجود نیست"
+        elif Wcheckans == "" and Scheckans == "" or Dcheckans == "" or Rcheckans == "":
+            ans = "خطری برای داروی %s یافت نشد" % drug_name
+        dispatcher.utter_message(text=ans)
+        entities = [drug_name]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList,\
+                    "confidence": confidence, "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name)]
+## end
+# end
+
+# hoshdar
+## checked II
 class ActionAnswerWarning1(Action):
 
     def name(self) -> Text:
@@ -1169,10 +1345,9 @@ class ActionAnswerWarning1(Action):
             return []
         # end
         drug_name = None
-        illness = next(tracker.get_latest_entity_values("illness"), None)
         for dn in tracker.latest_message["entities"]:
                 DN = Norm.normalize(dn["value"])
-                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r") and (DN != illness):
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
                     print("dn: " + DN)
                     if drug_name == None:
                         drug_name = DN
@@ -1231,8 +1406,84 @@ class ActionAnswerWarning1(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name)]
+## end
+## checked II
+class ActionAnswerWarning1Comp(Action):
 
-# checked II
+    def name(self) -> Text:
+        return "action_answer_warning_1_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = None
+        drug_name = tracker.slots["drug_name"]
+        ans = "در نحوه نوشتار دارو دقت فرمایید"
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        ans = "هیچ هشداری برای داروی %s یافت نشد" % drug_name
+
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                Warnings = data[name]["Cautions"][0]["Warnings"]
+                Warnings = Norm.normalize(Warnings)
+                checkans = Warnings.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace(" ", "")
+                ans = "هشدار های زیر برای داروی " + drug_name + " یافت شد: \n" + Warnings
+                if checkans != "":
+                    break
+
+        print("ans: " + ans)
+        ans = ans[:4096]
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        elif checkans == "":
+            ans = "هشدار خاصی برای داروی " + drug_name + " وجود ندارد"
+        
+        # ans = ans.replace("\r","")
+        # if ans == "":
+            # ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name)]
+## end
+## checked II
 class ActionAnswerWarning2(Action):
 
     def name(self) -> Text:
@@ -1313,13 +1564,14 @@ class ActionAnswerWarning2(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## end
+# end
 
-## nokte
-# checked II
-class ActionAnswerHowToUse1(Action):
+# nokte
+## checked II
+class ActionAnswerHowToUse(Action):
 
     def name(self) -> Text:
-        return "action_answer_how_to_use_1"
+        return "action_answer_how_to_use"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1395,9 +1647,83 @@ class ActionAnswerHowToUse1(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## end
+## checked II
+class ActionAnswerHowToUseComp(Action):
 
-## gheimat
-# checked II
+    def name(self) -> Text:
+        return "action_answer_how_to_use_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = None
+        drug_name = tracker.slots["drug_name"]
+        ans = "لطفا به نوشتار دارو توجه فرمایید"
+        if drug_name == None:
+            dispatcher.utter_message(text="%s"%ans)
+            return []
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                Recomm = data[name]["Cautions"][0]["Recommended_Tips"]
+                Recomm = Norm.normalize(Recomm)
+                checkans = Recomm.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace(" ", "")
+                ans = "نحوه مصرف در متن زیر برای داروی " + drug_name + " یافت شد: \n" + Recomm
+                
+                if checkans != "":
+                    break
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        elif checkans == "":
+            ans = "اطلاعاتی درباره نحوه مصرف " + drug_name + " وجود ندارد"
+        print("ans: " + ans)
+        ans = ans[:4096]
+        checkans = ans.replace("\r","")
+        checkans = checkans.replace("\n","")
+        checkans = checkans.replace(" ", "")
+        
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name)]
+## end
+# end
+
+# gheimat
+## checked II
 class ActionAnswerPrice(Action):
     def name(self) -> Text:
         return "action_answer_price"
@@ -1429,9 +1755,6 @@ class ActionAnswerPrice(Action):
         with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
             data: dict = json.loads(f.read())
 
-        if drug_name == None:
-            print("slot")
-            drug_name = tracker.slots["drug_name"]
         if drug_name == None:
             dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
         find_drug_name = False
@@ -1477,12 +1800,91 @@ class ActionAnswerPrice(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## end
-
-## Shebahat
-# checked II
-class ActionAnswerSames1(Action):
+## checked II
+class ActionAnswerPriceComp(Action):
     def name(self) -> Text:
-        return "action_answer_sames_1"
+        return "action_answer_price_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = None
+        for dn in tracker.latest_message["entities"]:
+                DN = Norm.normalize(dn["value"])
+                if (DN != "") and (DN != " ") and (DN != "\n") and (DN != "\r"):
+                    print("dn: " + DN)
+                    if drug_name == None:
+                        drug_name = DN
+                    elif len(drug_name) < len(DN):
+                        drug_name = DN
+        # drug_name = next(tracker.get_latest_entity_values("drug_name"), None)
+        with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
+            data: dict = json.loads(f.read())
+
+        drug_name = tracker.slots["drug_name"]
+        if drug_name == None:
+            dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
+        find_drug_name = False
+        ans = "قیمت یافت نشد"
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                try:
+                    Prices = data[name]["Price"]
+                    while "0" in Prices:
+                        Prices.remove("0")
+                    if len(Prices) == 0:
+                        continue
+                    Prices = list(map(int,Prices))
+                    ans = str(min(data[name]["Price"]))
+                    break
+                except:
+                    ans = "قیمت یافت نشد"
+        if not find_drug_name:
+            ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
+        print("ans: " + ans)
+        ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]  
+        except:
+            intentsList = None
+
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name)]
+## end
+#end
+
+# Shebahat
+## checked II
+class ActionAnswerSame1(Action):
+    def name(self) -> Text:
+        return "action_answer_same_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1510,9 +1912,7 @@ class ActionAnswerSames1(Action):
                         drug_name = DN
                     elif len(drug_name) < len(DN):
                         drug_name = DN
-        if drug_name == None:
-            print("slot")
-            drug_name = tracker.slots["drug_name"]
+        
         if drug_name == None:
             dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
         print(drug_name)
@@ -1552,10 +1952,74 @@ class ActionAnswerSames1(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name)]
-# checked II
-class ActionAnswerSames2(Action):
+## checked II
+class ActionAnswerSame1Comp(Action):
     def name(self) -> Text:
-        return "action_answer_sames_2"
+        return "action_answer_same_1_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        with open(dir_path + "/" +"data.json", "r", encoding='utf-8') as f:
+            data: dict = json.loads(f.read())
+        drug_name = None
+        drug_name = tracker.slots["drug_name"]
+        if drug_name == None:
+            dispatcher.utter_message(text="لطفا در نحوه نوشتار دارو توجه فرمایید.")
+        print(drug_name)
+        ans = "مشابه دارو در دیتابیس من یافت نشد"
+        for name in data:
+            if name == drug_name or drug_name in name:
+                try:
+                    Sames = data[name]["Sames"]
+                    NormedSames = []
+                    for same in Sames:
+                        NormedSames.append(Norm.normalize(same))
+                    ans = "دارو های مشابه داروی " + drug_name + " این ها است: \n" + NormedSames[0]
+                    for x in data[name]["Sames"][0:]:
+                        ans += ", " + x
+                    break
+                except:
+                    ans = "مشابه دارو در دیتابیس من یافت نشد"
+        print("ans: " + ans)
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name)]
+## end
+
+## checked II
+class ActionAnswerSame2(Action):
+    def name(self) -> Text:
+        return "action_answer_same_2"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1663,3 +2127,4 @@ class ActionAnswerSames2(Action):
 
         return [SlotSet("drug_name", drug_name_1)]
 ## end
+# end
