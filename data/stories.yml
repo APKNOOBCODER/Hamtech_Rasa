@@ -414,22 +414,148 @@ stories:
     entities:
       - sypmtom
   - action: action_answer_symptom_drug_usage
+# end
 
+# bimari ba daroye an
 - story: illness_drug_usage
   steps:
   - intent: illness_drug_usage
     entities:
       - illness
   - action: action_answer_illness_drug_usage
+# end
 
-## drug_interferences
-- story: drug_interferences_ask_1
+# drug_interferences_1
+- story: drug_interferences_1
   steps:
   - intent: drug_interferences_1
     entities:
       - drug_name
   - action: action_answer_drug_interferences_1
-- story: drug_interferences_ask_2
+## have drug_interferences_1 and then incomplete
+- story: drug_interferences_1_comp_1
+  steps:
+  - intent: drug_usage
+    entities: 
+      - drug_name
+  - action: action_answer_drug_usage
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_2
+  steps:
+  - intent: drug_usage_for_symptom
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_drug_usage_for_symptom
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_3
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_4
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_5
+  steps:
+  - intent: drug_interferences_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_interferences_1
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_6
+  steps:
+  - intent: drug_interferences_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_drug_interferences_2
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_7
+  steps:
+  - intent: side_effects_1
+    entities:
+      - drug_name
+  - action: action_answer_side_effects_1
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_8
+  steps:
+  - intent: drug_caution_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_caution_1
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_9
+  steps:
+  - intent: drug_warning_1
+    entities:
+      - drug_name
+  - action: action_answer_warning_1
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_10
+  steps:
+  - intent: drug_warning_2
+    entities:
+      - drug_name
+      - illness
+  - action: action_answer_warning_2
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_11
+  steps:
+  - intent: how_to_use_1
+    entities:
+      - drug_name
+  - action: action_answer_how_to_use_1
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_12
+  steps:
+  - intent: price
+    entities:
+      - drug_name
+  - action: action_answer_price
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_13
+  steps:
+  - intent: same_drug_1
+    entities:
+      - drug_name
+  - action: action_answer_sames_1
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+- story: drug_interferences_1_comp_14
+  steps:
+  - intent: same_drug_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_sames_2
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+## end
+## end
+# end
+
+- story: drug_interferences_2
   steps:
   - intent: drug_interferences_2
     entities:
@@ -438,7 +564,7 @@ stories:
   - action: action_answer_drug_interferences_2
 
 ## avarez
-- story: side_effects_ask_1
+- story: side_effects_1
   steps:
   - intent: side_effects_1
     entities:
@@ -446,7 +572,7 @@ stories:
   - action: action_answer_side_effects_1
 
 ## khatar
-- story: drug_caution_ask_1
+- story: drug_caution_1
   steps:
   - intent: drug_caution_1
     entities:
@@ -454,14 +580,14 @@ stories:
   - action: action_answer_drug_caution_1
 
 ## hoshdar
-- story: warning_ask_1
+- story: warning_1
   steps:
   - intent: drug_warning_1
     entities:
       - drug_name
   - action: action_answer_warning_1
 
-- story: warning_ask_2
+- story: warning_2
   steps:
   - intent: drug_warning_2
     entities:
@@ -470,7 +596,7 @@ stories:
   - action: action_answer_warning_2
 
 ## nokat
-- story: how_to_use_ask_1
+- story: how_to_use_1
   steps:
   - intent: how_to_use_1
     entities:

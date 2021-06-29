@@ -625,7 +625,7 @@ class ActionAnswerSymptomDrugUsage(Action):
 
 # bimari ba daroye an
 ## checked II
-class ActionAnswerIlnessDrugUsage(Action):
+class ActionAnswerIllnessDrugUsage(Action):
 
     def name(self) -> Text:
         return "action_answer_illness_drug_usage"
@@ -702,8 +702,8 @@ class ActionAnswerIlnessDrugUsage(Action):
 ## end
 # end
 
-## tadakhol
-# checked II
+# tadakhol_1
+## checked II
 class ActionDrugInterferences1(Action):
 
     def name(self) -> Text:
@@ -732,7 +732,7 @@ class ActionDrugInterferences1(Action):
                         drug_name = DN
                     elif len(drug_name) < len(DN):
                         drug_name = DN
-        ans = "لطفا به نحوه نوشتار خود دقت کنید"
+        ans = "لطفا به نحوه نوشتار داروی خود دقت کنید"
         if drug_name == None:
             dispatcher.utter_message(text=ans)
             return []
@@ -783,6 +783,85 @@ class ActionDrugInterferences1(Action):
         ## end log
         
         return [SlotSet("drug_name", drug_name)]
+## end
+
+## checked II
+class ActionDrugInterferences1Comp(Action):
+
+    def name(self) -> Text:
+        return "action_answer_drug_interferences_1_comp"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        drug_name = tracker.slots["drug_name"]
+
+        ans = "لطفا به نحوه نوشتار داروی خود دقت کنید"
+        if drug_name == None:
+            dispatcher.utter_message(text=ans)
+            return []
+        ans = "تداخل دارویی برای داروی %s یافت نشد" % drug_name
+        
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                Drug_Interferences = data[name]["Cautions"][0]["Drug_Interferences"]
+                Drug_Interferences = Norm.normalize(Drug_Interferences)
+                checkans = Drug_Interferences.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace(" ", "")
+                ans = "تداخل های زیر برای داروی " + drug_name + " یافت شد: \n" \
+                 + Drug_Interferences
+
+                if checkans != "":
+                    break
+       
+        print("ans: " + ans)
+        ans = ans[:4096]
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال \
+             شما موجود نیست"
+        elif checkans == "":
+            ans = "تداخل دارویی خاصی برای " + drug_name + " وجود ندارد"
+        
+        dispatcher.utter_message(text=ans)
+        entities = [drug_name]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": \
+                     confidence, "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+        
+        return [SlotSet("drug_name", drug_name)]
+## end
+# end
 
 # checked II
 class ActionDrugInterferences2(Action):
