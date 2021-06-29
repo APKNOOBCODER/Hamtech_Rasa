@@ -34,32 +34,32 @@ stories:
   - action: action_answer_drug_usage_comp
 - story: drug_usage_comp_2
   steps:
-  - intent: drug_usage_ask_3
+  - intent: drug_usage_for_illness
     entities: 
       - drug_name
       - symptom
-  - action: action_answer_drug_usage_3
+  - action: action_answer_drug_usage_for_illness
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
 - story: drug_usage_comp_3
   steps:
-  - intent: drug_usage_ask_4
+  - intent: illness_drug_usage
     entities: 
       - drug_name
       - symptom
-  - action: action_answer_drug_usage_4
+  - action: action_answer_illness_drug_usage
+  - intent: drug_usage_comp
+  - action: action_answer_drug_usage_comp
+- story: drug_usage_comp_4
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
 - story: drug_usage_comp_5
-  steps:
-  - intent: drug_usage_ask_5
-    entities: 
-      - drug_name
-      - symptom
-  - action: action_answer_drug_usage_5
-  - intent: drug_usage_comp
-  - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_6
   steps:
   - intent: drug_interferences_1
     entities:
@@ -67,7 +67,7 @@ stories:
   - action: action_answer_drug_interferences_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_7
+- story: drug_usage_comp_6
   steps:
   - intent: drug_interferences_2
     entities:
@@ -76,7 +76,7 @@ stories:
   - action: action_answer_drug_interferences_2
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_8
+- story: drug_usage_comp_7
   steps:
   - intent: side_effects_1
     entities:
@@ -84,7 +84,7 @@ stories:
   - action: action_answer_side_effects_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_9
+- story: drug_usage_comp_8
   steps:
   - intent: drug_caution_1
     entities:
@@ -92,7 +92,7 @@ stories:
   - action: action_answer_drug_caution_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_10
+- story: drug_usage_comp_9
   steps:
   - intent: drug_warning_1
     entities:
@@ -100,7 +100,7 @@ stories:
   - action: action_answer_warning_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_11
+- story: drug_usage_comp_10
   steps:
   - intent: drug_warning_2
     entities:
@@ -109,7 +109,7 @@ stories:
   - action: action_answer_warning_2
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_12
+- story: drug_usage_comp_11
   steps:
   - intent: how_to_use_1
     entities:
@@ -117,7 +117,7 @@ stories:
   - action: action_answer_how_to_use_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_13
+- story: drug_usage_comp_12
   steps:
   - intent: price
     entities:
@@ -125,7 +125,7 @@ stories:
   - action: action_answer_price
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_14
+- story: drug_usage_comp_13
   steps:
   - intent: same_drug_1
     entities:
@@ -133,7 +133,7 @@ stories:
   - action: action_answer_sames_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
-- story: drug_usage_comp_15
+- story: drug_usage_comp_14
   steps:
   - intent: same_drug_2
     entities:
@@ -143,7 +143,9 @@ stories:
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
 ## end
+# end
 
+# mavared masraf ba alaem
 - story: drug_usage_for_symptom
   steps:
   - intent: drug_usage_for_symptom
@@ -164,32 +166,32 @@ stories:
   - action: action_answer_drug_usage_for_symptom_comp
 - story: drug_usage_for_symptom_comp_2
   steps:
-  - intent: drug_usage_ask_3
+  - intent: drug_usage_for_illness
     entities: 
       - drug_name
       - symptom
-  - action: action_answer_drug_usage_3
+  - action: action_answer_drug_usage_for_illness
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
 - story: drug_usage_for_symptom_comp_3
   steps:
-  - intent: drug_usage_ask_4
+  - intent: illness_drug_usage
     entities: 
       - drug_name
       - symptom
-  - action: action_answer_drug_usage_4
+  - action: action_answer_illness_drug_usage
+  - intent: drug_usage_for_symptom_comp
+  - action: action_answer_drug_usage_for_symptom_comp
+- story: drug_usage_for_symptom_comp_4
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
 - story: drug_usage_for_symptom_comp_5
-  steps:
-  - intent: drug_usage_ask_5
-    entities: 
-      - drug_name
-      - symptom
-  - action: action_answer_drug_usage_5
-  - intent: drug_usage_for_symptom_comp
-  - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_6
   steps:
   - intent: drug_interferences_1
     entities:
@@ -197,7 +199,7 @@ stories:
   - action: action_answer_drug_interferences_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_7
+- story: drug_usage_for_symptom_comp_6
   steps:
   - intent: drug_interferences_2
     entities:
@@ -206,7 +208,7 @@ stories:
   - action: action_answer_drug_interferences_2
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_8
+- story: drug_usage_for_symptom_comp_7
   steps:
   - intent: side_effects_1
     entities:
@@ -214,7 +216,7 @@ stories:
   - action: action_answer_side_effects_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_9
+- story: drug_usage_for_symptom_comp_8
   steps:
   - intent: drug_caution_1
     entities:
@@ -222,7 +224,7 @@ stories:
   - action: action_answer_drug_caution_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_10
+- story: drug_usage_for_symptom_comp_9
   steps:
   - intent: drug_warning_1
     entities:
@@ -230,7 +232,7 @@ stories:
   - action: action_answer_warning_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_11
+- story: drug_usage_for_symptom_comp_10
   steps:
   - intent: drug_warning_2
     entities:
@@ -239,7 +241,7 @@ stories:
   - action: action_answer_warning_2
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_12
+- story: drug_usage_for_symptom_comp_11
   steps:
   - intent: how_to_use_1
     entities:
@@ -247,7 +249,7 @@ stories:
   - action: action_answer_how_to_use_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_13
+- story: drug_usage_for_symptom_comp_12
   steps:
   - intent: price
     entities:
@@ -255,7 +257,7 @@ stories:
   - action: action_answer_price
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_14
+- story: drug_usage_for_symptom_comp_13
   steps:
   - intent: same_drug_1
     entities:
@@ -263,7 +265,7 @@ stories:
   - action: action_answer_sames_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
-- story: drug_usage_for_symptom_comp_15
+- story: drug_usage_for_symptom_comp_14
   steps:
   - intent: same_drug_2
     entities:
@@ -273,28 +275,152 @@ stories:
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
 ## end
+# end
 
-- story: drug_usage_ask_3
+# mavared masraf ba bimari
+- story: drug_usage_for_illness
   steps:
-  - intent: drug_usage_3
+  - intent: drug_usage_for_illness
     entities:
       - drug_name
       - illness
-  - action: action_answer_drug_usage_3
-
-- story: drug_usage_ask_4
+  - action: action_answer_drug_usage_for_illness
+## have drug_usage_for_illness and then incomplete
+- story: drug_usage_for_illness_comp_1
   steps:
-  - intent: drug_usage_4
+  - intent: drug_usage
+    entities: 
+      - drug_name
+  - action: action_answer_drug_usage
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_2
+  steps:
+  - intent: drug_usage_for_symptom
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_drug_usage_for_symptom
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_3
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_4
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_5
+  steps:
+  - intent: drug_interferences_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_interferences_1
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_6
+  steps:
+  - intent: drug_interferences_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_drug_interferences_2
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_7
+  steps:
+  - intent: side_effects_1
+    entities:
+      - drug_name
+  - action: action_answer_side_effects_1
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_8
+  steps:
+  - intent: drug_caution_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_caution_1
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_9
+  steps:
+  - intent: drug_warning_1
+    entities:
+      - drug_name
+  - action: action_answer_warning_1
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_10
+  steps:
+  - intent: drug_warning_2
+    entities:
+      - drug_name
+      - illness
+  - action: action_answer_warning_2
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_11
+  steps:
+  - intent: how_to_use_1
+    entities:
+      - drug_name
+  - action: action_answer_how_to_use_1
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_12
+  steps:
+  - intent: price
+    entities:
+      - drug_name
+  - action: action_answer_price
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_13
+  steps:
+  - intent: same_drug_1
+    entities:
+      - drug_name
+  - action: action_answer_sames_1
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+- story: drug_usage_for_illness_comp_14
+  steps:
+  - intent: same_drug_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_sames_2
+  - intent: drug_usage_for_illness_comp
+  - action: action_answer_drug_usage_for_illness_comp
+## end
+# end
+
+# alaem ba daroye an
+- story: symptom_drug_usage
+  steps:
+  - intent: symptom_drug_usage
     entities:
       - sypmtom
-  - action: action_answer_drug_usage_4
+  - action: action_answer_symptom_drug_usage
 
-- story: drug_usage_ask_5
+- story: illness_drug_usage
   steps:
-  - intent: drug_usage_5
+  - intent: illness_drug_usage
     entities:
       - illness
-  - action: action_answer_drug_usage_5
+  - action: action_answer_illness_drug_usage
 
 ## drug_interferences
 - story: drug_interferences_ask_1
@@ -384,47 +510,47 @@ stories:
   steps:
   - intent: greet
   - action: action_answer_greet
-  - intent: drug_usage_5
-  - intent: drug_usage_5
+  - intent: illness_drug_usage
+  - intent: illness_drug_usage
     entities:
     - illness: کمر درد
-  - action: action_answer_drug_usage_5
-  - intent: drug_usage_4
+  - action: action_answer_illness_drug_usage
+  - intent: illness_drug_usage
     entities:
     - symptom: سردرد
   - action: action_answer_drug_usage_for_symptom
-  - intent: drug_usage_5
+  - intent: illness_drug_usage
     entities:
     - illness: كارسينوماي پيشرفته پروستات
-  - action: action_answer_drug_usage_5
-  - intent: drug_usage_3
+  - action: action_answer_illness_drug_usage
+  - intent: drug_usage_for_illness
     entities:
     - drug_name: تکسوتر
     - illness: سرطان تخمدان
-  - action: action_answer_drug_usage_3
+  - action: action_answer_drug_usage_for_illness
 
 - story: interactive_story_1
   steps:
-  - intent: drug_usage_5
+  - intent: illness_drug_usage
     entities:
     - illness: کمردرد
-  - action: action_answer_drug_usage_5
-  - intent: drug_usage_4
+  - action: action_answer_illness_drug_usage
+  - intent: illness_drug_usage
     entities:
     - illness: درد
-  - action: action_answer_drug_usage_4
-  - intent: drug_usage_4
+  - action: action_answer_illness_drug_usage
+  - intent: illness_drug_usage
     entities:
     - symptom: سر درد
-  - action: action_answer_drug_usage_4
-  - intent: drug_usage_4
+  - action: action_answer_illness_drug_usage
+  - intent: illness_drug_usage
     entities:
     - symptom: لرزش دست
-  - action: action_answer_drug_usage_4
-  - intent: drug_usage_5
+  - action: action_answer_illness_drug_usage
+  - intent: illness_drug_usage
     entities:
     - illness: واریس
-  - action: action_answer_drug_usage_5
+  - action: action_answer_illness_drug_usage
   - intent: drug_usage
     entities:
     - drug_name: کولوتریمازول
@@ -434,17 +560,17 @@ stories:
     - drug_name: تتراسایکلین
     - symptom: گوش درد
   - action: action_answer_drug_usage_for_symptom
-  - intent: drug_usage_5
+  - intent: illness_drug_usage
     entities:
     - illness: میگرن
-  - action: action_answer_drug_usage_5
+  - action: action_answer_illness_drug_usage
 
 - story: interactive_story_1
   steps:
-  - intent: drug_usage_4
+  - intent: illness_drug_usage
     entities:
     - symptom: بدن درد
-  - action: action_answer_drug_usage_4
+  - action: action_answer_illness_drug_usage
 
 - story: interactive_story_1
   steps:

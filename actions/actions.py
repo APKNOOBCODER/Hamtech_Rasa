@@ -46,8 +46,8 @@ class ActionAnswerGreet(Action):
                                        \n6- قیمت دارو ها \
                                        \n7- نام دارو ها و مشابه آن ها در بازار")
         return []
-## mavared masraf
-# checked II
+# mavared masraf
+## checked II
 class ActionAnswerDrugUsage(Action):
 
     def name(self) -> Text:
@@ -121,9 +121,9 @@ class ActionAnswerDrugUsage(Action):
                 json.dump(newlogdic, f, indent=4, ensure_ascii=False)
         ## end log
         return [SlotSet("drug_name", drug_name)]
-
-# checked II
-class ActionAnswerAskDrugUsageComp(Action):
+## end
+## checked II
+class ActionAnswerDrugUsageComp(Action):
 
     def name(self) -> Text:
         return "action_answer_drug_usage_comp"
@@ -227,9 +227,10 @@ class ActionAnswerAskDrugUsageComp(Action):
         ## end log
         return [SlotSet("drug_name", drug_name)]
 ## end
+# end
 
 # mavared masraf ba alaem
-# checked II
+## checked II
 class ActionAnswerDrugUsageForSymptom(Action):
 
     def name(self) -> Text:
@@ -301,8 +302,8 @@ class ActionAnswerDrugUsageForSymptom(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
-
-# chacked II
+## end
+## chacked II
 class ActionAnswerDrugUsageForSymptomComp(Action):
 
     def name(self) -> Text:
@@ -374,11 +375,15 @@ class ActionAnswerDrugUsageForSymptomComp(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name), SlotSet("symptom", symptom)]
-# checked II
-class ActionAnswerDrugUsage3(Action):
+## end
+# end
+
+# mavared masraf ba bimari
+## checked II
+class ActionAnswerDrugUsageForIllness(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_3"
+        return "action_answer_drug_usage_for_illness"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -454,12 +459,92 @@ class ActionAnswerDrugUsage3(Action):
         ## end log
 
         return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]
-
-# checked II
-class ActionAnswerDrugUsage4(Action):
+## end
+## checked II
+class ActionAnswerDrugUsageForIllnessComp(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_4"
+        return "action_answer_drug_usage_for_illness_comp"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # findout that intent is correct
+        Q = tracker.latest_message["text"]
+        print("Q: " + Q)
+        confidence = tracker.latest_message["intent"]["confidence"]
+        print("confidence: " + str(confidence))
+        intent = tracker.latest_message["intent"]["name"]
+        print("intent: " + intent)
+        if confidence < 0.6:
+            dispatcher.utter_message(text="متوجه نشدم، لطفا دوباره تلاش کنید")
+            return []
+        # end
+        
+        ans = "اطلاعاتی یافت نشد. لطفا به نوشتار فارسی دارو و بیماری گفته شده در سوال خود دقت فرمایید."
+
+        illness = next(tracker.get_latest_entity_values("illness"), None)
+        drug_name = tracker.slots["drug_name"]
+
+        if drug_name == None or illness == None:
+            print("None")
+            dispatcher.utter_message(text=ans)
+            return []
+        drug_name = Norm.normalize(drug_name)
+        with open(dir_path + "/" +"data.json","r") as f:
+            data: dict = json.loads(f.read())
+        print("drug_name: " + drug_name)
+        print("illness: " + illness)
+        find_drug_name = False
+        for name in data:
+            if name == drug_name or drug_name in name:
+                find_drug_name = True
+                usage = data[name]["Mechanisms"][0]["Usage"]
+                usage = Norm.normalize(usage)
+                checkans = usage.replace("\r","")
+                checkans = checkans.replace("\n","")
+                checkans = checkans.replace(" ", "")
+                if illness in usage:
+                    ans = drug_name + "برای رفع" + illness + " مناسب است، به علاوه برای موارد زیر استفاده می شود: " + "\n" + usage
+                    break
+                else:
+                    ans = drug_name + "، " + illness + " را از بین نمیبرد! اما برای موارد زیر استفاده می شود: " + "\n" + usage
+
+        print("ans: " + ans)
+        ans = ans[:4096]
+        
+        if not find_drug_name:
+            ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
+        dispatcher.utter_message(text=ans)
+        entities: list = [drug_name, illness]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
+        ## log
+        newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
+                    "entities": entities, "ans": ans}}
+        try:
+            with open(dir_path +  "/Log.json","r") as f:
+                logdic: dict = json.loads(f.read())
+                logdic.update(newlogdic)
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(logdic, f, indent=4, ensure_ascii=False)
+        except:
+            with open(dir_path +  "/Log.json","w") as f:
+                json.dump(newlogdic, f, indent=4, ensure_ascii=False)
+        ## end log
+
+        return [SlotSet("drug_name", drug_name), SlotSet("illness", illness)]
+## end
+# end
+
+# alaem ba daroye an
+## checked II
+class ActionAnswerSymptomDrugUsage(Action):
+
+    def name(self) -> Text:
+        return "action_answer_symptom_drug_usage"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -535,12 +620,15 @@ class ActionAnswerDrugUsage4(Action):
         ## end log
 
         return [SlotSet("symptom", symptom)]
+## end
+# end
 
-# checked II
-class ActionAnswerDrugUsage5(Action):
+# bimari ba daroye an
+## checked II
+class ActionAnswerIlnessDrugUsage(Action):
 
     def name(self) -> Text:
-        return "action_answer_drug_usage_5"
+        return "action_answer_illness_drug_usage"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -612,6 +700,7 @@ class ActionAnswerDrugUsage5(Action):
 
         return [SlotSet("illness", illness)]
 ## end
+# end
 
 ## tadakhol
 # checked II

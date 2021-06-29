@@ -18,13 +18,13 @@ intents:
 - drug_usage_for_symptom_comp:
     use_entities:
     - symptom
-- drug_usage_3:
+- drug_usage_for_illness:
     ignore_entities:
     - symptom
-- drug_usage_4:
+- symptom_drug_usage:
     use_entities:
     - symptom
-- drug_usage_5:
+- illness_drug_usage:
     use_entities:
     - illness
 - drug_interferences_1:
@@ -101,9 +101,9 @@ actions:
 - action_answer_drug_caution_1
 - action_answer_drug_interferences_1
 - action_answer_drug_interferences_2
-- action_answer_drug_usage_3
-- action_answer_drug_usage_4
-- action_answer_drug_usage_5
+- action_answer_drug_usage_for_illness
+- action_answer_symptom_drug_usage
+- action_answer_illness_drug_usage
 - action_answer_greet
 - action_answer_how_to_use_1
 - action_answer_price
