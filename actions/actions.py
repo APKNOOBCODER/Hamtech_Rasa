@@ -805,7 +805,10 @@ class SideEffects1(Action):
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
         print(tracker.latest_message)
-        intentsList = tracker.latest_message["intent_ranking"]
+        try:
+            intentsList = tracker.latest_message["intent_ranking"]
+        except KeyError:
+            intentsList = None
         ## log
         newlogdic = {Q:{"intent": intent, "intentlist": intentsList, "confidence": confidence, \
                     "entities": entities, "ans": ans}}
