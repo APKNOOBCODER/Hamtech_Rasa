@@ -774,7 +774,7 @@ class SideEffects1(Action):
             dispatcher.utter_message(text="%s"%ans)
             return []
         ans = "عوارض جانبی برای داروی %s یافت نشد" % drug_name
-
+        print(drug_name)
         with open(dir_path + "/" +"data.json","r") as f:
             data: dict = json.loads(f.read())
 
@@ -789,6 +789,7 @@ class SideEffects1(Action):
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
                 if checkans != "":
+                    print("ans: " + ans)
                     break
         
         print("ans: " + ans)
