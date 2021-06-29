@@ -30,6 +30,8 @@ intents:
 - drug_interferences_1:
     use_entities:
     - drug_name
+- drug_interferences_1_comp:
+    use_entities: []
 - drug_interferences_2:
     use_entities:
     - drug_name
@@ -94,21 +96,23 @@ responses:
   utter_iamabot:
   - text: من یه ربات ساخته شده با راسا هستم
 actions:
+- action_answer_greet
 - action_answer_drug_usage
 - action_answer_drug_usage_comp
 - action_answer_drug_usage_for_symptom
 - action_answer_drug_usage_for_symptom_comp
-- action_answer_drug_caution_1
-- action_answer_drug_interferences_1
-- action_answer_drug_interferences_2
 - action_answer_drug_usage_for_illness
+- action_answer_drug_usage_for_illness_comp
 - action_answer_symptom_drug_usage
 - action_answer_illness_drug_usage
-- action_answer_greet
+- action_answer_drug_interferences_1
+- action_answer_drug_interferences_1_comp
+- action_answer_drug_interferences_2
+- action_answer_warning_1
+- action_answer_warning_2
+- action_answer_side_effects_1
+- action_answer_drug_caution_1
 - action_answer_how_to_use_1
 - action_answer_price
 - action_answer_sames_1
 - action_answer_sames_2
-- action_answer_side_effects_1
-- action_answer_warning_1
-- action_answer_warning_2
