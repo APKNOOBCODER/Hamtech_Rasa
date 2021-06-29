@@ -780,14 +780,12 @@ class SideEffects1(Action):
 
         for name in data:
             if name == drug_name or drug_name in name:
-                ans = "عوارض جانبی زیر برای داروی " + drug_name + " یافت شد: \n" + data[name]["Cautions"][0]["Side_Effects"]
-                ans = Norm.normalize(ans)
-                checkans = ans.replace("عوارض جانبی زیر برای داروی ","")
-                checkans = checkans.replace(" یافت شد: \n","")
-                checkans = checkans.replace(drug_name, "")
-                checkans = checkans.replace("\r","")
+                Caution = data[name]["Cautions"][0]["Side_Effects"]
+                checkans = Caution.replace("\r","")
                 checkans = checkans.replace("\n","")
                 checkans = checkans.replace(" ", "")
+                ans = "عوارض جانبی زیر برای داروی " + drug_name + " یافت شد: \n" + Caution
+                ans = Norm.normalize(ans)
                 if checkans != "":
                     print("ans1: " + ans)
                     break
