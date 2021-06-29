@@ -315,4 +315,4 @@ stories:
   - slot_was_set:
     - drug_name: متفورمین
   - intent: ask_drug_usage_comp
-  - intent: ask_drug_usage_comp
+  - action: action_answer_ask_drug_usage_comp
