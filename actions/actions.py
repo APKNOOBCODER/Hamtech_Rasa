@@ -792,11 +792,6 @@ class SideEffects1(Action):
         
         print("ans2: " + ans)
         ans = ans[:4096]
-        checkans = ans.replace("عوارض جانبی زیر برای داروی ","")
-        checkans = checkans.replace(" یافت شد: \n","")
-        checkans = checkans.replace("\r","")
-        checkans = checkans.replace("\n","")
-        checkans = checkans.replace(" ", "")
         if checkans == "":
             ans = "با عرض پوزش، در اطلاعات دیتابیس من اطلاعات مربوط به سوال شما موجود نیست"
         # ans = ans.replace("\r","")
