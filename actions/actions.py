@@ -740,7 +740,7 @@ class ActionDrugInterferences2(Action):
         return []
 
 ## avarez
-# checked
+# checked II
 class SideEffects1(Action):
 
     def name(self) -> Text:
