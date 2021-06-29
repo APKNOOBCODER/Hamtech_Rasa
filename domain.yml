@@ -6,11 +6,11 @@ intents:
 - side_effects_1:
     use_entities:
     - drug_name
+- ask_drug_usage_comp:
+    use_entities: []
 - greet:
     use_entities:
     - symptom
-- ask_drug_usage_comp:
-    use_entities: []
 - same_drug_2:
     use_entities:
     - drug_name
