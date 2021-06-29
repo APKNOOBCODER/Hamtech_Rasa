@@ -552,7 +552,6 @@ stories:
   - intent: drug_interferences_1_comp
   - action: action_answer_drug_interferences_1_comp
 ## end
-## end
 # end
 
 - story: drug_interferences_2
@@ -563,13 +562,134 @@ stories:
       - drug_name
   - action: action_answer_drug_interferences_2
 
-## avarez
-- story: side_effects_1
+# avarez
+- story: side_effects
+  steps:
+  - intent: side_effects
+    entities:
+      - drug_name
+  - action: action_answer_side_effects
+## have side_effects and then incomplete
+- story: side_effects_comp_1
+  steps:
+  - intent: drug_usage
+    entities: 
+      - drug_name
+  - action: action_answer_drug_usage
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_2
+  steps:
+  - intent: drug_usage_for_symptom
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_drug_usage_for_symptom
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_3
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_4
+  steps:
+  - intent: illness_drug_usage
+    entities: 
+      - drug_name
+      - symptom
+  - action: action_answer_illness_drug_usage
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_5
+  steps:
+  - intent: side_effects
+    entities:
+      - drug_name
+  - action: action_answer_side_effects
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_6
+  steps:
+  - intent: drug_interferences_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_drug_interferences_2
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_7
   steps:
   - intent: side_effects_1
     entities:
       - drug_name
   - action: action_answer_side_effects_1
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_8
+  steps:
+  - intent: drug_caution_1
+    entities:
+      - drug_name
+  - action: action_answer_drug_caution_1
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_9
+  steps:
+  - intent: drug_warning_1
+    entities:
+      - drug_name
+  - action: action_answer_warning_1
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_10
+  steps:
+  - intent: drug_warning_2
+    entities:
+      - drug_name
+      - illness
+  - action: action_answer_warning_2
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_11
+  steps:
+  - intent: how_to_use_1
+    entities:
+      - drug_name
+  - action: action_answer_how_to_use_1
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_12
+  steps:
+  - intent: price
+    entities:
+      - drug_name
+  - action: action_answer_price
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_13
+  steps:
+  - intent: same_drug_1
+    entities:
+      - drug_name
+  - action: action_answer_sames_1
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+- story: side_effects_comp_14
+  steps:
+  - intent: same_drug_2
+    entities:
+      - drug_name
+      - drug_name
+  - action: action_answer_sames_2
+  - intent: side_effects_comp
+  - action: action_answer_side_effects_comp
+## end
+# end
 
 ## khatar
 - story: drug_caution_1

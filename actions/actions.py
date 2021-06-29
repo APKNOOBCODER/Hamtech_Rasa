@@ -863,7 +863,8 @@ class ActionDrugInterferences1Comp(Action):
 ## end
 # end
 
-# checked II
+# tadakhol_2
+## checked II
 class ActionDrugInterferences2(Action):
 
     def name(self) -> Text:
@@ -952,9 +953,10 @@ class ActionDrugInterferences2(Action):
 
         return []
 ## end
+# end
 
-## avarez
-# checked II
+# avarez
+## checked II
 class SideEffects1(Action):
 
     def name(self) -> Text:
@@ -1036,6 +1038,7 @@ class SideEffects1(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## end
+# end
 
 ## khatar
 # checked II
