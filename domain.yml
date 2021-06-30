@@ -135,6 +135,6 @@ actions:
 - action_answer_how_to_use_comp
 - action_answer_price
 - action_answer_price_comp
-- action_answer_same_1
-- action_answer_same_1_comp
-- action_answer_same_2
+- action_answer_same_drug_1
+- action_answer_same_drug_1_comp
+- action_answer_same_drug_2

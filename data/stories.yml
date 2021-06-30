@@ -132,7 +132,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
 - story: drug_usage_comp_14
@@ -266,7 +266,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
 - story: drug_usage_for_symptom_comp_14
@@ -398,7 +398,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: drug_usage_for_illness_comp
   - action: action_answer_drug_usage_for_illness_comp
 - story: drug_usage_for_illness_comp_14
@@ -547,7 +547,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: drug_interferences_1_comp
   - action: action_answer_drug_interferences_1_comp
 - story: drug_interferences_1_comp_14
@@ -686,7 +686,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: side_effect_comp
   - action: action_answer_side_effect_comp
 - story: side_effect_comp_14
@@ -816,7 +816,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: drug_caution_comp
   - action: action_answer_drug_caution_comp
 - story: drug_caution_comp_14
@@ -946,7 +946,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: warning_1_comp
   - action: action_answer_warning_1_comp
 - story: warning_1_comp_14
@@ -1084,7 +1084,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: how_to_use_comp
   - action: action_answer_how_to_use_comp
 - story: how_to_use_comp_14
@@ -1214,7 +1214,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: price_comp
   - action: action_answer_price_comp
 - story: price_comp_14
@@ -1344,7 +1344,7 @@ stories:
   - intent: same_drug_1
     entities:
       - drug_name
-  - action: action_answer_same_1
+  - action: action_answer_same_drug_1
   - intent: same_drug_1_comp
   - action: action_answer_same_drug_1_comp
 - story: same_drug_1_comp_14
