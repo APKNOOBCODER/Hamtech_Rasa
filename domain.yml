@@ -3,18 +3,29 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet:
-    ignore_entities:
+- drug_interferences_1_comp:
+    use_entities: []
+- side_effect:
+    use_entities:
     - drug_name
-    - illness
-    - symptom
+- same_drug_1_comp:
+    use_entities: []
+- goodbye
+- drug_usage_comp:
+    use_entities: []
+- price_comp:
+    use_entities:
+    - drug_name
+- drug_caution_comp:
+    use_entities: []
+- greet:
+    use_entities: []
 - drug_usage:
     use_entities:
     - drug_name
-- drug_usage_comp:
-    use_entities: []
 - drug_usage_for_symptom:
-    use_entities: [drug_name, symptom]
+    ignore_entities:
+    - illness
 - drug_usage_for_symptom_comp:
     use_entities:
     - symptom
@@ -33,12 +44,7 @@ intents:
 - drug_interferences_1:
     use_entities:
     - drug_name
-- drug_interferences_1_comp:
-    use_entities: []
 - drug_interferences_2:
-    use_entities:
-    - drug_name
-- side_effect:
     use_entities:
     - drug_name
 - side_effect_comp:
@@ -46,8 +52,6 @@ intents:
 - drug_caution:
     use_entities:
     - drug_name
-- drug_caution_comp:
-    use_entities: []
 - warning_1:
     use_entities:
     - drug_name
@@ -64,19 +68,13 @@ intents:
 - price:
     use_entities:
     - drug_name
-- price_comp:
-    use_entities:
-    - drug_name
 - same_drug_1:
     use_entities:
     - drug_name
-- same_drug_1_comp:
-    use_entities: []
 - same_drug_2:
     use_entities:
     - drug_name
 - not_recognized
-- goodbye
 - affirm
 - deny
 - bot_challenge
@@ -112,29 +110,30 @@ responses:
   utter_iamabot:
   - text: من یه ربات ساخته شده با راسا هستم
 actions:
-- action_answer_greet
-- action_answer_drug_usage
-- action_answer_drug_usage_comp
-- action_answer_drug_usage_for_symptom
-- action_answer_drug_usage_for_symptom_comp
-- action_answer_drug_usage_for_illness
-- action_answer_drug_usage_for_illness_comp
-- action_answer_symptom_drug_usage
-- action_answer_illness_drug_usage
+- action_answer_drug_caution
+- action_answer_drug_caution_comp
 - action_answer_drug_interferences_1
 - action_answer_drug_interferences_1_comp
 - action_answer_drug_interferences_2
-- action_answer_side_effect
-- action_answer_side_effect_comp
-- action_answer_drug_caution
-- action_answer_drug_caution_comp
-- action_answer_warning_1
-- action_answer_warning_1_comp
-- action_answer_warning_2
+- action_answer_drug_usage
+- action_answer_drug_usage_comp
+- action_answer_drug_usage_for_illness
+- action_answer_drug_usage_for_illness_comp
+- action_answer_drug_usage_for_symptom
+- action_answer_drug_usage_for_symptom_comp
+- action_answer_greet
 - action_answer_how_to_use
 - action_answer_how_to_use_comp
+- action_answer_illness_drug_usage
 - action_answer_price
 - action_answer_price_comp
 - action_answer_same_drug_1
 - action_answer_same_drug_1_comp
 - action_answer_same_drug_2
+- action_answer_side_effect
+- action_answer_side_effect_comp
+- action_answer_symptom_drug_usage
+- action_answer_warning_1
+- action_answer_warning_1_comp
+- action_answer_warning_2
+- utter_goodbye

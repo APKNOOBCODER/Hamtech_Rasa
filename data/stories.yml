@@ -1540,3 +1540,59 @@ stories:
     - drug_name: بتامتازون
   - slot_was_set:
     - symptom: زخم معده
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: action_answer_greet
+  - intent: side_effect
+    entities:
+    - drug_name: نئوتادین
+  - action: action_answer_side_effect
+  - slot_was_set:
+    - drug_name: نئوتادین
+  - intent: side_effect
+    entities:
+    - drug_name: نئوتادین
+  - action: action_answer_side_effect
+  - slot_was_set:
+    - drug_name: نئوتادین
+  - intent: price_comp
+  - action: action_answer_price_comp
+  - slot_was_set:
+    - drug_name: نئوتادین
+  - intent: drug_caution_comp
+  - action: action_answer_drug_caution_comp
+  - slot_was_set:
+    - drug_name: نئوتادین
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+  - slot_was_set:
+    - drug_name: نئوتادین
+  - intent: same_drug_1_comp
+  - action: action_answer_same_drug_1_comp
+  - intent: price_comp
+  - action: action_answer_price_comp
+  - slot_was_set:
+    - drug_name: نئوتادین
+  - intent: side_effect
+    entities:
+    - drug_name: دیکلوفناک
+    - drug_name: دیکلوفناک
+  - action: action_answer_side_effect
+  - slot_was_set:
+    - drug_name: دیکلوفناک
+  - intent: drug_usage_comp
+  - action: action_answer_drug_usage_comp
+  - slot_was_set:
+    - drug_name: دیکلوفناک
+  - intent: drug_interferences_1_comp
+  - action: action_answer_drug_interferences_1_comp
+  - slot_was_set:
+    - drug_name: دیکلوفناک
+  - intent: same_drug_1_comp
+  - action: action_answer_same_drug_1_comp
+  - slot_was_set:
+    - drug_name: دیکلوفناک
+  - intent: goodbye
+  - action: utter_goodbye
