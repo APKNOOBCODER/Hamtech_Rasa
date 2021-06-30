@@ -1770,7 +1770,7 @@ class ActionAnswerPrice(Action):
                     if len(Prices) == 0:
                         continue
                     
-                    ans = str(min(Prices))
+                    ans = str(min(Prices)) + " ریال"
                     break
                 except:
                     ans = "قیمت یافت نشد"
@@ -1848,7 +1848,7 @@ class ActionAnswerPriceComp(Action):
                     if len(Prices) == 0:
                         continue
                     
-                    ans = str(min(Prices))
+                    ans = str(min(Prices)) + " ریال"
                     break
                 except:
                     ans = "قیمت یافت نشد"
