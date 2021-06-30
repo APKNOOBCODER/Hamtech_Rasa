@@ -48,12 +48,12 @@ intents:
     - drug_name
 - drug_caution_comp:
     use_entities: []
-- drug_warning_1:
+- warning_1:
     use_entities:
     - drug_name
-- drug_warning_1_comp:
+- warning_1_comp:
     use_entities: []
-- drug_warning_2:
+- warning_2:
     ignore_entities:
     - symptom
 - how_to_use:
