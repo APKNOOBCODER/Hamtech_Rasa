@@ -141,7 +141,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: drug_usage_comp
   - action: action_answer_drug_usage_comp
 ## end
@@ -275,7 +275,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: drug_usage_for_symptom_comp
   - action: action_answer_drug_usage_for_symptom_comp
 ## end
@@ -407,7 +407,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: drug_usage_for_illness_comp
   - action: action_answer_drug_usage_for_illness_comp
 ## end
@@ -556,7 +556,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: drug_interferences_1_comp
   - action: action_answer_drug_interferences_1_comp
 ## end
@@ -695,7 +695,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: side_effect_comp
   - action: action_answer_side_effect_comp
 ## end
@@ -825,7 +825,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: drug_caution_comp
   - action: action_answer_drug_caution_comp
 ## end
@@ -955,7 +955,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: warning_1_comp
   - action: action_answer_warning_1_comp
 ## end
@@ -1093,7 +1093,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: how_to_use_comp
   - action: action_answer_how_to_use_comp
 ## end
@@ -1223,7 +1223,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: price_comp
   - action: action_answer_price_comp
 ## end
@@ -1353,7 +1353,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - intent: same_drug_1_comp
   - action: action_answer_same_drug_1_comp
 ## end
@@ -1365,7 +1365,7 @@ stories:
     entities:
       - drug_name
       - drug_name
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
 
 - story: not_recognized_story
   steps:
@@ -1452,14 +1452,14 @@ stories:
     entities:
     - drug_name: استامینوفن
     - drug_name: استامینوفن کودئین
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - slot_was_set:
     - drug_name: استامینوفن کودئین
   - intent: same_drug_2
     entities:
     - drug_name: ژلوفن
     - drug_name: ایبوبروفن
-  - action: action_answer_same_2
+  - action: action_answer_same_drug_2
   - slot_was_set:
     - drug_name: ایبوبروفن
 
