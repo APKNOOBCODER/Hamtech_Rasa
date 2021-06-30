@@ -1764,19 +1764,19 @@ class ActionAnswerPrice(Action):
                 find_drug_name = True
                 try:
                     Prices = data[name]["Price"]
-                    while "0" in Prices:
-                        Prices.remove("0")
+                    Prices = list(map(int,Prices))
+                    while 0 in Prices:
+                        Prices.remove(0)
                     if len(Prices) == 0:
                         continue
-                    Prices = list(map(int,Prices))
-                    ans = str(min(data[name]["Price"]))
+                    
+                    ans = str(min(Prices))
                     break
                 except:
                     ans = "قیمت یافت نشد"
         if not find_drug_name:
             ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
         print("ans: " + ans)
-        ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
         try:
@@ -1842,19 +1842,19 @@ class ActionAnswerPriceComp(Action):
                 find_drug_name = True
                 try:
                     Prices = data[name]["Price"]
-                    while "0" in Prices:
-                        Prices.remove("0")
+                    Prices = list(map(int,Prices))
+                    while 0 in Prices:
+                        Prices.remove(0)
                     if len(Prices) == 0:
                         continue
-                    Prices = list(map(int,Prices))
-                    ans = str(min(data[name]["Price"]))
+                    
+                    ans = str(min(Prices))
                     break
                 except:
                     ans = "قیمت یافت نشد"
         if not find_drug_name:
             ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
         print("ans: " + ans)
-        ans = "اطلاعاتی در دیتابیس من برای این سوال موجود نیست"
         dispatcher.utter_message(text=ans)
         entities: list = [drug_name]
         try:
@@ -1882,9 +1882,9 @@ class ActionAnswerPriceComp(Action):
 
 # Shebahat
 ## checked II
-class ActionAnswerSame1(Action):
+class ActionAnswerSameDrug1(Action):
     def name(self) -> Text:
-        return "action_answer_same_1"
+        return "action_answer_same_drug_1"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1953,9 +1953,9 @@ class ActionAnswerSame1(Action):
 
         return [SlotSet("drug_name", drug_name)]
 ## checked II
-class ActionAnswerSame1Comp(Action):
+class ActionAnswerSameDrug1Comp(Action):
     def name(self) -> Text:
-        return "action_answer_same_1_comp"
+        return "action_answer_same_drug_1_comp"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -2017,9 +2017,9 @@ class ActionAnswerSame1Comp(Action):
 ## end
 
 ## checked II
-class ActionAnswerSame2(Action):
+class ActionAnswerSameDrug2(Action):
     def name(self) -> Text:
-        return "action_answer_same_2"
+        return "action_answer_same_drug_2"
     
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
